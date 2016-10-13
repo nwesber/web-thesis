@@ -14,3 +14,8 @@
 Route::get('/', 'HomeController@index');
 Auth::routes();
 Route::resource('home', 'HomeController');
+Route::resource('settings', 'SettingsController');
+Route::resource('routine', 'RoutineController');
+Route::resource('event', 'EventsController');
+Route::resource('group', 'GroupController');
+Route::get('/home/settings', 'HomeController@settings');
