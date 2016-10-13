@@ -38,7 +38,7 @@
       </header>
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-          <img src="{{URL::asset('images/user.jpg')}}" class="demo-avatar">
+          <img src="{{ URL::asset('images/user.jpg') }}" class="demo-avatar">
           <div class="demo-avatar-dropdown">
             <span style="margin-top: 10px;">Welcome, {{ Auth::user()->name }} !</span>
             <div class="mdl-layout-spacer"></div>
@@ -46,14 +46,16 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           <a class="mdl-navigation__link" href="{{ route('home.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Routine</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event</i>Events</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Groups</a>
+          <a class="mdl-navigation__link" href="{{ route('settings.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Settings</a>
+          <!--
           <a class="mdl-navigation__link" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Logout</a>
-                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                      {{ csrf_field() }}
-                  </form>
+            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Logout</a>
+              <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+              </form> -->
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
