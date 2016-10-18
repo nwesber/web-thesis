@@ -18,6 +18,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/card.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/materialite.min.js') }}"></script>
 
     <!-- Scripts -->
     <script>
@@ -31,7 +37,7 @@
 
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Home</span>
+          <span class="mdl-layout-title">Routine</span>
           <div class="mdl-layout-spacer"></div>
 
         </div>
@@ -40,18 +46,18 @@
         <header class="demo-drawer-header">
           <img src="{{URL::asset('images/user.jpg')}}" class="demo-avatar">
           <div class="demo-avatar-dropdown">
-            <span style="margin-top: 10px;">Welcome, {{ Auth::user()->name }} !</span>
+            <span style="margin-top: 10px;">Welcome, {{ Auth::user()->name }}</span>
             <div class="mdl-layout-spacer"></div>
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="{{ route('home.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href="{{ url('/routine') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
           <a class="mdl-navigation__link" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Logout</a>
-                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ url('/logout') }}" method="GET" style="display: none;">
                       {{ csrf_field() }}
                   </form>
         </nav>
@@ -65,9 +71,6 @@
       </main>
     </div>
 
-    <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/materialite.min.js') }}"></script>
+    
 </body>
 </html>
