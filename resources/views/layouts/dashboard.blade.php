@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://bowercdn.net/c/klasify-0.4.4/stylesheets/klasify.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/materialicons.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/material.min.css') }}">
@@ -19,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/card.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/routine.css') }}">
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
