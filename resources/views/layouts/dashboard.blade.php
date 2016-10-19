@@ -47,7 +47,7 @@
       </header>
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-          <img src="{{URL::asset('images/user.jpg')}}" class="demo-avatar">
+          <img src="{{ URL::asset('images/user.jpg') }}" class="demo-avatar">
           <div class="demo-avatar-dropdown">
             <span style="margin-top: 10px;">Welcome, {{ Auth::user()->name }}</span>
             <div class="mdl-layout-spacer"></div>
