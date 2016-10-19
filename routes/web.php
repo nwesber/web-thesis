@@ -11,6 +11,3 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Auth::routes();
-Route::resource('home', 'HomeController');
