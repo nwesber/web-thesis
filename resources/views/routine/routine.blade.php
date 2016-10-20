@@ -12,7 +12,7 @@
 	      </div>
 	      <div class="col-2 routineHeader">
 	      	<a class="color-black full-width" href="{{ url('/routine/add-routine/') }}">
-	          <button class="float-right no-margin full-width text-center">
+	          <button class="float-right no-margin full-width text-center btn btn-primary">
 	             <span><h4 class="no-padding no-margin color-white">Create</h4></span>
 	          </button>
 	        </a>

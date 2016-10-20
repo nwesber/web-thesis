@@ -33,6 +33,13 @@
 
 <div class="container">
 
+  <div class="col-12">
+    @if( Session::has('message') )
+      <div class="alert alert-warning fade in full-width" role="alert" align="center">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>{{ Session::get('message') }}</strong>
+    @endif
+  </div>
 
   <div class="box">
     <div class="box-body">
@@ -57,21 +64,12 @@
               @endif
           </div>
 
-          <div class="col-md-12 full-width">
+          <div class="col-md-12 full-width no-padding">
             <div class="col-3 no-margin">
-              <a class="color-black full-width" href="{{ url('/routine/add-routine/') }}">
-                <button class="float-right no-margin full-width text-center" type="submit">
-                   <span><h4 class="no-padding no-margin color-white">Create</h4></span>
-                </button>
-              </a>
+              <input type="submit" value="Submit" class = "btn btn-primary pull-right">
             </div>
-
             <div class="col-3 no-margin">
-              <a class="color-black full-width" href="{{ url('/routine') }}">
-                <button class="float-right no-margin full-width text-center button-default" type="button">
-                   <span><h4 class="no-padding no-margin color-white">Back</h4></span>
-                </button>
-              </a>
+              <a href="{{ url('/routine') }}"><input type="button"  class="btn btn-default pull-right" value="Back"></a>
             </div>
           </div>
 
