@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Add Routine</h1>
+<!-- <h1>Add Routine</h1>
 <div class="row">
         <div class="col-lg-12">
     @if( Session::has('message') )
@@ -28,9 +28,60 @@
   	<input type="submit" value="Add Routine" class = "btn btn-info pull-right">
   	{!! Form::close() !!}
   </div>
+</div> -->
+
+
+<div class="container">
+
+
+  <div class="box">
+    <div class="box-body">
+      <div class="col-12">
+        <h3 class="no-margin no-padding">Add Routine</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-body-gray">
+      <div class="col-12 routineForm">
+        <div clas="col-12">
+          {!! Form::open(array('action' => array('RoutineController@storeRoutine'), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
+          <div class="col-md-12 form-group{{ $errors->has('routineName') ? ' has-error' : '' }}">
+            <label for="routineName">Routine Name <span class="color-red">*</span></label>
+            <input type="text" id="routineName" class="full-width" name="routineName" placeholder="Diet in 30 Days" required>
+              @if($errors->has('routineName'))
+                <span class="help-block">
+                  <strong class="danger">{{ $errors->first('routineName') }}</strong>
+                </span>
+              @endif
+          </div>
+
+          <div class="col-md-12 full-width">
+            <div class="col-3 no-margin">
+              <a class="color-black full-width" href="{{ url('/routine/add-routine/') }}">
+                <button class="float-right no-margin full-width text-center" type="submit">
+                   <span><h4 class="no-padding no-margin color-white">Create</h4></span>
+                </button>
+              </a>
+            </div>
+
+            <div class="col-3 no-margin">
+              <a class="color-black full-width" href="{{ url('/routine') }}">
+                <button class="float-right no-margin full-width text-center button-default" type="button">
+                   <span><h4 class="no-padding no-margin color-white">Back</h4></span>
+                </button>
+              </a>
+            </div>
+          </div>
+
+          {!! Form::close() !!}
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
-
-
 @endsection
 
 
