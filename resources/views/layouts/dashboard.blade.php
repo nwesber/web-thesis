@@ -39,9 +39,9 @@
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Routine</span>
           <div class="mdl-layout-spacer"></div>
-
         </div>
       </header>
+
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
           <img src="{{URL::asset('images/user.jpg')}}" class="demo-avatar">
@@ -51,15 +51,15 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="{{ url('/routine') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
+          <a class="mdl-navigation__link" href="{{ url('/routine') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Routine</a>
+          <a class="mdl-navigation__link" href="{{ url('/event') }}" id="event"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Event</a>
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a> -->
+          <a class="mdl-navigation__link" href="{{ url('/group') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Group</a>
           <a class="mdl-navigation__link" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Logout</a>
                 <form id="logout-form" action="{{ url('/logout') }}" method="GET" style="display: none;">
                       {{ csrf_field() }}
-                  </form>
+                </form>
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
@@ -74,3 +74,4 @@
     
 </body>
 </html>
+

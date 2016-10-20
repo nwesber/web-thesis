@@ -32,7 +32,17 @@ Route::post('routine/{id}/task/task-details/{id2}/updateTask', 'TaskController@u
 Route::get('routine/{id}/task/task-details/{id2}/delete', 'TaskController@taskDelete');
 Route::resource('routine', 'RoutineController');
 
-// Route::resource('task', 'TaskController');
+//Event
+Route::get('/event', 'EventController@index');
+
+//Group
+Route::get('/group', 'GroupController@index');
+Route::get('/group/add-group', 'GroupController@addGroup');
+Route::post('/group/store-group', 'GroupController@storeGroup');
+Route::get('/group/{id}/edit-group', 'GroupController@editGroup');
+Route::post('/group/{id}/update-group', 'GroupController@updateGroup');
+Route::get('/group/deleteGroup/{id}', 'GroupController@deleteGroup');
+Route::resource('group', 'GroupController');
 
 //Home
 Route::get('/logout', 'HomeController@logout');

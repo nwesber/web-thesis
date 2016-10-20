@@ -26,10 +26,10 @@
 			    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Saturday"> Saturday <br>
 			    </div>
 			    Time Start: <input type="time" name="timeStart" class="form-control">
-			    <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"> All Day 	
+			    <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"> All Day
 			    <hr/>
 			    	<input type="submit" value="Add Task" class = "btn btn-info pull-right form-control">
-			    	<a href="{{ url('/routine/'.$routine->id.'/task') }}"><input type="button"  class="btn btn-primary pull-right form-control" value="Back"></a>
+			    	<a href="{{ url('/routine/'.$routine->id.'/task') }}"><input type="button"  class="btn btn-primary pull-right form-control" value="Cancel"></a>
 		    {!! Form::close() !!}
 	  </div>
 	</div>
@@ -45,8 +45,6 @@
 			}
 		});
 	});
-
-
 </script>
 @endsection
 
