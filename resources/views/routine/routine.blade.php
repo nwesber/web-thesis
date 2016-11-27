@@ -1,78 +1,70 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardv2')
 
 @section('content')
 
-<div class="container">
-
-	<div class="box">
-	  <div class="box-body">
-	    <div class="col-12 no-padding">
-	    	<div class="col-10">
-	      	<h3 class="no-margin no-padding">Routine</h3>
-	      </div>
-	      <div class="col-2 routineHeader">
-	      	<a class="color-black full-width" href="{{ url('/routine/add-routine/') }}">
-	          <button class="float-right no-margin full-width text-center btn btn-primary">
-	             <span><h4 class="no-padding no-margin color-white">Create</h4></span>
-	          </button>
-	        </a>
-	      </div>
-	    </div>
-	  </div>
+<div class="row">
+	<div class="col-lg-12">
+	  <h1 class="page-header"></h1>
 	</div>
 
-	<div class="container">
 
-	 @if($routine->count() > 0)
-		 @foreach($routine as $rout)
-		 <div class="col-sm-3">
-		 	<div class="card">
-			 <div class="card-text no-padding no-margin">
-			  <h3 class="text-center no-padding no-margin">
-					<a href=" {{ url('/routine/'.$rout->id.'/task') }} ">
-						{{ $rout->routine_name }}
-					</a>
-				</h3>
-
-				<div class="col-12" style="margin-left: 14px;">
-					<div class="col-6 no-collapse">
-		        <a class="color-black full-width" href="{{ url('/routine/'.$rout->id. '/edit') }}">
-		          <button class="full-width button-white">
-		            Rename
-		          </button>
-		        </a>
-		      </div>
-		      <div class="col-6 no-collapse">
-		        <a id="confirmation"
-		           class="color-black full-width"
-		           href="{{ url('/routine/'.$rout->id. '/delete') }}"
-		           onclick="myFunction(event)">
-		          <button class="full-width button-white">
-		            Delete
-		          </button>
-		        </a>
-		      </div>
-				</div>
-
-			 </div>
-			</div>
-		 </div>
-		 @endforeach
-	 @else
-			<h3 class="text-center">-- No Routines Found --</h3>
-	 @endif
+	<div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-bicycle fa-fw"></i> <strong>Routine</strong>
+        <div class="pull-right">
+        	<a href="{{ url('/routine/add-routine/') }}">
+        		<button class="btn btn-primary btn-xs"><i class="fa fa-plus fa-fw"></i> Create</button>
+        	</a>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
 
 
+
+     		@if($routine->count() > 0)
+		 			@foreach($routine as $rout)
+        <div class="list-group">
+        	<div class="col-md-8" style="padding-top: 5px;">
+	          <a href="{{ url('/routine/'.$rout->id.'/task') }}" class="list-group-item">
+	              <i class="fa fa-soccer-ball-o fa-fw"></i>&nbsp;&nbsp;{{ $rout->routine_name }}
+	          </a>
+          </div>
+          <div class="col-md-2" style="padding-top: 5px;">
+          	<a href="{{ url('/routine/'.$rout->id. '/edit') }}" class="list-group-item">
+	            <i class="fa fa-edit fa-fw"></i>&nbsp;&nbsp; Rename
+	          </a>
+          </div>
+          <div class="col-md-2" style="padding-top: 5px;">
+          	<a href="{{ url('/routine/'.$rout->id. '/delete') }}" class="list-group-item" onclick="myFunction(event)">
+	            <i class="fa fa-trash fa-fw"></i>&nbsp;&nbsp; Delete
+	          </a>
+          </div>
+      	</div>
+      	<hr>
+      	@endforeach
+			  @else
+					<h3 class="text-center">-- No Routines Found --</h3>
+			  @endif
+
+
+
+
+        <!-- /.list-group -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
 	</div>
 
 </div>
-<script>
-function myFunction(e) {
-  if (confirm('Are you sure you want to delete this routine?')) {
-	} else {
-		e.preventDefault();
-	}
-}
-</script>
 
+<script>
+	function myFunction(e) {
+	  if (confirm('Are you sure you want to delete this routine?')) {
+		} else {
+			e.preventDefault();
+		}
+	}
+</script>
 @endsection
