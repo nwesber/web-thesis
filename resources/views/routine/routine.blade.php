@@ -28,7 +28,7 @@
         <div class="list-group">
         	<div class="col-md-8" style="padding-top: 5px;">
 	          <a href="{{ url('/routine/'.$rout->id.'/task') }}" class="list-group-item">
-	              <i class="fa fa-soccer-ball-o fa-fw"></i>&nbsp;&nbsp;{{ $rout->routine_name }}
+	             <i class="fa fa-soccer-ball-o fa-fw"></i>&nbsp;&nbsp;{{ $rout->routine_name }}
 	          </a>
           </div>
           <div class="col-md-2" style="padding-top: 5px;">
@@ -47,9 +47,6 @@
 			  @else
 					<h3 class="text-center">-- No Routines Found --</h3>
 			  @endif
-
-
-
 
         <!-- /.list-group -->
       </div>
