@@ -19,6 +19,7 @@
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dashboard/tether.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
@@ -41,7 +42,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ url('/routine') }}"><strong>iSCHED</strong></a>
+          <a class="navbar-brand" href="{{ url('/') }}"><strong>iSCHED</strong></a>
         </div>
 
         <!-- Navbar-Header -->
@@ -51,9 +52,6 @@
               <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
              <ul class="dropdown-menu dropdown-user">
-              <li>
-                <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-              </li>
               <li>
                 <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
               </li>
@@ -82,7 +80,7 @@
               </li>
 
               <li>
-                <a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                <a href="{{ url('/') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
               </li>
               <li>
                 <a href="#"><i class="fa fa-calendar fa-fw"></i> Events</a>
