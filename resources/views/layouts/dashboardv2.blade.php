@@ -16,11 +16,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/dashboard.css') }}">
 
+
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -83,10 +85,10 @@
                 <a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Events</a>
+                <a href="#"><i class="fa fa-calendar fa-fw"></i> Events</a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Groups</a>
+                <a href="#"><i class="fa fa-users fa-fw"></i> Groups</a>
               </li>
 
             </ul>

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardv2')
 
 @section('content')
 
@@ -29,6 +29,34 @@
   	{!! Form::close() !!}
   </div>
 </div> -->
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"></h1>
+  </div>
+
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-bicycle fa-fw"></i> <strong>New Routine</strong>
+        <div class="pull-right">
+          <a href="#">
+            <button class="btn btn-default btn-xs">Back</button>
+          </a>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+
+
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+
+</div>
 
 
 <div class="container">
