@@ -36,8 +36,6 @@ class taskController extends Controller
 
           $taskDay7 =  DB::table('task')->where('task_day', 'LIKE', '%Saturday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
 
-
-
         return view('task.task', compact('taskDay1', 'taskDay2', 'taskDay3', 'taskDay4', 'taskDay5', 'taskDay6', 'taskDay7', 'routine'));
     }
 
