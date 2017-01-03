@@ -18,9 +18,11 @@
 
 
     <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('js/dashboard/tether.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
 
