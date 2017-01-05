@@ -56,6 +56,9 @@ class taskController extends Controller
 
       $taskDay = implode(',', Input::get('taskDay'));
 
+      $army_time_str = $request->timeStart;
+      $regular_time_str = date( 'g:i A', strtotime( $army_time_str ) );
+
     	$task = new Task();
       $task->user_id = \Auth::user()->id;
       $task->routine_id = $routine->id;
