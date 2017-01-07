@@ -19,6 +19,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/task.css') }}">
 
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+
     <style type="text/css">
       .footer {
         display: table;
@@ -38,6 +41,9 @@
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
