@@ -17,24 +17,54 @@ class taskController extends Controller
     public function task($id){
         $routine = Routine::findOrFail($id);
 
-          $taskDay1 =  DB::table('task')->where('task_day', 'LIKE', '%Sunday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay1 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Sunday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
+        $taskDay2 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Monday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay2 =  DB::table('task')->where('task_day', 'LIKE', '%Monday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay3 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Tuesday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
+        $taskDay4 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Wednesday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay3 =  DB::table('task')->where('task_day', 'LIKE', '%Tuesday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay5 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Thursday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay4 =  DB::table('task')->where('task_day', 'LIKE', '%Wednesday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay6 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Friday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-
-          $taskDay5 =  DB::table('task')->where('task_day', 'LIKE', '%Thursday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
-
-
-          $taskDay6 =  DB::table('task')->where('task_day', 'LIKE', '%Friday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
-
-
-          $taskDay7 =  DB::table('task')->where('task_day', 'LIKE', '%Saturday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay7 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Saturday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
         return view('task.task', compact('taskDay1', 'taskDay2', 'taskDay3', 'taskDay4', 'taskDay5', 'taskDay6', 'taskDay7', 'routine'));
     }
