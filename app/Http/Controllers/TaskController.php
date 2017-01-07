@@ -17,26 +17,54 @@ class taskController extends Controller
     public function task($id){
         $routine = Routine::findOrFail($id);
 
-          $taskDay1 =  DB::table('task')->where('task_day', 'LIKE', '%Sunday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay1 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Sunday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
+        $taskDay2 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Monday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay2 =  DB::table('task')->where('task_day', 'LIKE', '%Monday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
- 
+        $taskDay3 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Tuesday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay3 =  DB::table('task')->where('task_day', 'LIKE', '%Tuesday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay4 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Wednesday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay4 =  DB::table('task')->where('task_day', 'LIKE', '%Wednesday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
+        $taskDay5 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Thursday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
+        $taskDay6 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Friday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
-          $taskDay5 =  DB::table('task')->where('task_day', 'LIKE', '%Thursday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
-
-
-          $taskDay6 =  DB::table('task')->where('task_day', 'LIKE', '%Friday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
-
-
-          $taskDay7 =  DB::table('task')->where('task_day', 'LIKE', '%Saturday%')->where('user_id', \Auth::user()->id)->where('deleted_at', '=', null)->get();
-
-
+        $taskDay7 =  DB::table('task')
+        ->where('task_day', 'LIKE', '%Saturday%')
+        ->where('user_id', \Auth::user()->id)
+        ->where('deleted_at', '=', null)
+        ->where('routine_id', '=', $id )
+        ->get();
 
         return view('task.task', compact('taskDay1', 'taskDay2', 'taskDay3', 'taskDay4', 'taskDay5', 'taskDay6', 'taskDay7', 'routine'));
     }
@@ -55,9 +83,12 @@ class taskController extends Controller
 
     public function storeTask(Request $request, $id){
       $routine = Routine::findOrFail($id);
-      
+
       $taskDay = implode(',', Input::get('taskDay'));
-      
+
+      $army_time_str = $request->timeStart;
+      $regular_time_str = date( 'g:i A', strtotime( $army_time_str ) );
+
     	$task = new Task();
       $task->user_id = \Auth::user()->id;
       $task->routine_id = $routine->id;
@@ -98,7 +129,7 @@ class taskController extends Controller
             ->withInput()
             ->withErrors($validator)
             ->with('message', 'Error');
-        } 
+        }
       $updateTask = Task::updateTask($id2, $request->taskTitle, $request->taskDesc, $request->taskDue, $request->taskPrio, $request->taskDay, $request->timeStart);
 
       if($request->taskTitle == 'taskTitle' && $request->taskDesc == 'taskDesc' && $request->taskDue == 'taskDue' && $request->taskDay == 'taskDay' && $request->taskPrio == 'taskPrio' && $request->timeStart == 'timeStart'){
@@ -115,4 +146,4 @@ class taskController extends Controller
 
       return redirect('/routine/'. $id. '/task')->with(compact('task', 'routine'))->with('message', 'Success');
     }
-}   
+}
