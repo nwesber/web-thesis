@@ -14,7 +14,7 @@
        <i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>
     <div class="btn-group pull-right">
-      <a href="#"
+      <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}"
          class="btn btn-primary"
          role="button"
          data-toggle="tooltip"
