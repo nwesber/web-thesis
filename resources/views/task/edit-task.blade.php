@@ -43,7 +43,7 @@
 
     <p class="page-header">
       <ol class="breadcrumb">
-        <li><a href="{{ url('/') }}">Home</a></li>
+        <li><a href="{{ url('/routine') }}">Home</a></li>
         <li><a href="{{ url('/routine/'.$routine->id.'/task') }}"> {{ $routine->routine_name}}</a></li>
         <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">{{$task->task_title}}</a></li>
         <li class="active">Edit Task</li>

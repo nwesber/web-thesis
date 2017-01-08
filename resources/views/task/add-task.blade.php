@@ -7,7 +7,7 @@
 	<div class="col-lg-12">
 	  <p class="page-header">
 			<ol class="breadcrumb">
-			  <li><a href="{{ url('/') }}">Home</a></li>
+			  <li><a href="{{ url('/routine') }}">Home</a></li>
 			  <li><a href="{{ url('/routine/'.$routine->id.'/task') }}"> {{ $routine->routine_name}}</a></li>
 			  <li class="active">New Task</li>
 			</ol>

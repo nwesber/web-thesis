@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="clearTop"></div>
-    <a href="{{ url('/') }}"
+    <a href="{{ url('/routine') }}"
        class="btn btn-default"
        role="button"
        data-toggle="tooltip"

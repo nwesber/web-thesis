@@ -33,7 +33,7 @@
           </div>
 
           <div class="col-md-12">
-            <a href="{{ url('/') }}">
+            <a href="{{ url('/routine') }}">
               <button class="btn btn-default">Back</button>
             </a>
             <button type="submit" class="btn btn-primary">Submit</button>

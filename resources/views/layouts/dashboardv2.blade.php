@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/task.css') }}">
 
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
 
     <style type="text/css">
       .footer {
@@ -41,9 +41,8 @@
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -108,10 +107,10 @@
               </li>
 
               <li>
-                <a href="{{ url('/') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                <a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-calendar fa-fw"></i> Events</a>
+                <a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Events</a>
               </li>
               <li>
                 <a href="#"><i class="fa fa-users fa-fw"></i> Groups</a>
