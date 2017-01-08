@@ -13,14 +13,19 @@ use DB;
 class CalendarController extends Controller
 {
 	public function index(){
-	  $events = [];
 
+		// create event array
+	  $eventCollection = [];
+
+	  //create variable for user id
 	  $userid = \Auth::user()->id;
 
+	  //fetch user events
 	  $events = DB::table('events')
 	  ->where('user_id', '=', $userid)
 	  ->get();
 
+	  //iterate all events where user id = logged in user then add them to the array
 	  foreach ($events as $event) {
 			$eventCollection[] = Calendar::event(
 		    $event->event_title, //event title
@@ -32,7 +37,7 @@ class CalendarController extends Controller
 		    	//make event clickable
 		    	//pass id
 		    	//route event/{id}/myevent
-	        'url' => 'event/'. $event->id .'/myevent',
+	        'url' => 'event/'. $event->id ,
 	        'description' => $event->event_description,
  	        //any other full-calendar supported parameters
     		]
@@ -44,8 +49,33 @@ class CalendarController extends Controller
 		return view('events.event', compact('calendar'));
 	}
 
-	public function event($id){
+	public function create(){
+		//create view
+	}
+
+	public function show($id){
+		//show event
 		$event = Events::findOrFail($id);
 		dd($event);
+	}
+
+	public function edit($id){
+		// edit view
+		dd($id);
+	}
+
+	public function store(Request $request){
+		// store event
+		dd($request);
+	}
+
+	public function update(Request $request, $id){
+		// update event
+		dd($request);
+	}
+
+	public function destroy($id){
+		//delete event
+		dd($id);
 	}
 }

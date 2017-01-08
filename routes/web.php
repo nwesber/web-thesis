@@ -34,7 +34,6 @@ Route::resource('routine', 'RoutineController');
 
 Route::resource('event', 'CalendarController');
 
-Route::get('event/{id}/myevent', 'CalendarController@event');
 //Home
 Route::get('/logout', 'HomeController@logout');
 
