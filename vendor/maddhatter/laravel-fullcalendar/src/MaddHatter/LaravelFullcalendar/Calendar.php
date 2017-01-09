@@ -31,9 +31,20 @@ class Calendar
         'header' => [
             'left' => 'prev,next today',
             'center' => 'title',
-            'right' => 'month,agendaWeek,agendaDay',
+            'right' => 'listDay,listWeek,month',
         ],
+
+         'views' =>[
+            'listDay' => [
+                'buttonText' => 'list day'
+            ],
+            'listWeek' => [
+                'buttonText' => 'list week'
+            ]
+         ],
+         'navLinks' => true,
         'eventLimit' => true,
+        'defaultView' => 'month',
     ];
 
     /**

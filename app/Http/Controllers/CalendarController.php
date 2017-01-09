@@ -9,6 +9,7 @@ use App\Events;
 use DateTime;
 use Calendar;
 use DB;
+use Crypt;
 
 class CalendarController extends Controller
 {
@@ -21,9 +22,7 @@ class CalendarController extends Controller
 	  $userid = \Auth::user()->id;
 
 	  //fetch user events
-	  $events = DB::table('events')
-	  ->where('user_id', '=', $userid)
-	  ->get();
+	  $events = Events::getEvents($userid)->get();
 
 	  //iterate all events where user id = logged in user then add them to the array
 	  foreach ($events as $event) {
@@ -33,11 +32,16 @@ class CalendarController extends Controller
 		    $event->time_start, //start time (you can also use Carbon instead of DateTime)
 		    $event->time_end, //end time (you can also use Carbon instead of DateTime)
 		    $event->id, //optionally, you can specify an event ID
+
 		    [
-		    	//make event clickable
-		    	//pass id
-		    	//route event/{id}/myevent
-	        'url' => 'event/'. $event->id ,
+		    	/*========================/
+		    		make event clickable
+			    	pass id
+			    	route = event/{id}
+			    	encrypt id for security
+		    	==========================*/
+	        'url' => 'event/'. Crypt::encrypt($event->id) ,
+	        'color' => $event->color ,
 	        'description' => $event->event_description,
  	        //any other full-calendar supported parameters
     		]
@@ -50,12 +54,17 @@ class CalendarController extends Controller
 	}
 
 	public function create(){
-		//create view
+		return view('events.create');
 	}
 
 	public function show($id){
 		//show event
-		$event = Events::findOrFail($id);
+
+		//decrypt id
+		$cryptEvent = Crypt::decrypt($id);
+
+		//find if event exist
+		$event = Events::findOrFail($cryptEvent);
 		dd($event);
 	}
 
@@ -66,7 +75,30 @@ class CalendarController extends Controller
 
 	public function store(Request $request){
 		// store event
-		dd($request);
+
+		// declare variables
+		$fullDay = "";
+		$userId = \Auth::user()->id;
+
+		// check if fullDay is true
+		if ($request->has('fullDay')) {
+    	$fullDay = true;
+		}else{
+			$fullDay = false;
+		}
+
+		//create new event object and store
+		$event = new Events;
+		$event->event_title = $request->eventTitle;
+		$event->event_description = $request->eventDesc;
+		$event->user_id = $userId;
+		$event->full_day = $fullDay;
+		$event->time_start = $request->eventStartDate;
+		$event->time_end = $request->eventEndDate;
+		$event->color = $request->eventColor;
+		$event->save();
+
+		return redirect('/event');
 	}
 
 	public function update(Request $request, $id){

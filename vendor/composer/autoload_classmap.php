@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable' => $baseDir . '/database/migrations/2017_01_09_065356_add_color_created_at_updated_at_deleted_at_coloumns_to_events_table.php',
     'AddEventColoumnsToEventsTable' => $baseDir . '/database/migrations/2017_01_08_181226_add_event_coloumns_to_events__table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
