@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable extends Migration
+class AddLocationToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('color');
-            $table->timestamps();
-            $table->softDeletes()->nullable();
+             $table->string('location');
         });
     }
 
@@ -28,7 +26,7 @@ class AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable extends Migration
     public function down()
     {
         Schema::table('events', function (Blueprint $table) {
-             Schema::drop('events');
+            Schema::drop('events');
         });
     }
 }

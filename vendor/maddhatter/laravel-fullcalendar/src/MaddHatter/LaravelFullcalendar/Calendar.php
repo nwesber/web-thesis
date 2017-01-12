@@ -34,7 +34,7 @@ class Calendar
             'right' => 'listDay,listWeek,month',
         ],
 
-         'views' =>[
+        'views' =>[
             'listDay' => [
                 'buttonText' => 'list day'
             ],
@@ -42,7 +42,7 @@ class Calendar
                 'buttonText' => 'list week'
             ]
          ],
-         'navLinks' => true,
+        'navLinks' => true,
         'eventLimit' => true,
         'defaultView' => 'month',
     ];

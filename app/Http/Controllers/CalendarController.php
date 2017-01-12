@@ -41,8 +41,7 @@ class CalendarController extends Controller
 			    	encrypt id for security
 		    	==========================*/
 	        'url' => 'event/'. Crypt::encrypt($event->id) ,
-	        'color' => $event->color ,
-	        'description' => $event->event_description,
+	        'color' => $event->color,
  	        //any other full-calendar supported parameters
     		]
 			);
@@ -65,7 +64,9 @@ class CalendarController extends Controller
 
 		//find if event exist
 		$event = Events::findOrFail($cryptEvent);
-		dd($event);
+
+
+		return view('events.show', compact('event'));
 	}
 
 	public function edit($id){
