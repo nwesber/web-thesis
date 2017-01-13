@@ -94,6 +94,7 @@ class CalendarController extends Controller
 		$event->event_description = $request->eventDesc;
 		$event->user_id = $userId;
 		$event->full_day = $fullDay;
+		$event->location = "Makati";
 		$event->time_start = $request->eventStartDate;
 		$event->time_end = $request->eventEndDate;
 		$event->color = $request->eventColor;
