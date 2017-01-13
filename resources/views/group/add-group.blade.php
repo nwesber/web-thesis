@@ -28,8 +28,8 @@
 		        </span>
 		    @endif
 		</div>
-  	<a href="{{ url('/group') }}"><input type="button"  class="btn btn-primary pull-right" value="Back"></a>
-  	<input type="submit" value="Add Group" class = "btn btn-info pull-right">
+  	<input type="submit" value="Create Group" class = "btn btn-info pull-right">
+    <a href="{{ url('/group') }}"><input type="button"  class="btn btn-primary pull-right" value="Back"></a>
   	{!! Form::close() !!}
   </div>
 </div>

@@ -32,17 +32,25 @@ Route::post('routine/{id}/task/task-details/{id2}/updateTask', 'TaskController@u
 Route::get('routine/{id}/task/task-details/{id2}/delete', 'TaskController@taskDelete');
 Route::resource('routine', 'RoutineController');
 
+
 //Event
-Route::get('/event', 'EventController@index');
+Route::get('/event', 'CalendarController@index');
 
 //Group
 Route::get('/group', 'GroupController@index');
 Route::get('/group/add-group', 'GroupController@addGroup');
+Route::get('/group/{id}', 'GroupController@groupDetails');
 Route::post('/group/store-group', 'GroupController@storeGroup');
 Route::get('/group/{id}/edit-group', 'GroupController@editGroup');
 Route::post('/group/{id}/update-group', 'GroupController@updateGroup');
-Route::get('/group/deleteGroup/{id}', 'GroupController@deleteGroup');
+Route::get('/group/{id}/add-member', 'GroupController@addMember');
+Route::post('/group/{id}/add-member/store', 'GroupController@storeMember');
+Route::get('/group/{id}/view-member', 'GroupController@viewMember');
+Route::post('/group/{id}/view-member/update', 'GroupController@updateMember');
+Route::get('/group/{id}/leave-group', 'GroupController@leaveGroup');
 Route::resource('group', 'GroupController');
+
 
 //Home
 Route::get('/logout', 'HomeController@logout');
+

@@ -8,10 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'iSCHED') }}</title>
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://bowercdn.net/c/klasify-0.4.4/stylesheets/klasify.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/materialicons.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/material.min.css') }}">
@@ -19,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/card.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/routine.css') }}">
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
@@ -31,11 +34,12 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 
-      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 showIt">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Routine</span>
           <div class="mdl-layout-spacer"></div>
@@ -44,17 +48,16 @@
 
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-          <img src="{{URL::asset('images/user.jpg')}}" class="demo-avatar">
+          <img src="{{ URL::asset('images/user.jpg') }}" class="demo-avatar">
           <div class="demo-avatar-dropdown">
             <span style="margin-top: 10px;">Welcome, {{ Auth::user()->name }}</span>
             <div class="mdl-layout-spacer"></div>
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="{{ url('/routine') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Routine</a>
-          <a class="mdl-navigation__link" href="{{ url('/event') }}" id="event"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Event</a>
-          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a> -->
-          <a class="mdl-navigation__link" href="{{ url('/group') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Group</a>
+          <a class="mdl-navigation__link" href="{{ url('/routine') }}" onclick="showIt();"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Routine</a>
+          <a class="mdl-navigation__link" id="showNow2" href="{{ url('/event') }}" onclick="showIt2();"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event</i>Events</a>
+          <a class="mdl-navigation__link" id="showNow3" href="{{ url('/group') }}" onclick="showIt3();"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Groups</a>
           <a class="mdl-navigation__link" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Logout</a>
                 <form id="logout-form" action="{{ url('/logout') }}" method="GET" style="display: none;">
@@ -71,7 +74,10 @@
       </main>
     </div>
 
-    
+<!-- Madhatter -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 </body>
 </html>
-

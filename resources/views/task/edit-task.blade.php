@@ -16,33 +16,32 @@
 <div class = "container">
   <div class = "form-group">
   {!! Form::model($task, ['method' => 'POST', 'action' => array('TaskController@updateTask', $routine->id, $task->id), 'id' => 'form1', 'class' => 'form-vertical'])   !!}
-		    Task Title: <input type="text" value="{{$task->task_title}}" name="taskTitle" class = "form-control" required="true">
-		    Task Description: <input type="text" value="{{$task->task_description}}" name="taskDesc" class = "form-control" required="true">
-		    Due Date: <input type="text" value="{{$task->due_date}}" name="taskDue" class = "form-control" required="true">
+		    Task Title: <input type="text" value="{{$task->task_title}}" name="taskTitle" class = "form-control" required="true"><br>
+		    Task Description: <input type="text" value="{{$task->task_description}}" name="taskDesc" class = "form-control" required="true"><br>
+		    Due Date: <input type="text" value="{{$task->due_date}}" name="taskDue" class = "form-control" required="true"><br>
 		    Priority: 
-         
+         <br>
           @if($task->priority == 'High')
-            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> Low
-            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true"> Medium
-            <input type="radio" name="taskPrio" value="High" value="{{$task->priority}}" required="true" checked> High 
+            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> Low<br>
+            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true"> Medium<br>
+            <input type="radio" name="taskPrio" value="High" value="{{$task->priority}}" required="true" checked> High <br>
           
           @elseif($task->priority == 'Medium')
-            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> Low
-            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true" checked> Medium
-            <input type="radio" name="taskPrio" value="High" value="{{$task->priority}}" required="true"> High 
+            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> Low<br>
+            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true" checked> Medium<br>
+            <input type="radio" name="taskPrio" value="High" value="{{$task->priority}}" required="true"> High <br>
 
           @elseif($task->priority == 'Low')
-            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true" checked> Low
-            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true"> Medium
-            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> High
+            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true" checked> Low<br>
+            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true"> Medium<br>
+            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> High<br>
           
           @else
-            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> Low
-            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true"> Medium
-            <input type="radio" name="taskPrio" value="High" value="{{$task->priority}}" required="true"> High 
-          
+            <input type="radio" name="taskPrio" value="Low" value="{{$task->priority}}" required="true"> Low<br>
+            <input type="radio" name="taskPrio" value="Medium" value="{{$task->priority}}" required="true"> Medium<br>
+            <input type="radio" name="taskPrio" value="High" value="{{$task->priority}}" required="true"> High <br>
           @endif
-          <br>
+
         <div id="showIt">
           Select Day:<br>
           <input type ="checkbox" name="taskDay[]" id="taskDay" class="task" value="Sunday" <?php if(\DB::table('task')->where('$task->task_day', 'LIKE', '%Sunday%')) { echo "checked='checked'";} ?>> Sunday <br>
@@ -54,6 +53,7 @@
           <input type ="checkbox" name="taskDay[]" id="taskDay" class="task" value="Saturday"  <?php if(\DB::table('task')->where('$task->task_day', 'LIKE', '%Saturday%')) { echo "checked='checked'";} ?>> Saturday <br>
         </div>
 		    Time Start: <input type="time" name="timeStart" value="{{ $task->time_start }}" class="form-control" required="true">	
+        <br>
         @if($task->taskDay == 'All Day')
         <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" <?php if(\DB::table('task')->where('$task->task_day', '!=', 'All Day')) { echo !"checked='checked'";} ?>> All Day 
 
@@ -61,8 +61,9 @@
         <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" <?php if(\DB::table('task')->where('$task->task_day', '=', 'All Day')) { echo "checked='checked'";} ?>> All Day  
         
         @endif
-		    <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}"><input type="button" class="btn btn-primary pull-right" value="Cancel"></a>
 		    <input type="submit" value="Save Task" class = "btn btn-info pull-right">
+        <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}"><input type="button" class="btn btn-primary pull-right" value="Cancel"></a>
+        
 	    {!! Form::close() !!}
   </div>
 </div>

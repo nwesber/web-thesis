@@ -104,10 +104,10 @@
       <div class = "form-group text-center">
       <hr/>
           <div class = "col-sm-12">
-            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}"><input type = "button" class = "btn btn-info form-control" style = "width:50%" value = "Add Task"></a>
+            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}"><input type = "button" class = "btn btn-info form-control" value = "Add Task"></a>
           </div>
           <div class = "col-sm-12">
-            <a href="{{ url('/routine') }}"><input type = "button" class = "btn btn-primary form-control" style = "width:50%" value = "Back"></a>
+            <a href="{{ url('/routine') }}"><input type = "button" class = "btn btn-primary form-control" value = "Back"></a>
           </div>
     	</div>
     </div>
