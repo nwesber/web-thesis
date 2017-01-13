@@ -34,17 +34,18 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 
-      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 showIt">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Routine</span>
           <div class="mdl-layout-spacer"></div>
-
         </div>
       </header>
+
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
           <img src="{{ URL::asset('images/user.jpg') }}" class="demo-avatar">
@@ -54,15 +55,14 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="{{ url('/routine') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Routine</a>
-          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event</i>Events</a>
-          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Groups</a>
+          <a class="mdl-navigation__link" href="{{ url('/routine') }}" onclick="showIt();"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Routine</a>
+          <a class="mdl-navigation__link" id="showNow2" href="{{ url('/event') }}" onclick="showIt2();"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event</i>Events</a>
+          <a class="mdl-navigation__link" id="showNow3" href="{{ url('/group') }}" onclick="showIt3();"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Groups</a>
           <a class="mdl-navigation__link" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Logout</a>
                 <form id="logout-form" action="{{ url('/logout') }}" method="GET" style="display: none;">
                       {{ csrf_field() }}
-                  </form>
+                </form>
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
@@ -74,7 +74,10 @@
       </main>
     </div>
 
-
+<!-- Madhatter -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 </body>
 </html>
-

@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <div class="row">
 	<div class="col-lg-12">
 	  <p class="page-header">
@@ -88,7 +89,7 @@
       <!-- /.panel-body -->
        {!! Form::close() !!}
     </div>
-	</div>
+ 	</div>
 
 </div>
 
@@ -102,8 +103,6 @@
 			}
 		});
 	});
-
-
 </script>
 @endsection
 

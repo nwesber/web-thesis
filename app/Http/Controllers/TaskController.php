@@ -66,6 +66,7 @@ class taskController extends Controller
         ->where('routine_id', '=', $id )
         ->get();
 
+
         return view('task.task', compact('taskDay1', 'taskDay2', 'taskDay3', 'taskDay4', 'taskDay5', 'taskDay6', 'taskDay7', 'routine'));
     }
 
@@ -86,8 +87,9 @@ class taskController extends Controller
 
       $taskDay = implode(',', Input::get('taskDay'));
 
-      $army_time_str = $request->timeStart;
-      $regular_time_str = date( 'g:i A', strtotime( $army_time_str ) );
+      if($taskDay == 'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'){
+          $taskDay = 'All Day';
+      }
 
     	$task = new Task();
       $task->user_id = \Auth::user()->id;
@@ -115,6 +117,8 @@ class taskController extends Controller
       $routine = Routine::findOrFail($id);
       $task = Task::findOrFail($id2);
 
+      
+
        $validator = Validator::make($request->all(), [
             'taskTitle' => 'required',
             'taskDesc' => 'required|max:255',
@@ -130,12 +134,13 @@ class taskController extends Controller
             ->withErrors($validator)
             ->with('message', 'Error');
         }
+        }else{
       $updateTask = Task::updateTask($id2, $request->taskTitle, $request->taskDesc, $request->taskDue, $request->taskPrio, $request->taskDay, $request->timeStart);
-
+      }
       if($request->taskTitle == 'taskTitle' && $request->taskDesc == 'taskDesc' && $request->taskDue == 'taskDue' && $request->taskDay == 'taskDay' && $request->taskPrio == 'taskPrio' && $request->timeStart == 'timeStart'){
         return redirect('/routine/'. $id.'/task/task-details/'. $id2)->with(compact('task', 'routine'))->with('message', 'No changes has been made.');
       }else{
-       return redirect('/routine/'. $id.'/task/task-details/'. $id2)->with(compact('task', 'routine'))->with('message', 'Your changes has been saved.');
+       return redirect('/routine/'. $id.'/task/task-details/'. $id2)->with(compact('task', 'routine'))->with('message', 'Your changes has been saved!');
       }
     }
 
