@@ -4,20 +4,15 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-12 clearBottom">
-    <div class="clearTop"></div>
-    <div class="btn-group pull-right">
-      <a href="{{ route('event.create') }}"
-         class="btn btn-primary"
-         role="button">
-         <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; &nbsp;Add Event
-      </a>
-    </div>
-  </div>
-  <div class="clearTop"></div>
-  <div class="col-md-12">
+  <div class="col-md-12 clearTop">
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>My Events</strong></div>
+      <div class="panel-heading"><strong>My Events</strong>
+        <div class="pull-right">
+          <a href="{{ route('event.create') }}">
+            <button class="btn btn-primary btn-xs"><i class="fa fa-plus fa-fw"></i> Create</button>
+          </a>
+        </div>
+      </div>
       <div class="panel-body">
         {!! $calendar->calendar() !!}
       </div>

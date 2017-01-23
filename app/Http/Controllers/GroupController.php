@@ -48,7 +48,7 @@ class GroupController extends Controller
             ->get();
             // dd(Group::where('group_name')->get();
             // dd($group);
-           /* 
+           /*
         $group = GroupMember::where('is_removed', '=', 0)->get();
         dd($group);*/
 
@@ -107,14 +107,14 @@ class GroupController extends Controller
         $group->user_id = \Auth::user()->id;
         $group->has_member = 1;
     	if(Group::where('user_id', '=', \Auth::user()->id) && Group::where('group_name', '=', Input::get('groupName'))->exists()){
-    		return redirect('/group/add-group')->with('message', 'Group Name already exist!');	
+    		return redirect('/group/add-group')->with('message', 'Group Name already exist!');
     	}else{
             $group->leave_group = 0;
     		$group->save();
 		}
         $member = new GroupMember();
         $member->group_id = $group->id;
-        $member->user_id = \Auth::user()->name; 
+        $member->user_id = \Auth::user()->name;
         $member->is_removed = 0;
         $member->save();
 
@@ -141,12 +141,12 @@ class GroupController extends Controller
         return view('group.group-details', compact('group'));
     }*/
 
-    
+
 
     public function addMember($id, Request $request){
         $users = User::where('id', '!=', \Auth::user()->id)->get();
         $group = Group::findOrFail($id);
-        
+
 
         return view('group.add-member', compact('users', 'group'));
     }
@@ -180,16 +180,16 @@ class GroupController extends Controller
             // dd($groupMem);
         // $newMember = implode(',', Input::get('addMember'));
         // $member = new GroupMember();
-       
+
 
         foreach($userId as $key => $n ) {
-            $arrData[] = array( 
+            $arrData[] = array(
                 'user_id' => $userId[$key],
                 'group_id' => $group->id,
                 'is_removed' => 0,
                 "created_at" => $now,
                 "updated_at" => $now
-            );    
+            );
         }
         $member = DB::table('group_members')->insert($arrData);
         return redirect('/group')->with(compact('group'))->with('message', 'Successfully Added Member(s)');
@@ -230,7 +230,7 @@ class GroupController extends Controller
 
         $event = Input::get('shareEvent');
       /*  foreach($event as $key => $n ) {
-            $arrData[] = array( 
+            $arrData[] = array(
                 'event_title' => $event[$key],
                 'user_id' => $userId,
                 'group_id' => '$id',
@@ -243,7 +243,7 @@ class GroupController extends Controller
         }
         /*if(SharedEvent::where('event_title', '=', $event)->exists()){
             $shareEvent = DB::table('shared_events')->where('is_shared', '=', 0)->where('user_id', '=', $userId)->where('group_id', '=', $id)
-            ->update(array('group_id' => $group->id, 
+            ->update(array('group_id' => $group->id,
                            'is_shared' => 1));
            foreach($event as $key => $n ) {
             $arrData[] = DB::table('shared_events')->update([
@@ -254,7 +254,7 @@ class GroupController extends Controller
                ]);
             }
         }*/
-        
+
         /*$event = Input::get('shareEvent');
         foreach($event as $key => $n ) {
             DB::table('shared_events')
