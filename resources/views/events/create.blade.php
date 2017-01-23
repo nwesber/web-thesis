@@ -22,7 +22,7 @@
 
         <div class="form-group">
           <label for="eventTitle">Event Title:</label>
-          <input type="text" name="eventTitle" class="form-control" required="true" placeholder="Unititled Event">
+          <input type="text" name="eventTitle" class="form-control" required="true" placeholder="Untitled Event">
         </div>
 
         <div id="notFullDay">
@@ -62,6 +62,10 @@
           <strong>Event Details:</strong>
         </h5>
         <div class="form-group">
+          <label for="eventDesc">Event Location:</label>
+          <input type="text" name="location" class="form-control" required="true" placeholder="">
+        </div>
+        <div class="form-group">
           <label for="eventDesc">Event Description:</label>
           <textarea class="form-control" rows="4" id="eventDesc" name="eventDesc"></textarea>
         </div>
@@ -69,6 +73,9 @@
         <div id="cp2" class="input-group colorpicker-component form-group">
           <input type="text" value="#00AABB" class="form-control" id="eventColor" name="eventColor" />
           <span class="input-group-addon"><i></i></span>
+        </div>
+        <div class="form-group">
+          <input type ="checkbox" name="isShared" id="isShared"> Share to Group
         </div>
         <div class="pull-right">
           <button type="reset" class="btn btn-default" value="Reset">Reset</button>

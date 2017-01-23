@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardv2')
 
 @section('content')
 
@@ -13,6 +13,16 @@
 	    @endif
 	</div>
 
+	 <div class="clearTop"></div>
+    <a href="{{ url('group/' . $group->id) }}"
+       class="btn btn-default"
+       role="button"
+       data-toggle="tooltip"
+       data-placement="bottom"
+       title="Back">
+       <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </a>
+    <br>
 	List of Users:
 	{!! Form::open(array('action' => array('GroupController@storeMember', $group->id), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
 	<ul>

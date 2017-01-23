@@ -44,8 +44,11 @@ Route::get('/event', 'CalendarController@index');
 //Group
 Route::get('/group', 'GroupController@index');
 Route::get('/group/add-group', 'GroupController@addGroup');
-Route::get('/group/{id}', 'GroupController@groupDetails');
+// Route::get('/group/{id}', 'GroupController@groupDetails');
+Route::get('/group/{id}', 'GroupController@groupCalendar');
+Route::get('/group/{id}/shareEvent', 'GroupController@groupShareEvent');
 Route::post('/group/store-group', 'GroupController@storeGroup');
+Route::post('/group/{id}/shareEvent/performSharing', 'GroupController@performShare');
 Route::get('/group/{id}/edit-group', 'GroupController@editGroup');
 Route::post('/group/{id}/update-group', 'GroupController@updateGroup');
 Route::get('/group/{id}/add-member', 'GroupController@addMember');
@@ -55,5 +58,5 @@ Route::post('/group/{id}/view-member/update', 'GroupController@updateMember');
 Route::get('/group/{id}/leave-group', 'GroupController@leaveGroup');
 Route::resource('group', 'GroupController');
 
-
-
+//Home
+Route::get('/logout', 'HomeController@logout');

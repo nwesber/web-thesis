@@ -130,10 +130,9 @@ class taskController extends Controller
 
          if ($validator->fails()) {
              return redirect('/routine/'. $id.'/task/task-details/'. $id2 . '/edit')
-            ->withInput()
+          ->withInput()
             ->withErrors($validator)
             ->with('message', 'Error');
-        }
         }else{
       $updateTask = Task::updateTask($id2, $request->taskTitle, $request->taskDesc, $request->taskDue, $request->taskPrio, $request->taskDay, $request->timeStart);
       }

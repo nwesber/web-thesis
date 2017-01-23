@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable extends Migration
+class CreateGroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->string('color');
+        Schema::create('group', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('group_name');
+            $table->boolean('has_member');
+            $table->boolean('leave_group');
             $table->timestamps();
-            $table->softDeletes()->nullable();
         });
     }
 
@@ -27,8 +30,6 @@ class AddColorCreatedAtUpdatedAtDeletedAtColoumnsToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-             Schema::drop('events');
-        });
+        Schema::dropIfExists('group');
     }
 }
