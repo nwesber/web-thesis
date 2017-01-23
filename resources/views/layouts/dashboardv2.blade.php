@@ -117,7 +117,7 @@
                 <a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Events</a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-users fa-fw"></i> Groups</a>
+                <a href="{{ url('/group') }}"><i class="fa fa-users fa-fw"></i> Groups</a>
               </li>
 
             </ul>

@@ -10,6 +10,8 @@ use DateTime;
 use Calendar;
 use DB;
 use Crypt;
+use App\SharedEvent;
+use App\Group;
 
 class CalendarController extends Controller
 {
@@ -23,6 +25,8 @@ class CalendarController extends Controller
 
 	  //fetch user events
 	  $events = Events::getEvents($userid)->get();
+	  $holidays = DB::table('holidays')->get();
+	  // dd($holidays);
 
 	  //iterate all events where user id = logged in user then add them to the array
 	  foreach ($events as $event) {
@@ -76,7 +80,10 @@ class CalendarController extends Controller
 
 	public function store(Request $request){
 		// store event
-
+		/*$groupId = Group::where('user_id', '=', \Auth::user()->id)->pluck('id');
+		dd($groupId);
+		$groupIds = implode(',', $groupId);
+		dd($groupIds);*/
 		// declare variables
 		$fullDay = "";
 		$userId = \Auth::user()->id;
@@ -94,10 +101,32 @@ class CalendarController extends Controller
 		$event->event_description = $request->eventDesc;
 		$event->user_id = $userId;
 		$event->full_day = $fullDay;
+		$event->location = $request->location;
+		$event->is_shared = 0;
+		if($request->isShared == true){
+			$event->is_shared = 1;
+		}
 		$event->time_start = $request->eventStartDate;
 		$event->time_end = $request->eventEndDate;
 		$event->color = $request->eventColor;
 		$event->save();
+
+		/*$group = new SharedEvent;
+		$group->event_title = $request->eventTitle;
+		$group->event_description = $request->eventDesc;
+		$group->group_id = $groupId;
+		$group->user_id = $userId;
+		$group->full_day = $fullDay;
+		$group->location = "Makati";
+		$group->is_shared = 0;
+		if($request->isShared == true){
+			$event->is_shared = 1;
+		}
+		$group->time_start = $request->eventStartDate;
+		$group->time_end = $request->eventEndDate;
+		$group->color = $request->eventColor;
+		dd($group);
+		$group->save();*/
 
 		return redirect('/event');
 	}
@@ -112,3 +141,5 @@ class CalendarController extends Controller
 		dd($id);
 	}
 }
+	
+

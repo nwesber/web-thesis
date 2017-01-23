@@ -231,6 +231,7 @@
 
         </div>
       </div>
+
       <div id="friday" class="tab-pane fade">
         <div class="row">
           <div class="clearTop"></div>
@@ -293,7 +294,6 @@
               @endforelse
 
             </div>
-          </div>
 
         </div>
       </div>
