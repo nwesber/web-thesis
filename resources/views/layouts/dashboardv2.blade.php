@@ -92,7 +92,13 @@
               </li>
             </ul>
           </li>
+
+
+
+          @yield('nav')
+
         </ul>
+
 
         <!-- Navbar Sidebar -->
         <div class="navbar-default sidebar" role="navigation">
