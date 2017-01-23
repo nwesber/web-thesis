@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-12 clearBottom">
+  <div class="col-md-12 clearTop">
   </div>
   <div class="clearTop"></div>
   <div class="col-md-12">
