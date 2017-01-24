@@ -1,23 +1,19 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
 
+@section('event', 'class="active"')
 
 @section('content')
 {!!Form::open(array('url' => '/createEvent')) !!}
 <div class="row">
-  <div class="col-md-12 clearBottom">
-    <div class="clearTop"></div>
-    <a href="{{ url('/event') }}" class="btn btn-default">Back</a>
-    <div class="btn-group pull-right">
-      <button type="submit" class="btn btn-primary" value="Submit">
-        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-        &nbsp; &nbsp;Save Event
-      </button>
-    </div>
-  </div>
-  <div class="clearTop"></div>
   <div class="col-md-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>Create Event</strong></div>
+      <div class="panel-heading"><strong>Create Event</strong>
+        <div class="pull-right">
+          <a href="{{ url('/event') }}">
+            <button class="btn btn-default btn-xs" type="button"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+          </a>
+        </div>
+      </div>
       <div class="panel-body">
 
         <div class="form-group">

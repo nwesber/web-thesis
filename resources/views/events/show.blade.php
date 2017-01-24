@@ -1,10 +1,11 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
 
+@section('event', 'class="active"')
 
 @section('content')
 
 <div class="row">
-  <div class="col-md-12 clearBottom">
+<!--   <div class="col-md-12 clearBottom">
     <div class="clearTop"></div>
     <a href="#"
        class="btn btn-default"
@@ -33,10 +34,23 @@
          <i class="fa fa-trash-o" aria-hidden="true"></i>
       </a>
     </div>
-  </div>
-  <div class="clearTop"></div>
+  </div> -->
+
   <div class="col-md-12">
     <div class="panel panel-default">
+      <div class="panel-heading"><strong>Event Details:</strong>
+        <div class="pull-right dropdown">
+          <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+            <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu ">
+            <li><a href="{{ url('#') }}">Edit Task</a></li>
+            <li><a href="{{ url('#') }}" onclick="myFunction(event)">Delete Task</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ url('/event') }}">Return to My Events</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="panel-body">
         <h3>{{ $event->event_title}}</h3>
         <div>

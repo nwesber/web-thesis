@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Http\Requests;
 use App\Events;
@@ -60,7 +61,12 @@ class CalendarController extends Controller
 		//show event
 
 		//decrypt id
-		$cryptEvent = Crypt::decrypt($id);
+		try{
+			$cryptEvent = Crypt::decrypt($id);
+		}catch(DecryptException $e){
+			return view('errors.404');
+		}
+
 
 		//find if event exist
 		$event = Events::findOrFail($cryptEvent);
