@@ -87,7 +87,17 @@
               <li class=""><a href="#">Other Link</a></li>
               <li class=""><a href="#">Other Link</a></li>
               <li class="divider"></li>
-              <li><a href="#">Logout</a></li>
+              <li>
+                <a href="{{ url('/logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                   <i class="fa fa-sign-out fa-fw"></i>
+                   Logout
+                </a>
+                <form id="logout-form" action="{{ url('/logout') }}" method="GET" style="display: none;">
+                  {{ csrf_field() }}
+                </form>
+              </li>
             </ul>
           </li>
         </ul>
@@ -106,7 +116,7 @@
             <div class="side-menu-container">
               <ul class="nav navbar-nav">
                 <li @yield('class')><a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Routine</a></li>
-                <li><a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Event</a></li>
+                <li @yield('event')><a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Event</a></li>
                 <li><a href="#"><i class="fa fa-users fa-fw"></i> Group</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->

@@ -1,5 +1,6 @@
 @extends('layouts.dashboardv3')
 
+@section('event', 'class="active"')
 
 @section('content')
 
