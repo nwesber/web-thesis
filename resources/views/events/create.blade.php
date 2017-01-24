@@ -51,15 +51,19 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <input type ="checkbox" name="fullDay" id="fullDay" value="1"> All Day
-        </div>
+        </div> -->
         <h5 class="page-header">
           <strong>Event Details:</strong>
         </h5>
         <div class="form-group">
           <label for="eventDesc">Event Description:</label>
           <textarea class="form-control" rows="4" id="eventDesc" name="eventDesc"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="eventLocation">Location:</label>
+          <input type="text" name="eventLocation" id="eventLocation" class="form-control" required="true">
         </div>
          <label for="eventColor">Event Color:</label>
         <div id="cp2" class="input-group colorpicker-component form-group">

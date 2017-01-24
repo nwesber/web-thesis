@@ -28,4 +28,6 @@ class Events extends Model
     ->whereNull('deleted_at');
     return $events;
   }
+
+
 }

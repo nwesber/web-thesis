@@ -24,6 +24,7 @@ class CalendarController extends Controller
 
 	  //fetch user events
 	  $events = Events::getEvents($userid)->get();
+	  $holidays = DB::table('holidays')->get();
 
 	  //iterate all events where user id = logged in user then add them to the array
 	  foreach ($events as $event) {
@@ -47,6 +48,33 @@ class CalendarController extends Controller
     		]
 			);
 		}
+
+		//iterate all events where user id = logged in user then add them to the array
+	  foreach ($holidays as $holiday) {
+			$eventCollection[] = Calendar::event(
+		    $holiday->event_title, //event title
+		    true, //full day event?
+		    $holiday->time_start, //start time (you can also use Carbon instead of DateTime)
+		    $holiday->time_end, //end time (you can also use Carbon instead of DateTime)
+		    $holiday->id, //optionally, you can specify an event ID
+
+		    [
+		    	/*========================/
+		    		make event clickable
+			    	pass id
+			    	route = event/{id}
+			    	encrypt id for security
+		    	==========================*/
+
+	        'color' => $holiday->color,
+ 	        //any other full-calendar supported parameters
+    		]
+			);
+		}
+
+
+
+
 
 		//add an array with addEvents
 		$calendar = Calendar::addEvents($eventCollection);
@@ -99,10 +127,12 @@ class CalendarController extends Controller
 		$event->event_title = $request->eventTitle;
 		$event->event_description = $request->eventDesc;
 		$event->user_id = $userId;
+		$event->location = $request->eventLocation;
 		$event->full_day = $fullDay;
 		$event->time_start = $request->eventStartDate;
 		$event->time_end = $request->eventEndDate;
 		$event->color = $request->eventColor;
+		$event->is_shared = 0;
 		$event->save();
 
 		return redirect('/event');
