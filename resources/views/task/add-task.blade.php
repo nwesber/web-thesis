@@ -1,24 +1,20 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
+
+@section('class', 'class="active"')
 
 @section('content')
 
 
 <div class="row">
-	<div class="col-lg-12">
-	  <p class="page-header">
-			<ol class="breadcrumb">
-			  <li><a href="{{ url('/routine') }}">Home</a></li>
-			  <li><a href="{{ url('/routine/'.$routine->id.'/task') }}"> {{ $routine->routine_name}}</a></li>
-			  <li class="active">New Task</li>
-			</ol>
-		</p>
-	</div>
-
 	<div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>New Task</strong>
-
+        <div class="pull-right">
+          <a href="{{ url('/routine/'.$routine->id.'/task') }}">
+            <button class="btn btn-default btn-xs"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+          </a>
+        </div>
       </div>
       <!-- /.panel-heading -->
       {!! Form::open(array('action' => array('TaskController@storeTask', $routine->id), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
@@ -41,7 +37,7 @@
 						</div>
 						<div class="form-group col-md-4">
 						  <label for="taskDue">Due Date:</label>
-						  <input type="date" name="taskDue" class="form-control" value="<?php echo date("Y-m-d");?>" required="true">
+						  <input type="date" name="taskDue" class="form-control" required="true">
 						</div>
 						<div class="form-group col-md-4">
 						  <label for="timeStart">Time Start:</label>
@@ -77,9 +73,6 @@
 			  </div>
 			  <div class="col-md-12">
 			  	<div class="pull-right">
-			  		<a href="{{ url('/') }}">
-          		<button class="btn btn-default btn-md"></i> Back</button>
-       		  </a>
        		  <input type="submit" value="Add Task" class="btn btn-primary">
 			  	</div>
 

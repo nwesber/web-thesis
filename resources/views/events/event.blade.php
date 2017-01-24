@@ -1,12 +1,9 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
 
 
 @section('content')
 
 <div class="row">
-  <div class="col-md-12 clearTop">
-  </div>
-  <div class="clearTop"></div>
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>My Events</strong>

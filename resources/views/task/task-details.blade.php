@@ -1,91 +1,61 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
+
+@section('class', 'class="active"')
 
 @section('content')
 
+@if( Session::has('message') )
+  <div class="alert alert-success fade in" role="alert" align="center">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{ Session::get('message') }}</strong>
+  </div>
+@endif
 <div class="row">
   <div class="col-md-12">
-    <div class="clearTop"></div>
-    @if( Session::has('message') )
-      <div class="alert alert-success fade in" role="alert" align="center">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>{{ Session::get('message') }}</strong>
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>View Details:</strong>
+      <div class="pull-right dropdown">
+          <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+            <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu ">
+            <li><a href="{{ url('routine/'.$routine->id.'/task') }}">Return to {{ $routine->routine_name}}</a></li>
+            <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/edit') }}">Edit Task</a></li>
+            <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/delete') }}" onclick="myFunction(event)">Delete Task</a></li>
+          </ul>
+        </div>
       </div>
-    @endif
-  <div class="col-md-12">
-    <div class="clearTop"></div>
-    <a href="{{ url('routine/'.$routine->id.'/task') }}"
-       class="btn btn-default"
-       role="button"
-       data-toggle="tooltip"
-       data-placement="bottom"
-       title="Back">
-       <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </a>
-    <div class="btn-group pull-right">
-      <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/edit') }}"
-         class="btn btn-warning"
-         role="button"
-         data-toggle="tooltip"
-         data-placement="bottom"
-         title="Edit">
-         <i class="fa fa-pencil" aria-hidden="true"></i>
-      </a>
-      <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/delete') }}"
-         class="btn btn-danger"
-         role="button"
-         onclick="myFunction(event)"
-         data-toggle="tooltip"
-         data-placement="bottom"
-         title="Delete">
-         <i class="fa fa-trash-o" aria-hidden="true"></i>
-      </a>
-    </div>
-  </div>
-    <div class="col-lg-12">
-      <h3 class="page-header">
-        {{$task->task_title}}
-      </h3>
-      <div class="panel panel-default">
-
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td><strong>Task Description:</strong> </td>
-            </tr>
-            <tr>
-              <td>{{$task->task_description}}</td>
-            </tr>
-            <tr>
-              <td><strong>Due Date:</strong></td>
-            </tr>
-            <tr>
-              <td>{{ $task->due_date }}</td>
-            </tr>
-            <tr>
-              <td><strong>Priority:</strong></td>
-            </tr>
-             <tr>
-              <td>{{ $task->priority }}</td>
-            </tr>
-             <tr>
-              <td><strong>Time Start:</strong></td>
-            </tr>
-             <tr>
-              <td>{{ \Carbon\Carbon::parse($task->time_start)->format('g:i A') }} </td>
-            </tr>
-            <tr>
-              <td><strong>Progress:</strong></td>
-            </tr>
-            <tr>
-              @if($task->is_completed == 1)
-                <td>Completed</td>
-              @else
-                <td>In Progress</td>
-              @endif
-            </tr>
-          </tbody>
+      <div class="panel-body">
+        <table class="table">
+          <tr>
+            <td>Task Title:</td>
+            <td><strong>{{$task->task_title}}</strong></td>
+          </tr>
+          <tr>
+            <td>Task Description:</td>
+            <td><strong>{{$task->task_description}}</strong></td>
+          </tr>
+          <tr>
+            <td>Due Date:</td>
+            <td><strong>{{ Carbon\Carbon::parse($task->due_date)->format('D, M-d-Y') }}</strong></td>
+          </tr>
+          <tr>
+            <td>Priority:</td>
+            <td><strong>{{ $task->priority }}</strong></td>
+          </tr>
+          <tr>
+            <td>Time Start:</td>
+            <td><strong>{{ \Carbon\Carbon::parse($task->time_start)->format('g:i A') }}</strong></td>
+          </tr>
+          <tr>
+            <td>Progess:</td>
+            @if($task->is_completed == 1)
+              <td><strong>Completed</strong></td>
+            @else
+              <td><strong>In Progress</strong></td>
+            @endif
+          </tr>
         </table>
-
       </div>
     </div>
   </div>

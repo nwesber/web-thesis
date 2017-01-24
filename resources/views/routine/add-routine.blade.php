@@ -1,11 +1,9 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
+
+@section('class', 'class="active"')
 
 @section('content')
 <div class="row">
-  <div class="col-lg-12">
-    <h1 class="page-header"></h1>
-  </div>
-
   <div class="col-lg-12">
     @if( Session::has('message') )
       <div class="alert alert-warning fade in" role="alert" align="center">
@@ -34,7 +32,7 @@
 
           <div class="col-md-12">
             <a href="{{ url('/routine') }}">
-              <button class="btn btn-default">Back</button>
+              <button type="button" class="btn btn-default">Back</button>
             </a>
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
