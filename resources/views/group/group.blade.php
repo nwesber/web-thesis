@@ -1,11 +1,13 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
+
+@section('group', 'class="active"')
 
 @section('content')
 
 
 <div class="row">
 
-  <div class="col-md-12 clearTop">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
         <i class="fa fa-users fa-fw"></i> <strong>Group</strong>

@@ -117,7 +117,7 @@
               <ul class="nav navbar-nav">
                 <li @yield('class')><a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Routine</a></li>
                 <li @yield('event')><a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Event</a></li>
-                <li><a href="#"><i class="fa fa-users fa-fw"></i> Group</a></li>
+                <li @yield('group')><a href="{{ url('/group') }}"><i class="fa fa-users fa-fw"></i> Group</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </nav>
