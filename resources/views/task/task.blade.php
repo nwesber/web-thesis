@@ -1,300 +1,320 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
+
+@section('class', 'class="active"')
 
 @section('content')
-
+@if( Session::has('message') )
+  <div class="alert alert-success fade in" role="alert" align="center">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{ Session::get('message') }}</strong>
+  </div>
+@endif
 <div class="row">
   <div class="col-md-12">
-    <div class="clearTop"></div>
-    <a href="{{ url('/routine') }}"
-       class="btn btn-default"
-       role="button"
-       data-toggle="tooltip"
-       data-placement="bottom"
-       title="Return to Routines">
-       <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </a>
-    <div class="btn-group pull-right">
-      <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}"
-         class="btn btn-primary"
-         role="button"
-         data-toggle="tooltip"
-         data-placement="bottom"
-         title="Add Task">
-         <i class="fa fa-plus" aria-hidden="true"></i>
-      </a>
-      <a href="{{ url('/routine/'.$routine->id. '/edit') }}"
-         class="btn btn-warning"
-         role="button"
-         data-toggle="tooltip"
-         data-placement="bottom"
-         title="Edit">
-         <i class="fa fa-pencil" aria-hidden="true"></i>
-      </a>
-      <a href="{{ url('/routine/'.$routine->id. '/delete') }}"
-         class="btn btn-danger"
-         role="button"
-         onclick="myFunction(event)"
-         data-toggle="tooltip"
-         data-placement="bottom"
-         title="Delete">
-         <i class="fa fa-trash-o" aria-hidden="true"></i>
-      </a>
-    </div>
-  </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"> <strong>{{ $routine->routine_name}}</strong>
+        <div class="pull-right dropdown">
+          <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+            <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu ">
 
-  <div class="col-md-12">
-    <div class="col-lg-12">
-      <div class="row">
-        <h3 class="page-header">
-          {{ $routine->routine_name}}
-        </h3>
-      </div>
-    </div>
-
-    <a href="#" class="nav-tabs-dropdown btn btn-block btn-primary">Tabs</a>
-    <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-tabs-horizontal">
-      <li class="active"><a data-toggle="tab" href="#sunday">Sunday</a></li>
-      <li><a data-toggle="tab" href="#monday">Monday</a></li>
-      <li><a data-toggle="tab" href="#tuesday">Tuesday</a></li>
-      <li><a data-toggle="tab" href="#wednesday">Wednesday</a></li>
-      <li><a data-toggle="tab" href="#thursday">Thursday</a></li>
-      <li><a data-toggle="tab" href="#friday">Friday</a></li>
-      <li><a data-toggle="tab" href="#saturday">Saturday</a></li>
-    </ul>
-
-    <div class="tab-content">
-      <div id="sunday" class="tab-pane fade in active">
-       <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
-              </div>
-
-              @forelse($taskDay1 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
-
-            </div>
-          </div>
-
+            <li class="dropdown-header">Task</li>
+            <li><a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">Create Task</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">Routine Settings</li>
+            <li><a href="{{ url('/routine/'.$routine->id. '/edit') }}">Edit Routine</a></li>
+            <li><a href="{{ url('/routine/'.$routine->id. '/delete') }}" onclick="myFunction(event)">Delete Routine</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ url('/routine') }}">Return to All Routines</a></li>
+          </ul>
         </div>
       </div>
+      <div class="panel-body">
 
-      <div id="monday" class="tab-pane fade">
-        <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
-              </div>
 
-              @forelse($taskDay2 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
 
-            </div>
-          </div>
+        <div class="col-md-12">
+          <a href="#" class="nav-tabs-dropdown btn btn-block btn-primary">Tabs</a>
+          <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-tabs-horizontal">
+            <li class="active"><a data-toggle="tab" href="#sunday">Sunday</a></li>
+            <li><a data-toggle="tab" href="#monday">Monday</a></li>
+            <li><a data-toggle="tab" href="#tuesday">Tuesday</a></li>
+            <li><a data-toggle="tab" href="#wednesday">Wednesday</a></li>
+            <li><a data-toggle="tab" href="#thursday">Thursday</a></li>
+            <li><a data-toggle="tab" href="#friday">Friday</a></li>
+            <li><a data-toggle="tab" href="#saturday">Saturday</a></li>
+          </ul>
 
-        </div>
-      </div>
-      <div id="tuesday" class="tab-pane fade">
-        <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
-              </div>
-              @forelse($taskDay3 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
+          <div class="tab-content">
+            <div id="sunday" class="tab-pane fade in active">
+             <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
 
-            </div>
-          </div>
+                    <table class="table">
+                      <tbody>
+                       @forelse($taskDay1 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
 
-        </div>
-      </div>
-      <div id="wednesday" class="tab-pane fade">
-        <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
-              </div>
-              @forelse($taskDay4 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
+                  </div>
+                </div>
 
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div id="thursday" class="tab-pane fade">
-        <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
               </div>
-              @forelse($taskDay5 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div id="friday" class="tab-pane fade">
-        <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
-              </div>
-              @forelse($taskDay6 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div id="saturday" class="tab-pane fade">
-        <div class="row">
-          <div class="clearTop"></div>
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <strong>My Tasks:</strong>
-              </div>
-              @forelse($taskDay7 as $task)
-              <div class="list-group">
-                <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}" class="list-group-item">
-                  <h4 class="list-group-item-heading">{{$task->task_title}}</h4>
-                  <p class="list-group-item-text">{{$task->task_description}}</p>
-                </a>
-              </div>
-              @empty
-              <div class="list-group">
-                <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                  <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
-                    <button class="btn btn-primary btn-md">
-                      <i class="fa fa-plus fa-fw"></i>
-                      <strong>Add Task</strong>
-                    </button>
-                  </a>
-                </li>
-              </div>
-              @endforelse
-
             </div>
 
+            <div id="monday" class="tab-pane fade">
+              <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
+
+                    <table class="table">
+                      <tbody>
+                       @forelse($taskDay2 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div id="tuesday" class="tab-pane fade">
+              <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
+                  <table class="table">
+                      <tbody>
+                       @forelse($taskDay3 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div id="wednesday" class="tab-pane fade">
+              <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
+                  <table class="table">
+                      <tbody>
+                       @forelse($taskDay4 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div id="thursday" class="tab-pane fade">
+              <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
+                  <table class="table">
+                      <tbody>
+                       @forelse($taskDay5 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div id="friday" class="tab-pane fade">
+              <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
+                    <table class="table">
+                      <tbody>
+                       @forelse($taskDay6 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div id="saturday" class="tab-pane fade">
+              <div class="row">
+                <div class="clearTop"></div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <strong>My Tasks:</strong>
+                    </div>
+                    <table class="table">
+                      <tbody>
+                       @forelse($taskDay7 as $task)
+                       <tr>
+                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
+                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                             {{$task->task_title}}
+                            </a>
+                          </td>
+                       </tr>
+                       @empty
+                        <div class="list-group">
+                          <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
+                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                              <button class="btn btn-primary btn-md">
+                                <i class="fa fa-plus fa-fw"></i>
+                                <strong>Add Task</strong>
+                              </button>
+                            </a>
+                          </li>
+                        </div>
+                       @endforelse
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
         </div>
       </div>
     </div>

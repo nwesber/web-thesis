@@ -1,10 +1,11 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
 
+@section('event', 'class="active"')
 
 @section('content')
 
 <div class="row">
-  <div class="col-md-12 clearTop">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>My Events</strong>
         <div class="pull-right">

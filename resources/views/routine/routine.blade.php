@@ -1,13 +1,15 @@
-@extends('layouts.dashboardv2')
+@extends('layouts.dashboardv3')
+
+@section('class', 'class="active"')
 
 @section('content')
 
 <div class="row">
+	<div class="col-md-12">
 
-	<div class="col-md-12 clearTop">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <i class="fa fa-bicycle fa-fw"></i> <strong>Routine</strong>
+        <i class="fa fa-bicycle fa-fw"></i> <strong>My Routine</strong>
         <div class="pull-right">
         	<a href="{{ url('/routine/add-routine/') }}">
         		<button class="btn btn-primary btn-xs"><i class="fa fa-plus fa-fw"></i> Create</button>
