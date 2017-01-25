@@ -33,7 +33,7 @@ class GroupController extends Controller
     }
 
     public function groupCalendar($id){
-      $group = Group::findOrFail($id);  
+      $group = Group::findOrFail($id);
         // create event array
       $eventCollection = [];
 
@@ -58,7 +58,9 @@ class GroupController extends Controller
                     route = event/{id}
                     encrypt id for security
                 ==========================*/
-            'url' => 'event/'. Crypt::encrypt($event->id) ,
+
+                // comment for now will create a seperate page for this
+            /*'url' => 'event/'. Crypt::encrypt($event->id) ,*/
             'color' => $event->color,
             //any other full-calendar supported parameters
             ]
@@ -181,7 +183,7 @@ class GroupController extends Controller
        $color = $share->pluck('color');
        $location = $share->pluck('location');
            // dd($location);
-       
+
         foreach($event as $key => $n ) {
             $events = Events::getEvents($userId)->where('event_title', '=', $event[$key])->where('is_shared', '=', '0')->update(array('is_shared' => 1));
             $arrData[] = array(
