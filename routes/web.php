@@ -36,7 +36,7 @@ Route::resource('routine', 'RoutineController');
 Route::resource('event', 'CalendarController');
 
 Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEvent']);
-
+Route::post('/createSharedEvent',['uses'=>'CalendarController@storeWithShared','as'=>'createSharedEvent']);
 
 //Event
 Route::get('/event', 'CalendarController@index');

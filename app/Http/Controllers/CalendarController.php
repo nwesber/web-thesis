@@ -12,6 +12,7 @@ use DB;
 use Crypt;
 use App\SharedEvent;
 use App\Group;
+use Input;
 
 class CalendarController extends Controller
 {
@@ -57,7 +58,8 @@ class CalendarController extends Controller
 	}
 
 	public function create(){
-		return view('events.create');
+		$group = Group::where('user_id', '=', \Auth::user()->id)->get();
+		return view('events.create', compact('group'));
 	}
 
 	public function show($id){
@@ -80,10 +82,62 @@ class CalendarController extends Controller
 
 	public function store(Request $request){
 		// store event
-		/*$groupId = Group::where('user_id', '=', \Auth::user()->id)->pluck('id');
-		dd($groupId);
-		$groupIds = implode(',', $groupId);
-		dd($groupIds);*/
+
+		// declare variables
+		$fullDay = "";
+		$userId = \Auth::user()->id;
+		$eventShared = Input::get('shareEvent');
+
+		// check if fullDay is true
+		if ($request->has('fullDay')) {
+    	$fullDay = true;
+		}else{
+			$fullDay = false;
+		}
+
+		//create new event object and store
+		$event = new Events;
+		$event->event_title = $request->eventTitle;
+		$event->event_description = $request->eventDesc;
+		$event->user_id = $userId;
+		$event->full_day = $fullDay;
+		$event->location = $request->location;
+		$event->is_shared = 0;
+		if($request->isShared == true){
+			$event->is_shared = 1;
+		}
+		$event->time_start = $request->eventStartDate;
+		$event->time_end = $request->eventEndDate;
+		$event->color = $request->eventColor;
+		$event->save();
+
+		if(!$eventShared == null){
+		foreach($eventShared as $key => $n ) {
+            $arrData[] = array(
+                'event_title' => $request->eventTitle,
+                'event_description' => $request->eventDesc,
+                'group_id' => 0,
+                'user_id' => $userId,
+                'group_id' => $eventShared[$key],
+                'is_shared' => 1,
+                'full_day' => $fullDay,
+                'location' => $request->location,
+                'time_start' => $request->eventStartDate,
+                'time_end' => $request->eventEndDate,
+                'color' => $request->eventColor,
+            );
+        }
+        	$shareEvent = DB::table('shared_events')->insert($arrData);
+    	}
+
+		return redirect('/event');
+	}
+
+	/*public function storeWithShared(Request $request){
+		// store event
+
+        $eventShared = Input::get('shareEvent');
+
 		// declare variables
 		$fullDay = "";
 		$userId = \Auth::user()->id;
@@ -111,25 +165,27 @@ class CalendarController extends Controller
 		$event->color = $request->eventColor;
 		$event->save();
 
-		/*$group = new SharedEvent;
-		$group->event_title = $request->eventTitle;
-		$group->event_description = $request->eventDesc;
-		$group->group_id = $groupId;
-		$group->user_id = $userId;
-		$group->full_day = $fullDay;
-		$group->location = "Makati";
-		$group->is_shared = 0;
-		if($request->isShared == true){
-			$event->is_shared = 1;
-		}
-		$group->time_start = $request->eventStartDate;
-		$group->time_end = $request->eventEndDate;
-		$group->color = $request->eventColor;
-		dd($group);
-		$group->save();*/
+
+
+		foreach($eventShared as $key => $n ) {
+            $arrData[] = array(
+                'event_title' => $request->eventTitle,
+                'event_description' => $request->eventDesc,
+                'group_id' => 0,
+                'user_id' => $userId,
+                'group_id' => $eventShared[$key],
+                'is_shared' => 1,
+                'full_day' => $fullDay,
+                'location' => $request->location,
+                'time_start' => $request->eventStartDate,
+                'time_end' => $request->eventEndDate,
+                'color' => $request->eventColor,
+            );
+        }
+        $shareEvent = DB::table('shared_events')->insert($arrData);
 
 		return redirect('/event');
-	}
+	}*/
 
 	public function update(Request $request, $id){
 		// update event

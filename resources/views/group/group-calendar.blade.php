@@ -26,6 +26,9 @@
             <li>
               <a href="{{ url('/group/'.$group->id. '/view-member') }}"><i class="fa fa-users fa-fw"></i> View Member</a>
             </li>
+            <li>
+              <a href="{{ url('/group/'.$group->id. '/edit-group') }}"><i class="fa fa-edit fa-fw"></i> Rename Group</a>
+            </li>
             <li class="divider"></li>
             <li>
               <a href="{{ url('group/'. $group->id .'/shareEvent') }}"><i class="fa fa-share" aria-hidden="true"></i> Share An Event</a>

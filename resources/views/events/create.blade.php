@@ -8,7 +8,7 @@
     <div class="clearTop"></div>
     <a href="{{ url('/event') }}" class="btn btn-default">Back</a>
     <div class="btn-group pull-right">
-      <button type="submit" class="btn btn-primary" value="Submit">
+      <button type="submit" class="btn btn-primary" id="formSubmit" value="Submit">
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
         &nbsp; &nbsp;Save Event
       </button>
@@ -74,12 +74,46 @@
           <input type="text" value="#00AABB" class="form-control" id="eventColor" name="eventColor" />
           <span class="input-group-addon"><i></i></span>
         </div>
+        @if($group->count() > 0)
         <div class="form-group">
           <input type ="checkbox" name="isShared" id="isShared"> Share to Group
         </div>
+        @endif
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select Group(s) you want to share your Event</h4>
+              </div>
+              <div class="modal-body">
+                   List of your Groups:
+                    <ul>
+                    @if($group->count() > 0)
+                      @foreach($group as $groups)
+                      <div class="col-sm-12">
+                      <hr width="100%">
+                        <div class="col-sm-6">
+                          <li>{{ $groups->group_name }}</li>
+                        </div>
+                        <div class ="col-sm-6">
+                          <input type="checkbox" name="shareEvent[]" value="{{ $groups->id }}" title="Share to Group">
+                        </div>
+                      </div>
+                      @endforeach
+                    @endif
+                    </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="pull-right">
           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-          <button type="submit" class="btn btn-primary" value="Submit">
+          <button type="submit" class="btn btn-primary" id="formSubmit2" value="Submit">
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
             &nbsp; &nbsp;Save Event
           </button>
@@ -107,5 +141,21 @@
   $(function() {
     $('#cp2').colorpicker();
   });
+  $('#isShared').click(function(){
+    if ($('#isShared').is(':checked')) {
+        $('#myModal').modal('show');
+    }else{
+        $('#myModal').modal('hide');
+    }
+  });
+  /*$('#isShared').click(function(){
+    if ($('#isShared').is(':checked')) {
+        $('#formSubmit').hide();
+        $('#formSubmit2').hide();
+    }else{
+        $('#formSubmit').show();
+        $('#formSubmit2').show();
+    }
+  });*/
 </script>
 @endsection

@@ -12,7 +12,7 @@ return array(
     'CreateHolidaysTable' => $baseDir . '/database/migrations/2017_01_17_131609_create_holidays_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateRoutineTable' => $baseDir . '/database/migrations/2016_10_19_033600_create_routine_table.php',
-    'CreateSharedEventsTable' => $baseDir . '/database/migrations/2017_01_16_122733_create_shared_events_table.php',
+    'CreateSharedEventsTable' => $baseDir . '/database/migrations/2017_01_25_082808_create_shared_events_table.php',
     'CreateTaskTable' => $baseDir . '/database/migrations/2016_10_19_070828_create_task_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
