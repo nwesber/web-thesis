@@ -35,6 +35,7 @@ Route::resource('routine', 'RoutineController');
 Route::resource('event', 'CalendarController');
 
 Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEvent']);
+Route::get('/updateEvent/{id}', 'CalendarController@edit' );
 
 //Home
 Route::get('/logout', 'HomeController@logout');

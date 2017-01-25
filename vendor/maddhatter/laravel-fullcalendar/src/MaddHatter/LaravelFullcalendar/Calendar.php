@@ -44,7 +44,7 @@ class Calendar
          ],
         'navLinks' => true,
         'eventLimit' => true,
-        'defaultView' => 'month',
+        'defaultView' => 'listWeek',
     ];
 
     /**

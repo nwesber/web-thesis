@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/dashboardv2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/task.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/event.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}">
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
@@ -43,6 +44,7 @@
     <!-- <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboardv2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/spectrum.js') }}"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
