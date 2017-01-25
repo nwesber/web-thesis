@@ -169,21 +169,10 @@ class GroupController extends Controller
         $userId = \Auth::user()->id;
         $event = Input::get('shareEvent');
 
-       function clean($string) {
-           $string = preg_replace('/[]""]/', '', $string); 
-
-           return preg_replace('/[""[]/', '', $string); 
-        }
-        foreach($event as $key => $n ){
-        $share = DB::table('shared_events')
-                ->join('events', 'shared_events.id', '=', 'shared_events.id')
-                // ->where('events.event_title', '=', $event[$key])
-                ->where('group_id', '=', $id)
-                ->where('events.user_id', '=', $userId)
-                ->where('events.is_shared', '=', '0')
-                ->distinct()
-                ->get();
-        }
+        $share = DB::table('events')
+            ->where('user_id', '=', $userId)
+            ->where('is_shared', '=', '0')
+            ->get();
 
        $eventDesc = $share->pluck('event_description');
        $fullDay = $share->pluck('full_day');
@@ -191,7 +180,7 @@ class GroupController extends Controller
        $timeEnd = $share->pluck('time_end');
        $color = $share->pluck('color');
        $location = $share->pluck('location');
-           
+           // dd($location);
        
         foreach($event as $key => $n ) {
             $events = Events::getEvents($userId)->where('event_title', '=', $event[$key])->where('is_shared', '=', '0')->update(array('is_shared' => 1));
@@ -208,8 +197,9 @@ class GroupController extends Controller
                 'location' => $location[$key],
                 );
         }
+        // dd($arrData);
         $shareNow = DB::table('shared_events')->insert($arrData);
-        
+        // dd($shareNow);
         return redirect('/group/' . $group->id)->with(compact('group'))->with('message', 'Successfully Shared Event(s)!');
 
     }
