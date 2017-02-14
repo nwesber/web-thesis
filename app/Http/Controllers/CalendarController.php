@@ -10,6 +10,8 @@ use App\Events;
 use DateTime;
 use Calendar;
 use DB;
+use DateInterval;
+use DatePeriod;
 use Crypt;
 
 class CalendarController extends Controller
@@ -18,6 +20,16 @@ class CalendarController extends Controller
 	  $eventCollection = [];
 
 	  $userid = \Auth::user()->id;
+
+		/*
+		$dateStart = '2017-02-11';
+		$dateEnd = '2017-02-12';
+		$timeStart = '0800';
+		$timeEnd = '1100';
+		$start = $dateStart . 'T' .$timeStart;
+		$end = $dateEnd . 'T' .$timeEnd;
+		*/
+
 
 	  $events = Events::getEvents($userid)->get();
 	  $holidays = DB::table('holidays')->get();
@@ -71,6 +83,7 @@ class CalendarController extends Controller
 	}
 
 	public function store(Request $request){
+		dd($request);
 		$fullDay = "";
 		$userId = \Auth::user()->id;
 
@@ -79,6 +92,49 @@ class CalendarController extends Controller
 		}else{
 			$fullDay = false;
 		}
+
+
+		/*
+		create 2 DB
+
+		Event DB
+		Event Details
+
+		Event Coloumns
+			id
+			user_id
+			timestamps
+		Event Details Coloumns
+			id
+			event_id
+			event_title
+			event_description
+			location
+			full_day
+			time_start
+			time_end
+			color
+		*/
+
+		/*
+
+		//loop for finding day in a given date range
+		$format = "N, Y-m-d";
+		$start = new DateTime($request->eventStartDate);
+		$end = new DateTime($request->eventEndDate);
+
+		$interval = new DateInterval('P1D'); // 1 Day
+		$dateRange = new DatePeriod($start, $interval, $end);
+
+		$range = [];
+	  foreach ($dateRange as $date) {
+	    if($date->format('N') == 1){
+	    	$range[] = $date->format($format);
+	    }
+	  }
+
+	  dd($range);
+		*/
 
 		$event = new Events;
 		$event->event_title = $request->eventTitle;
