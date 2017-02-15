@@ -31,20 +31,23 @@ class Calendar
         'header' => [
             'left' => 'prev,next today',
             'center' => 'title',
-            'right' => 'listDay,listWeek,month',
+            'right' => 'listDay,month,listWeek',
         ],
 
         'views' =>[
             'listDay' => [
-                'buttonText' => 'list day'
+                'buttonText' => 'List Day'
             ],
             'listWeek' => [
-                'buttonText' => 'list week'
+                'buttonText' => 'List Week'
+            ],
+            'month' => [
+                'buttonText' => 'Month'
             ]
          ],
         'navLinks' => true,
         'eventLimit' => true,
-        'defaultView' => 'listWeek',
+        'defaultView' => 'month',
     ];
 
     /**

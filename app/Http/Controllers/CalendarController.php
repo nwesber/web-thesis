@@ -21,16 +21,6 @@ class CalendarController extends Controller
 
 	  $userid = \Auth::user()->id;
 
-		/*
-		$dateStart = '2017-02-11';
-		$dateEnd = '2017-02-12';
-		$timeStart = '0800';
-		$timeEnd = '1100';
-		$start = $dateStart . 'T' .$timeStart;
-		$end = $dateEnd . 'T' .$timeEnd;
-		*/
-
-
 	  $events = Events::getEvents($userid)->get();
 	  $holidays = DB::table('holidays')->get();
 
@@ -83,70 +73,63 @@ class CalendarController extends Controller
 	}
 
 	public function store(Request $request){
-		dd($request);
-		$fullDay = "";
+		/* P1Y = 1 year , P1M = 1 Month , PT1M = 1 minute , P1W = 1 Week */
+
 		$userId = \Auth::user()->id;
+		$dateStart = $request->eventStartDate;
+		$dateEnd = $request->eventEndDate;
+		$timeStart = date("Hi", strtotime($request->eventTimeStart));
+		$timeEnd = date("Hi", strtotime($request->eventTimeEnd));
 
-		if ($request->has('fullDay')) {
-    	$fullDay = true;
-		}else{
-			$fullDay = false;
-		}
+	  if($request->has('endsNever')){
+	  	$result = $this->yearlyRepeatNever($dateStart);
+	  	dd($result);
+	  }else if($request->has('endsAfter')){
+	  	$occurences = $request->occurrences;
+	  	$result = $this->yearlyOccurences($occurences, $dateStart);
+	  	dd($result);
+	  }else if($request->has('endsOn')){
+	  	$endOn = $request->modalEnd;
+	  	$result = $this->yearlyRepeatOn($dateStart, $dateEnd, $endOn);
+			$newarray = array_chunk($result, 2);
+			foreach($newarray as $arr){
+			  foreach($arr as $a){
+				  $time_start = new DateTime(reset($arr) . 'T' . $timeStart);
+					$time_end = new DateTime(end($arr) . 'T' . $timeEnd);
 
+		  		$event = new Events;
+					$event->event_title =  $request->eventTitle;
+					$event->event_description =  $request->eventDesc;
+					$event->user_id = $userId;
+					$event->location = $request->eventLocation;
+					$event->full_day = '0';
+					$event->time_start = $time_start;
+					$event->time_end = $time_end;
+					$event->color = $request->eventColor;
+					$event->is_shared = '0';
+					$event->save();
+					break;
+			  }
+			}
 
-		/*
-		create 2 DB
+	  }else{
 
-		Event DB
-		Event Details
-
-		Event Coloumns
-			id
-			user_id
-			timestamps
-		Event Details Coloumns
-			id
-			event_id
-			event_title
-			event_description
-			location
-			full_day
-			time_start
-			time_end
-			color
-		*/
-
-		/*
-
-		//loop for finding day in a given date range
-		$format = "N, Y-m-d";
-		$start = new DateTime($request->eventStartDate);
-		$end = new DateTime($request->eventEndDate);
-
-		$interval = new DateInterval('P1D'); // 1 Day
-		$dateRange = new DatePeriod($start, $interval, $end);
-
-		$range = [];
-	  foreach ($dateRange as $date) {
-	    if($date->format('N') == 1){
-	    	$range[] = $date->format($format);
-	    }
 	  }
 
-	  dd($range);
-		*/
 
-		$event = new Events;
-		$event->event_title = $request->eventTitle;
-		$event->event_description = $request->eventDesc;
-		$event->user_id = $userId;
-		$event->location = $request->eventLocation;
-		$event->full_day = $fullDay;
-		$event->time_start = $request->eventStartDate;
-		$event->time_end = $request->eventEndDate;
-		$event->color = $request->eventColor;
-		$event->is_shared = 0;
-		$event->save();
+		/*
+			$event = new Events;
+			$event->event_title = $request->eventTitle;
+			$event->event_description = $request->eventDesc;
+			$event->user_id = $userId;
+			$event->location = $request->eventLocation;
+			$event->full_day = $fullDay;
+			$event->time_start = $request->eventStartDate;
+			$event->time_end = $request->eventEndDate;
+			$event->color = $request->eventColor;
+			$event->is_shared = 0;
+			$event->save();
+		*/
 
 		return redirect('/event');
 	}
@@ -167,5 +150,70 @@ class CalendarController extends Controller
 
 	public function destroy($id){
 		dd($id);
+	}
+
+	public function yearlyOccurences($occurences, $dateStart){
+	  $format = "Y-m-d";
+		$start = new DateTime($dateStart);
+		$end = new DateTime('2025-12-31');
+		$interval = new DateInterval('P1Y'); // 1 year
+		$dateRange = new DatePeriod($start, $interval, $end);
+
+		$range = [];
+
+		//occurences
+	  foreach ($dateRange as $date) {
+	  	$result = count($range);
+	  	if($result == $occurences) {
+	  		break;
+	  	}else{
+	  		$range[] = $date->format($format);
+	  	}
+	  }
+
+	  return $range;
+	}
+
+	public function yearlyRepeatNever($dateStart){
+		$format = "Y-m-d";
+		$start = new DateTime($dateStart);
+		$maxDate = new DateTime('2050-01-01');
+		$interval = new DateInterval('P1Y'); // 1 year
+		$dateRange = new DatePeriod($start, $interval, $maxDate);
+
+		$range = [];
+		foreach ($dateRange as $date) {
+			$range[] = $date->format($format);
+	  }
+
+		return $range;
+	}
+
+	public function yearlyRepeatOn($dateStart, $dateEnd, $repeatOn){
+		$format = "Y-m-d";
+		$rangeStart = [];
+		$rangeEnd = [];
+		$mergeRange = [];
+		$range = [];
+		$startDate = new DateTime($dateStart);
+		$endDate = new DateTime($dateEnd);
+		$maxDate = new DateTime($repeatOn);
+
+		$interval = new DateInterval('P1Y'); // 1 year
+		$startDateRange = new DatePeriod($startDate, $interval, $maxDate);
+		$endDateRange = new DatePeriod($endDate, $interval, $maxDate);
+
+		foreach ($startDateRange as $start) {
+			$rangeStart[] = $start->format($format);
+		}
+
+		foreach ($endDateRange as $end) {
+			$rangeEnd[] = $end->format($format);
+		}
+
+		$mergeRange = array_merge($rangeStart, $rangeEnd);
+		$range = array_sort_recursive($mergeRange);
+
+		return $range;
 	}
 }
