@@ -36,6 +36,7 @@ Route::resource('event', 'CalendarController');
 
 Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEvent']);
 Route::get('/updateEvent/{id}', 'CalendarController@edit' );
+Route::get('/repeatEvent/{id}', 'CalendarController@showRepeatEvent' );
 
 //Home
 Route::get('/logout', 'HomeController@logout');

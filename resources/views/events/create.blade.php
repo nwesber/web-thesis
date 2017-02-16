@@ -60,7 +60,7 @@
         <div class="form-group row">
           <div class="col-md-1">
             <div class="checkbox">
-              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value=""><strong>Repeat</strong></label>
+              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
           </div>
            <div class="col-sm-2">
@@ -101,22 +101,22 @@
         <div class="form-group">
           <label for="sel1">Repeats:</label>
           <select class="form-control" id="repeat" onchange = "dynamicModal()" name="repeat">
-            <option value="week">Weekly</option>
-            <option value="month">Monthly</option>
             <option value="year">Yearly</option>
+            <option value="month">Monthly</option>
+            <option value="week">Weekly</option>
           </select>
         </div>
 
-        <div class="form-group clearBottom" style="overflow-x:auto;" id="weeks">
+        <div class="form-group clearBottom" style="overflow-x:auto; display: none;" id="weeks">
           <p><strong>Repeat On:</strong></p>
           <select class="form-control" id="weeklyRepeat" onchange = "dynamicModal()" name="weeklyRepeat">
-            <option value="sun">Every Sunday</option>
-            <option value="mon">Every Monday</option>
-            <option value="tue">Every Tuesday</option>
-            <option value="wed">Every Wednesday</option>
-            <option value="thu">Every Thursday</option>
-            <option value="fri">Every Friday</option>
-            <option value="sat">Every Saturday</option>
+            <option value="0">Every Sunday</option>
+            <option value="1">Every Monday</option>
+            <option value="2">Every Tuesday</option>
+            <option value="3">Every Wednesday</option>
+            <option value="4">Every Thursday</option>
+            <option value="5">Every Friday</option>
+            <option value="6">Every Saturday</option>
           </select>
         </div>
 
@@ -129,17 +129,12 @@
           <label for="modalStart">Ends On:</label>
           <div class="radio">
             <label>
-              <input type="radio" name="endsNever" id="never" onchange="dynamicModal()">Never
+              <input type="radio" name="endsOn" id="never" value="never" onchange="dynamicModal()"/>Never
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="endsAfter" id="after" onchange="dynamicModal()">After <input type="number" name="occurrences" id="modalOccur" disabled="true"> occurrences
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="radio" name="endsOn" id="on" onchange="dynamicModal()">On <input type="date" name="modalEnd" id="modalEnd" disabled="true" />
+              <input type="radio" name="endsOn" id="on" value="endsOn" onchange="dynamicModal()">On <input type="date" name="modalEnd" id="modalEnd" disabled="true" />
             </label>
           </div>
         </div>
@@ -190,21 +185,15 @@ $("#showPaletteOnly").spectrum({
   }
   function dynamicModal(){
     var option = document.getElementById("repeat").value;
-    var repeatsOn = document.getElementById("weeklyRepeat").value;
     var startDate = document.getElementById("eventStartDate").value;
     var occurrences = "";
     var modalStart = document.getElementById("modalStart");
 
     modalStart.value = startDate;
 
-    if(document.getElementById('after').checked) {
-      document.getElementById("modalOccur").disabled = false;
-      document.getElementById("modalEnd").disabled = true;
-    }else if(document.getElementById('on').checked) {
+    if(document.getElementById('on').checked) {
       document.getElementById("modalEnd").disabled = false;
-      document.getElementById("modalOccur").disabled = true;
     }else if(document.getElementById('never').checked){
-      document.getElementById("modalOccur").disabled = true;
       document.getElementById("modalEnd").disabled = true;
     }
 

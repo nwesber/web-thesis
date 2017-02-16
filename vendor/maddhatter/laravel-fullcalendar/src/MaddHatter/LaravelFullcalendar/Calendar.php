@@ -31,7 +31,7 @@ class Calendar
         'header' => [
             'left' => 'prev,next today',
             'center' => 'title',
-            'right' => 'listDay,month,listWeek',
+            'right' => 'listDay,month,listWeek,listYear',
         ],
 
         'views' =>[
@@ -43,6 +43,9 @@ class Calendar
             ],
             'month' => [
                 'buttonText' => 'Month'
+            ],
+            'listYear' => [
+                'buttonText' => 'Year'
             ]
          ],
         'navLinks' => true,
