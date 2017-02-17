@@ -42,7 +42,7 @@ class Events extends Model
     $event->color = $request->eventColor;
     $event->is_shared = '0';
     $event->save();
-    return $events;
+    return $event;
   }
 
 

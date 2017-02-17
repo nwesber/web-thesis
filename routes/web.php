@@ -32,6 +32,8 @@ Route::post('routine/{id}/task/task-details/{id2}/updateTask', 'TaskController@u
 Route::get('routine/{id}/task/task-details/{id2}/delete', 'TaskController@taskDelete');
 Route::resource('routine', 'RoutineController');
 
+
+
 Route::resource('event', 'CalendarController');
 
 Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEvent']);

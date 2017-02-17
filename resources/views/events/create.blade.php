@@ -6,6 +6,7 @@
 {!!Form::open(array('url' => '/createEvent')) !!}
 <div class="row">
   <div class="col-md-12">
+    @include('errors.errors')
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Create Event</strong>
         <div class="pull-right">
@@ -18,7 +19,7 @@
 
         <div class="form-group">
           <label for="eventTitle">Event Title:</label>
-          <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event">
+          <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" >
         </div>
 
         <h5 class="clearTop">

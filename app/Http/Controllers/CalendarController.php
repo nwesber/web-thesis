@@ -14,6 +14,7 @@ use DB;
 use DateInterval;
 use DatePeriod;
 use Crypt;
+use Validator;
 
 class CalendarController extends Controller
 {
@@ -29,13 +30,12 @@ class CalendarController extends Controller
 	  foreach ($repeatEvent as $repeat) {
 			$eventCollection[] = Calendar::event(
 		    $repeat->event_title,
-		    false,
+		    $repeat->full_day,
 		    $repeat->time_start,
 		    $repeat->time_end,
 		    $repeat->id,
 
 		    [
-
 	        'url' => 'repeatEvent/'. Crypt::encrypt($repeat->id) ,
 	        'color' => $repeat->color,
     		]
@@ -104,6 +104,22 @@ class CalendarController extends Controller
 		$userId = \Auth::user()->id;
 		$events = new Events();
 		$repeatEvent = new RepeatEvent();
+		$timestamp = strtotime($request->eventStartDate);
+		$userWeek = $dw = date( "w", $timestamp);
+
+    $validator = Validator::make($request->all(), [
+      'eventTitle' => 'required',
+      'eventStartDate' => 'required',
+      'eventEndDate' => 'required',
+      'eventTimeStart' => 'required',
+      'eventTimeEnd' => 'required'
+    ]);
+
+     if ($validator->fails()) {
+        return redirect('/event/create')
+        ->withErrors($validator)
+        ->withInput();
+      }
 
 		if($request->chkRepeat == 'repeatEvent'){
 			switch($request->repeat){
@@ -116,7 +132,11 @@ class CalendarController extends Controller
 				break;
 
 				case 'week':
-					$repeatEvent->repeatWeek( $request, $userId );
+					if($request->weeklyRepeat == $userWeek){
+						$repeatEvent->repeatWeek( $request, $userId );
+					}else{
+						return redirect('/event/create')->withInput()->withErrors(['Date Start and Repeat Week Chosen does not match.']);
+					}
 				break;
 			}
 		}

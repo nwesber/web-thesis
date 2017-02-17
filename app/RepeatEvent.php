@@ -27,6 +27,14 @@ class RepeatEvent extends Model
     $dateEnd = $request->eventEndDate;
     $timeStart = date("Hi", strtotime($request->eventTimeStart));
     $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+    $allDay = false;
+
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
+
 
     if($request->has('endsOn')){
       $repeatOption = $request->endsOn;
@@ -48,7 +56,7 @@ class RepeatEvent extends Model
             $event->repeat_id = $repeatId;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
-            $event->full_day = '0';
+            $event->full_day = $allDay;
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
@@ -75,7 +83,7 @@ class RepeatEvent extends Model
             $event->repeat_id = $repeatId;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
-            $event->full_day = '0';
+            $event->full_day = $allDay;
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
@@ -98,6 +106,14 @@ class RepeatEvent extends Model
     $dateEnd = $request->eventEndDate;
     $timeStart = date("Hi", strtotime($request->eventTimeStart));
     $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+    $allDay = false;
+
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
+
     if($request->has('endsOn')){
       $repeatOption = $request->endsOn;
 
@@ -117,7 +133,7 @@ class RepeatEvent extends Model
             $event->repeat_id = $repeatId;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
-            $event->full_day = '0';
+            $event->full_day = $allDay;
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
@@ -144,7 +160,7 @@ class RepeatEvent extends Model
             $event->repeat_id = $repeatId;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
-            $event->full_day = '0';
+            $event->full_day = $allDay;
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
@@ -160,6 +176,17 @@ class RepeatEvent extends Model
   }
 
   public static function repeatWeek($request, $id){
+    $dateStart = $request->eventStartDate;
+    $dateEnd = $request->eventEndDate;
+    $timeStart = date("Hi", strtotime($request->eventTimeStart));
+    $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+    $allDay = false;
+
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
     if($request->has('endsOn')){
       $repeatOption = $request->endsOn;
 
@@ -181,7 +208,7 @@ class RepeatEvent extends Model
             $event->repeat_id = $repeatId;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
-            $event->full_day = '0';
+            $event->full_day = $allDay;
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
@@ -198,7 +225,7 @@ class RepeatEvent extends Model
     }
   }
 
-  public function repeatNever($dateStart, $dateEnd, $dateInterval){
+  public static function repeatNever($dateStart, $dateEnd, $dateInterval){
     $rangeStart = [];
     $rangeEnd = [];
     $mergeRange = [];
@@ -254,7 +281,7 @@ class RepeatEvent extends Model
     return $range;
   }
 
-  public function weeklyRepeatNever($dateStart, $dateEnd, $week){
+  public static function weeklyRepeatNever($dateStart, $dateEnd, $week){
     $rangeStart = [];
     $rangeEnd = [];
     $mergeRange = [];
@@ -288,7 +315,7 @@ class RepeatEvent extends Model
 
   }
 
-  public function weeklyRepeat($dateStart, $dateEnd, $repeatOn, $week){
+  public static function weeklyRepeat($dateStart, $dateEnd, $repeatOn, $week){
     $rangeStart = [];
     $rangeEnd = [];
     $mergeRange = [];

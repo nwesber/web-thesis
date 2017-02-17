@@ -21,20 +21,17 @@
           <input type="text" name="eventTitle" class="form-control" required="true" value="{{ $event->event_title }}">
         </div>
 
-        <div id="notFullDay">
+
+        <div class="form-group row">
           <div class="col-md-6">
-            <div class="form-group">
-              <label for="eventStartDate">Date Start: </label>
-              <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
-              <input type="datetime-local" name="eventStartDate" class="form-control">
-            </div>
+            <label for="eventStartDate">Date Start:</label>
+            <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
+            <input type="datetime-local" name="eventStartDate" class="form-control" id="eventStartDate">
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="eventEndDate">Date End:</label>
-              <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
-              <input type="datetime-local" name="eventEndDate" class="form-control">
-            </div>
+           <div class="col-md-6">
+            <label for="eventEndDate">Date End:</label>
+            <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
+            <input type="datetime-local" name="eventEndDate" class="form-control">
           </div>
         </div>
 
