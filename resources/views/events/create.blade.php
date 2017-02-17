@@ -166,15 +166,37 @@
 <script type="text/javascript">
 
 $("#showPaletteOnly").spectrum({
-    color: "rgb(244, 204, 204)",
+    color: "CornflowerBlue ",
     showPaletteOnly: true,
     change: function(color) {
         printColor(color);
     },
     palette: [
-      ['black', 'white', 'blanchedalmond',
-      'rgb(255, 128, 0);', 'hsv 100 70 50'],
-      ['red', 'yellow', 'green', 'blue', 'violet']
+      [
+        'black',
+        'Grey ',
+        'DarkRed ',
+        'red',
+        'orange',
+        'yellow',
+        'green',
+        'blue',
+        'MediumBlue ',
+        'indigo '
+      ],
+
+      [
+        'white',
+        'LightGrey',
+        'brown',
+        'pink',
+        'orange',
+        'Khaki',
+        'GreenYellow ',
+        'LightSkyBlue',
+        'CornflowerBlue  ',
+        'Plum  '
+      ]
     ]
 });
 

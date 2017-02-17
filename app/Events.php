@@ -31,12 +31,20 @@ class Events extends Model
     $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
     $time_start = new DateTime( $dateStart . 'T' . $timeStart);
     $time_end = new DateTime($dateEnd . 'T' . $timeEnd);
+    $allDay = false;
+
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
+
     $event = new Events;
     $event->event_title =  $request->eventTitle;
     $event->event_description =  $request->eventDesc;
     $event->user_id = $id;
     $event->location = $request->eventLocation;
-    $event->full_day = '0';
+    $event->full_day = $allDay;
     $event->time_start = $time_start;
     $event->time_end = $time_end;
     $event->color = $request->eventColor;
