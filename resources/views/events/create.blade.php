@@ -129,7 +129,7 @@
           <label for="modalStart">Ends On:</label>
           <div class="radio">
             <label>
-              <input type="radio" name="endsOn" id="never" value="never" onchange="dynamicModal()"/>Never
+              <input type="radio" name="endsOn" id="never" value="never" checked='checked' onchange="dynamicModal()"/>Never
             </label>
           </div>
           <div class="radio">
