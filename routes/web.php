@@ -40,6 +40,10 @@ Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEven
 Route::get('/updateEvent/{id}', 'CalendarController@edit' );
 Route::get('/repeatEvent/{id}', 'CalendarController@showRepeatEvent' );
 
+
 //Home
 Route::get('/logout', 'HomeController@logout');
+Route::get('/change-password', 'HomeController@changePass');
+Route::post('/postUpdatePassword', 'HomeController@postUpdatePassword');
+
 

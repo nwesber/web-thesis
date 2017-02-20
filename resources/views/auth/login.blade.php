@@ -117,11 +117,11 @@
                         <h2 class="mdl-card__title-text">Lost Password</h2>
                     </div>
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
                     <div class="mdl-card__supporting-text">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="email" id="email" disabled="true" />
+                            <input class="mdl-textfield__input" type="email" id="email" name="email" />
                             <label class="mdl-textfield__label" for="email">E-Mail</label>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                             </button>
                         </div>
                     </div>
-
+                    </form>
 
                 </div>
             </figure>
