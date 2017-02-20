@@ -1,20 +1,10 @@
-@extends('layouts.dashboardv2')
-
+@extends('layouts.dashboardv3')
+@section('group', 'class="active"')
 
 @section('content')
 
 <div class="row">
-  <!-- <div class="col-md-12 clearBottom">
-    <div class="clearTop"></div>
-    <div class="btn-group pull-right">
-      <a href="{{ url('group/'. $group->id .'/shareEvent') }}"
-         class="btn btn-primary"
-         role="button">
-         <i class="fa fa-share" aria-hidden="true"></i>&nbsp; &nbsp;Share An Event
-      </a>
-    </div> -->
-
-  <div class="col-md-12 clearTop">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>{{ $group->group_name }} Events</strong>
         <div class="dropdown pull-right">

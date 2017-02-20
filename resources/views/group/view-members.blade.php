@@ -1,5 +1,5 @@
-@extends('layouts.dashboardv2')
-
+@extends('layouts.dashboardv3')
+@section('group', 'class="active"')
 @section('content')
 
 
@@ -22,7 +22,7 @@
        title="Back">
        <i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>
-	
+
 	<br>
 
 	Members:

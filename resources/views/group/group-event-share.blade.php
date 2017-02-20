@@ -1,5 +1,5 @@
-@extends('layouts.dashboardv2')
-
+@extends('layouts.dashboardv3')
+@section('group', 'class="active"')
 @section('content')
 
 <div class="row">
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		@endforeach
-	<input type="submit" class = "btn btn-primary" value="Share Event">	
+	<input type="submit" class = "btn btn-primary" value="Share Event">
 	@else
 		<h5>-- No Event Found --</h5>
 		<input type="submit" class = "btn btn-primary" value="Share Event" disabled="true">

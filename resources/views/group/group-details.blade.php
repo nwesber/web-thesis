@@ -1,5 +1,5 @@
-@extends('layouts.dashboardv2')
-
+@extends('layouts.dashboardv3')
+@section('group', 'class="active"')
 @section('content')
 
 <div class="row">
