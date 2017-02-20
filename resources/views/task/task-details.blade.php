@@ -14,23 +14,22 @@
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>View Details:</strong>
-      <div class="pull-right dropdown">
+        <div class="pull-right dropdown">
           <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
             <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
           </button>
           <ul class="dropdown-menu ">
-            <li><a href="{{ url('routine/'.$routine->id.'/task') }}">Return to {{ $routine->routine_name}}</a></li>
             <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/edit') }}">Edit Task</a></li>
-            <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/delete') }}" onclick="myFunction(event)">Delete Task</a></li>
+            <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/delete') }}" onclick="myFunction(event)">Delete Task</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ url('routine/'.$routine->id.'/task') }}">Return to {{ $routine->routine_name}}</a></li>
           </ul>
         </div>
       </div>
       <div class="panel-body">
+        <h3>{{$task->task_title}}</h3>
         <table class="table">
-          <tr>
-            <td>Task Title:</td>
-            <td><strong>{{$task->task_title}}</strong></td>
-          </tr>
           <tr>
             <td>Task Description:</td>
             <td><strong>{{$task->task_description}}</strong></td>

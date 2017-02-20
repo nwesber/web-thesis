@@ -292,6 +292,7 @@ class ComposerStaticInita1d65ebf3544f30ae851822e3cbcce1d
         'AddEventColoumnsToEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_08_181226_add_event_coloumns_to_events__table.php',
         'AddLocationToEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_12_035318_add_location_to_events_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateRepeatEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_16_104253_create-repeat-events-table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

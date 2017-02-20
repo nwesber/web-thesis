@@ -31,15 +31,21 @@ class Calendar
         'header' => [
             'left' => 'prev,next today',
             'center' => 'title',
-            'right' => 'listDay,listWeek,month',
+            'right' => 'listDay,month,listWeek,listYear',
         ],
 
         'views' =>[
             'listDay' => [
-                'buttonText' => 'list day'
+                'buttonText' => 'List Day'
             ],
             'listWeek' => [
-                'buttonText' => 'list week'
+                'buttonText' => 'List Week'
+            ],
+            'month' => [
+                'buttonText' => 'Month'
+            ],
+            'listYear' => [
+                'buttonText' => 'Year'
             ]
          ],
         'navLinks' => true,

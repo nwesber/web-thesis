@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/dashboardv2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/task.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/event.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}">
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
@@ -43,6 +44,7 @@
     <!-- <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboardv2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/spectrum.js') }}"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
@@ -115,7 +117,8 @@
             <!-- Main Menu -->
             <div class="side-menu-container">
               <ul class="nav navbar-nav">
-                <li @yield('class')><a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Routine</a></li>
+                <li @yield('home')><a href="{{ url('/home') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a></li>
+                <li @yield('class')><a href="{{ url('/routine') }}"><i class="fa fa-list fa-fw"></i> Routine</a></li>
                 <li @yield('event')><a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Event</a></li>
                 <li @yield('group')><a href="{{ url('/group') }}"><i class="fa fa-users fa-fw"></i> Group</a></li>
               </ul>

@@ -36,6 +36,12 @@ Route::resource('routine', 'RoutineController');
 Route::resource('event', 'CalendarController');
 
 Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEvent']);
+Route::get('/updateEvent/{id}', 'CalendarController@edit' );
+Route::get('/repeatEvent/{id}', 'CalendarController@showRepeatEvent' );
+Route::get('/updateRepeatEvent/{id}', 'CalendarController@editRepeatEvent');
+Route::patch('/repeatUpdate/{id}', 'CalendarController@updateRepeatEvent');
+Route::get('/deleteEvent/{id}', 'CalendarController@destroy' );
+Route::get('/deleteRepeatEvent/{id}', 'CalendarController@destroyRepeat' );
 
 
 //Event
@@ -44,7 +50,7 @@ Route::get('/event', 'CalendarController@index');
 //Group
 Route::get('/group', 'GroupController@index');
 Route::get('/group/add-group', 'GroupController@addGroup');
-// Route::get('/group/{id}', 'GroupController@groupDetails');
+
 Route::get('/group/{id}', 'GroupController@groupCalendar');
 Route::get('/group/{id}/shareEvent', 'GroupController@groupShareEvent');
 Route::post('/group/store-group', 'GroupController@storeGroup');
@@ -59,4 +65,5 @@ Route::get('/group/{id}/leave-group', 'GroupController@leaveGroup');
 Route::resource('group', 'GroupController');
 
 //Home
+Route::get('/home', 'CalendarController@home');
 Route::get('/logout', 'HomeController@logout');
