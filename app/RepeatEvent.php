@@ -60,7 +60,7 @@ class RepeatEvent extends Model
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
-            $event->is_shared = '0';
+            $event->is_shared = $request->shared;
             $event->save();
             break;
           }
@@ -87,16 +87,38 @@ class RepeatEvent extends Model
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
-            $event->is_shared = '0';
+            $event->is_shared = $request->shared;
             $event->save();
             break;
           }
         }
       }
     }
+  }
 
+  public static function updateRepeat($request, $repeatId, $id, $start, $end){
+    $allDay = false;
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
 
+    $time_start = new DateTime($start);
+    $time_end = new DateTime($end);
+    $query = RepeatEvent::where('user_id', $id)
+      ->where('repeat_id', $repeatId)
+      ->update([
+        'event_title' => $request->eventTitle,
+        'event_description' => $request->eventDesc,
+        'full_day' =>  $allDay,
+        'color' => $request->eventColor,
+        'location' => $request->eventLocation,
+        'is_shared' => $request->shared,
 
+      ]);
+
+    return $query;
   }
 
 
@@ -137,7 +159,7 @@ class RepeatEvent extends Model
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
-            $event->is_shared = '0';
+            $event->is_shared = $request->shared;
             $event->save();
             break;
           }
@@ -164,7 +186,7 @@ class RepeatEvent extends Model
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
-            $event->is_shared = '0';
+            $event->is_shared = $request->shared;
             $event->save();
             break;
           }
@@ -175,7 +197,7 @@ class RepeatEvent extends Model
 
   }
 
-  public static function repeatWeek($request, $id){
+  public static function repeatWeek($request, $id, $userWeekStart, $userWeekEnd){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
     $timeStart = date("Hi", strtotime($request->eventTimeStart));
@@ -193,7 +215,7 @@ class RepeatEvent extends Model
       if($repeatOption == 'endsOn'){
         $endOn = $request->modalEnd;
         $week = $request->weeklyRepeat;
-        $result = RepeatEvent::weeklyRepeat($dateStart, $dateEnd, $endOn, $week);
+        $result = RepeatEvent::weeklyRepeat($dateStart, $dateEnd, $endOn, $userWeekStart, $userWeekEnd);
         $newarray = array_chunk($result, 2);
         $repeatId = random_int(0,1000);
 
@@ -212,7 +234,7 @@ class RepeatEvent extends Model
             $event->time_start = $time_start;
             $event->time_end = $time_end;
             $event->color = $request->eventColor;
-            $event->is_shared = '0';
+            $event->is_shared = $request->shared;
             $event->save();
             break;
           }
@@ -220,7 +242,32 @@ class RepeatEvent extends Model
       }
 
       else{
-        dd('never');
+        $week = $request->weeklyRepeat;
+        $result = RepeatEvent::weeklyRepeatNever($dateStart, $dateEnd, $userWeekStart, $userWeekEnd);
+        $newarray = array_chunk($result, 2);
+        $repeatId = random_int(0,1000);
+
+        /* ===== Looping Dates ===== */
+        foreach($newarray as $arr){
+          foreach($arr as $a){
+            $time_start = new DateTime(reset($arr) . 'T' . $timeStart);
+            $time_end = new DateTime(end($arr) . 'T' . $timeEnd);
+            $event = new RepeatEvent;
+            $event->event_title =  $request->eventTitle;
+            $event->event_description =  $request->eventDesc;
+            $event->repeat_id = $repeatId;
+            $event->user_id = $id;
+            $event->location = $request->eventLocation;
+            $event->full_day = $allDay;
+            $event->time_start = $time_start;
+            $event->time_end = $time_end;
+            $event->color = $request->eventColor;
+            $event->is_shared = $request->shared;
+            $event->save();
+            break;
+          }
+        }
+
       }
     }
   }
@@ -281,7 +328,7 @@ class RepeatEvent extends Model
     return $range;
   }
 
-  public static function weeklyRepeatNever($dateStart, $dateEnd, $week){
+  public static function weeklyRepeatNever($dateStart, $dateEnd, $userWeekStart, $userWeekEnd){
     $rangeStart = [];
     $rangeEnd = [];
     $mergeRange = [];
@@ -297,13 +344,13 @@ class RepeatEvent extends Model
 
 
     foreach ($startDateRange as $start) {
-      if($start->format('N') == $week){
+      if($start->format('N') == $userWeekStart){
         $rangeStart[] = $start->format($format);
       }
     }
 
     foreach ($endDateRange as $end) {
-      if($end->format('N') == $week){
+      if($end->format('N') == $userWeekEnd){
         $rangeEnd[] = $end->format($format);
       }
     }
@@ -315,7 +362,7 @@ class RepeatEvent extends Model
 
   }
 
-  public static function weeklyRepeat($dateStart, $dateEnd, $repeatOn, $week){
+  public static function weeklyRepeat($dateStart, $dateEnd, $repeatOn, $userWeekStart, $userWeekEnd){
     $rangeStart = [];
     $rangeEnd = [];
     $mergeRange = [];
@@ -331,13 +378,13 @@ class RepeatEvent extends Model
 
 
     foreach ($startDateRange as $start) {
-      if($start->format('N') == $week){
+      if($start->format('N') == $userWeekStart){
         $rangeStart[] = $start->format($format);
       }
     }
 
     foreach ($endDateRange as $end) {
-      if($end->format('N') == $week){
+      if($end->format('N') == $userWeekEnd){
         $rangeEnd[] = $end->format($format);
       }
     }
@@ -346,6 +393,11 @@ class RepeatEvent extends Model
     $range = array_sort_recursive($mergeRange);
 
     return $range;
+  }
+
+  public static function destroyEvent($repeatId, $userId){
+    $query = RepeatEvent::where('user_id', $userId)->where('repeat_id', $repeatId)->delete();
+    return $query;
   }
 
 }

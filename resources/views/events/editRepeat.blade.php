@@ -3,13 +3,13 @@
 @section('event', 'class="active"')
 
 @section('content')
-{!! Form::model($event, ['method' => 'PATCH', 'action' => ['CalendarController@update', Crypt::encrypt($event->id)], 'id' => 'form1']) !!}
+{!! Form::model($event, ['method' => 'PATCH', 'action' => ['CalendarController@updateRepeatEvent', Crypt::encrypt($event->id)], 'id' => 'form1']) !!}
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Update Event</strong>
         <div class="pull-right">
-          <a href="{{ url('/event', Crypt::encrypt($event->id)) }}">
+          <a href="{{ url('/repeatEvent', Crypt::encrypt($event->id)) }}">
             <button class="btn btn-default btn-xs" type="button"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
           </a>
         </div>
@@ -26,18 +26,17 @@
         <div class="form-group row">
           <div class="col-md-6">
             <label for="eventStartDate">Date Start:</label>
-            <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventStartDate" class="form-control" id="eventStartDate">
+            <p class="small"><strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
           </div>
            <div class="col-md-6">
             <label for="eventEndDate">Date End:</label>
-            <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventEndDate" class="form-control" value="{{ $event->time_end }}">
+            <p class="small"><strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
           </div>
         </div>
 
-        <h5 class="page-header">
+        <h5 class="">
           <strong>Event Details:</strong>
+          <hr/>
         </h5>
         <div class="form-group">
           <label for="eventDesc">Event Description:</label>
@@ -47,12 +46,19 @@
           <label for="eventLocation">Location:</label>
           <input type="text" name="eventLocation" id="eventLocation" class="form-control" required="true" value="{{ $event->location }}">
         </div>
-         <div class="form-group">
-          <label for="chooseColor">Choose Color:</label>
-          <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" required="true" value="{{ $event->color }}">
+        <div class="form-group row">
+         <div class="col-sm-2">
+          <div class="checkbox">
+            <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
+          </div>
+         </div>
+        </div>
+        <div class="form-group">
+          <label for="eventColor">Choose Color:</label>
+          <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" value="{{ $event->color }}">
         </div>
         <h5 class="clearTop">
-          <strong>Visibility</strong>
+          <strong>Visibility:</strong>
           <hr>
         </h5>
         <div class="radio">

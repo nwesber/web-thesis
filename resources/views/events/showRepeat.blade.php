@@ -12,8 +12,8 @@
             <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
           </button>
           <ul class="dropdown-menu ">
-            <li><a href="{{ URL::to('updateEvent/' . Crypt::encrypt($event->id)) }}">Edit Event</a></li>
-            <li><a href="{{ URL::to('deleteEvent/' . Crypt::encrypt($event->id)) }} }}" onclick="myFunction(event)">Delete Event</a></li>
+            <li><a href="{{ URL::to('updateRepeatEvent/' . Crypt::encrypt($event->id)) }}">Edit Event</a></li>
+            <li><a href="{{ URL::to('deleteRepeatEvent/' . Crypt::encrypt($event->id))  }}" onclick="myFunction(event)">Delete Event</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ url('/event') }}">Return to My Events</a></li>
           </ul>

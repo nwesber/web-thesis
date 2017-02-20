@@ -117,7 +117,8 @@
             <!-- Main Menu -->
             <div class="side-menu-container">
               <ul class="nav navbar-nav">
-                <li @yield('class')><a href="{{ url('/routine') }}"><i class="fa fa-dashboard fa-fw"></i> Routine</a></li>
+                <li @yield('home')><a href="{{ url('/home') }}"><i class="fa fa-dashboard fa-fw"></i> Home</a></li>
+                <li @yield('class')><a href="{{ url('/routine') }}"><i class="fa fa-list fa-fw"></i> Routine</a></li>
                 <li @yield('event')><a href="{{ url('/event') }}"><i class="fa fa-calendar fa-fw"></i> Event</a></li>
                 <li><a href="#"><i class="fa fa-users fa-fw"></i> Group</a></li>
               </ul>

@@ -39,7 +39,12 @@ Route::resource('event', 'CalendarController');
 Route::post('/createEvent',['uses'=>'CalendarController@store','as'=>'createEvent']);
 Route::get('/updateEvent/{id}', 'CalendarController@edit' );
 Route::get('/repeatEvent/{id}', 'CalendarController@showRepeatEvent' );
+Route::get('/updateRepeatEvent/{id}', 'CalendarController@editRepeatEvent');
+Route::patch('/repeatUpdate/{id}', 'CalendarController@updateRepeatEvent');
+Route::get('/deleteEvent/{id}', 'CalendarController@destroy' );
+Route::get('/deleteRepeatEvent/{id}', 'CalendarController@destroyRepeat' );
 
 //Home
+Route::get('/home', 'CalendarController@home');
 Route::get('/logout', 'HomeController@logout');
 
