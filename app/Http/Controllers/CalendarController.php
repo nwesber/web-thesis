@@ -14,7 +14,12 @@ use DB;
 use DateInterval;
 use DatePeriod;
 use Crypt;
+
 use Validator;
+
+
+use App\SharedEvent;
+use App\Group;
 
 
 class CalendarController extends Controller
@@ -139,10 +144,6 @@ class CalendarController extends Controller
 		return view('events.event', compact('calendar'));
 	}
 
-	public function create(){
-		return view('events.create');
-	}
-
 	public function show($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -241,7 +242,6 @@ class CalendarController extends Controller
 		$userId = \Auth::user()->id;
 		$repeatId = $event->repeat_id;
 		$updateEvent = RepeatEvent::updateRepeat($request, $repeatId, $userId);
-
 		return redirect('/event');
 	}
 

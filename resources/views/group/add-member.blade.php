@@ -13,7 +13,7 @@
 	    @endif
 	</div>
 
-	 <div class="clearTop"></div>
+	<div class="clearTop"></div>
     <a href="{{ url('group/' . $group->id) }}"
        class="btn btn-default"
        role="button"
