@@ -18,9 +18,7 @@
       <div class="panel-body">
         <div class="form-group">
           <label for="eventTitle">Event Title:</label>
-
-          <input type="text" name="eventTitle" class="form-control" required="true" placeholder="Untitled Event">
-
+          <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" >
         </div>
 
         <h5 class="clearTop">
@@ -82,16 +80,13 @@
         </h5>
         <div class="radio">
           <label><input type="radio" name="shared" value="0" checked='checked'>Private</label>
-
         </div>
         <div class="radio">
           <label><input type="radio" name="shared" value="1">Public</label>
         </div>
-
-
         <div class="pull-right">
           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-          <button type="submit" class="btn btn-primary" id="formSubmit2" value="Submit">
+          <button type="submit" class="btn btn-primary" value="Submit">
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
             &nbsp; &nbsp;Save Event
           </button>
@@ -159,12 +154,10 @@
      $('#myModal').modal();
    }
 });
-
 </script>
 
 
 <script type="text/javascript">
-
 $("#showPaletteOnly").spectrum({
     color: "CornflowerBlue ",
     showPaletteOnly: true,
@@ -184,7 +177,6 @@ $("#showPaletteOnly").spectrum({
         'MediumBlue ',
         'indigo '
       ],
-
       [
         'white',
         'LightGrey',
@@ -199,9 +191,7 @@ $("#showPaletteOnly").spectrum({
       ]
     ]
 });
-
 </script>
-<<<<<<< HEAD
 
 <script type="text/javascript">
   function exitRepeat(){
@@ -212,37 +202,12 @@ $("#showPaletteOnly").spectrum({
     var startDate = document.getElementById("eventStartDate").value;
     var occurrences = "";
     var modalStart = document.getElementById("modalStart");
-
     modalStart.value = startDate;
-
     if(document.getElementById('on').checked) {
       document.getElementById("modalEnd").disabled = false;
     }else if(document.getElementById('never').checked){
       document.getElementById("modalEnd").disabled = true;
     }
   }
-
-=======
-<script>
-  $(function() {
-    $('#cp2').colorpicker();
-  });
-  $('#isShared').click(function(){
-    if ($('#isShared').is(':checked')) {
-        $('#myModal').modal('show');
-    }else{
-        $('#myModal').modal('hide');
-    }
-  });
-  /*$('#isShared').click(function(){
-    if ($('#isShared').is(':checked')) {
-        $('#formSubmit').hide();
-        $('#formSubmit2').hide();
-    }else{
-        $('#formSubmit').show();
-        $('#formSubmit2').show();
-    }
-  });*/
->>>>>>> group
 </script>
 @endsection
