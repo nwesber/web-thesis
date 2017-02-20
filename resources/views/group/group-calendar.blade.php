@@ -11,21 +11,21 @@
           <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-gear fa-fw"></i> Group Settings <span class="caret"></span></button>
           <ul class="dropdown-menu" aria-labelby="dropdownMenu1">
             <li>
-              <a href="{{ url('/group/'.$group->id. '/add-member') }}"><i class="fa fa-plus fa-fw"></i> Add Member</a>
+              <a href="{{ url('/group/'.$group->id. '/add-member') }}">Add Member/s</a>
             </li>
             <li>
-              <a href="{{ url('/group/'.$group->id. '/view-member') }}"><i class="fa fa-users fa-fw"></i> View Member</a>
+              <a href="{{ url('/group/'.$group->id. '/view-member') }}">View Member/s</a>
             </li>
             <li>
-              <a href="{{ url('/group/'.$group->id. '/edit-group') }}"><i class="fa fa-edit fa-fw"></i> Rename Group</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="{{ url('group/'. $group->id .'/shareEvent') }}"><i class="fa fa-share" aria-hidden="true"></i> Share An Event</a>
+              <a href="{{ url('/group/'.$group->id. '/edit-group') }}">Rename Group</a>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="{{ url('/group/'.$group->id. '/leave-group') }}"><i class="fa fa-sign-out fa-fw"></i> Leave Group</a>
+              <a href="#"></i>New Event</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="{{ url('/group/'.$group->id. '/leave-group') }}"> Leave Group</a>
             </li>
           </ul>
         </div>

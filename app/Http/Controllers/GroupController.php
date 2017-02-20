@@ -20,14 +20,14 @@ use App\SharedEvent;
 class GroupController extends Controller
 {
     public function index(){
-            $group = DB::table('group')
-            ->join('group_members', 'group.id', '=', 'group_members.group_id')
-            ->where('group_members.user_id', '=', \Auth::user()->name)
+        $group = DB::table('group')
+        ->join('group_members', 'group.id', '=', 'group_members.group_id')
+        ->where('group_members.user_id', '=', \Auth::user()->name)
 
-            ->select('group_members.*', 'group.*')
-            ->where('is_removed', '=', 0)
+        ->select('group_members.*', 'group.*')
+        ->where('is_removed', '=', 0)
 
-            ->get();
+        ->get();
 
     	return view('group.group', compact('group'));
     }
