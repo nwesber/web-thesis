@@ -5,6 +5,7 @@
 @section('content')
 
 
+
 <div class="row">
 	<div class="col-md-12">
     <div class="panel panel-default">
@@ -81,7 +82,7 @@
       <!-- /.panel-body -->
        {!! Form::close() !!}
     </div>
-	</div>
+ 	</div>
 
 </div>
 
@@ -95,8 +96,6 @@
 			}
 		});
 	});
-
-
 </script>
 @endsection
 

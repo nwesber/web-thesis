@@ -3,6 +3,7 @@
 @section('class', 'class="active"')
 
 @section('content')
+
 <div class="row">
   <div class="col-lg-12">
     <div class="col-lg-12">
@@ -58,3 +59,24 @@
 
 </div>
 @endsection
+
+<script>
+  $(document).ready(function(){
+      if(document.getElementById('allDay').checked) {
+          $("#showIt").hide();
+      } else {
+          $("#showIt").show();
+      }
+       $('#allDay').on('click', function(){
+      if(document.getElementById('allDay').checked) {
+          $("#showIt").hide();
+      } else {
+          $("#showIt").show();
+          $('.task').prop('checked',false);
+      }
+    });
+  });
+</script>
+
+@endsection
+>>>>>>> groupcrud

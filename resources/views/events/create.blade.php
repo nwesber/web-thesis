@@ -16,7 +16,6 @@
         </div>
       </div>
       <div class="panel-body">
-
         <div class="form-group">
           <label for="eventTitle">Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" >
@@ -75,6 +74,16 @@
           <label for="eventColor">Choose Color:</label>
           <input type="text" name="eventColor" id="showPaletteOnly" class="form-control">
         </div>
+         <h5 class="clearTop">
+          <strong>Visibility:</strong>
+          <hr>
+        </h5>
+        <div class="radio">
+          <label><input type="radio" name="shared" value="0" checked='checked'>Private</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="shared" value="1">Public</label>
+        </div>
         <div class="pull-right">
           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
           <button type="submit" class="btn btn-primary" value="Submit">
@@ -107,20 +116,6 @@
             <option value="week">Weekly</option>
           </select>
         </div>
-
-        <div class="form-group clearBottom" style="overflow-x:auto; display: none;" id="weeks">
-          <p><strong>Repeat On:</strong></p>
-          <select class="form-control" id="weeklyRepeat" onchange = "dynamicModal()" name="weeklyRepeat">
-            <option value="0">Every Sunday</option>
-            <option value="1">Every Monday</option>
-            <option value="2">Every Tuesday</option>
-            <option value="3">Every Wednesday</option>
-            <option value="4">Every Thursday</option>
-            <option value="5">Every Friday</option>
-            <option value="6">Every Saturday</option>
-          </select>
-        </div>
-
         <div>
           <label for="modalStart">Starts On:</label>
           <input type="date" name="modalStart" id="modalStart" class="form-control" disabled="true">
@@ -159,12 +154,10 @@
      $('#myModal').modal();
    }
 });
-
 </script>
 
 
 <script type="text/javascript">
-
 $("#showPaletteOnly").spectrum({
     color: "CornflowerBlue ",
     showPaletteOnly: true,
@@ -184,7 +177,6 @@ $("#showPaletteOnly").spectrum({
         'MediumBlue ',
         'indigo '
       ],
-
       [
         'white',
         'LightGrey',
@@ -199,7 +191,6 @@ $("#showPaletteOnly").spectrum({
       ]
     ]
 });
-
 </script>
 
 <script type="text/javascript">
@@ -211,25 +202,12 @@ $("#showPaletteOnly").spectrum({
     var startDate = document.getElementById("eventStartDate").value;
     var occurrences = "";
     var modalStart = document.getElementById("modalStart");
-
     modalStart.value = startDate;
-
     if(document.getElementById('on').checked) {
       document.getElementById("modalEnd").disabled = false;
     }else if(document.getElementById('never').checked){
       document.getElementById("modalEnd").disabled = true;
     }
-
-    if(option == 'week'){
-      $("#weeks").show();
-    }else if(option == 'month'){
-      $("#weeks").hide();
-    }else if(option == 'year'){
-      $("#weeks").hide();
-    }
-
-
   }
-
 </script>
 @endsection

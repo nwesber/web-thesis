@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEventColoumnsToEventsTable extends Migration
+class CreateGroupMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class AddEventColoumnsToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->string('event_title');
-            $table->bigInteger('user_id');
-            $table->boolean('full_day');
-            $table->dateTime('time_start');
-            $table->dateTime('time_end');
+        Schema::create('group_members', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('group_id');
+            $table->string('user_id');
+            $table->boolean('is_removed');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ class AddEventColoumnsToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('events');
+        Schema::dropIfExists('group_members');
     }
 }

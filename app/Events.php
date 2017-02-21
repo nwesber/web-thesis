@@ -48,10 +48,54 @@ class Events extends Model
     $event->time_start = $time_start;
     $event->time_end = $time_end;
     $event->color = $request->eventColor;
-    $event->is_shared = '0';
+    $event->is_shared = $request->shared;
     $event->save();
     return $event;
   }
+
+  public static function updateEvent($request, $id, $event){
+    $allDay = false;
+    $start = "";
+    $end = "";
+
+
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
+
+
+    if($request->eventStartDate == null && $request->eventEndDate == null){
+      $start = $request->oldStart;
+      $end = $request->oldEnd;
+    }else{
+      $start = $request->eventStartDate;
+      $end = $request->eventEndDate;
+    }
+
+    $time_start = new DateTime($start);
+    $time_end = new DateTime($end);
+    $query = Events::where('user_id', $id)
+      ->where('id', $event)
+      ->update([
+        'event_title' => $request->eventTitle,
+        'event_description' => $request->eventDesc,
+        'full_day' =>  $allDay,
+        'time_start' =>  $time_start,
+        'time_end' => $time_end,
+        'color' => $request->eventColor,
+        'location' => $request->eventLocation,
+        'is_shared' => $request->shared,
+
+      ]);
+  }
+
+  public static function deleteEvent($id){
+    $query = Events::where('id', $id)->delete();
+    return $query;
+  }
+
 
 
 }

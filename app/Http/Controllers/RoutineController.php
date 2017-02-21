@@ -45,16 +45,32 @@ class RoutineController extends Controller
     public function updateRoutine(Request $request, $id){
         $routine = Routine::findOrFail($id);
 
+         $validator = Validator::make($request->all(), [
+            'routineName' => 'required',
+        ]);
+
+         if ($validator->fails()) {
+             return redirect('/routine/'. $id.'/edit')
+            ->withInput()
+            ->withErrors($validator)
+            ->with('message', 'Error');
+        } 
+
         $updateRoutine = Routine::updateRoutine($id, $request->routineName);
 
-        return redirect('/')->with(compact('routine'));
+        if($request->routine_name == 'routineName'){
+            return redirect('/')->with(compact('routine'))->with('message', 'No changes has been made.');
+        }else{
+            return redirect('/')->with(compact('routine'))->with('message', 'Your changes has been saved!');       
+        }
+       
     }
 
     public function deleteRoutine($id){
         $routine = Routine::findOrFail($id);
         $deleteRoutine = Routine::deleteRoutine($id);
 
-        return redirect('/routine')->with(compact('routine'), 'message', 'Success!');
+        return redirect('/routine')->with(compact('routine'))->with('message', 'Routine ' . $routine->routine_name .  ' has been successfully deleted!');
     }
 }
 
