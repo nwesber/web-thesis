@@ -29,9 +29,9 @@ class Calendar
      */
     protected $defaultOptions = [
         'header' => [
-            'left' => 'prev,next today',
-            'center' => 'title',
-            'right' => 'listDay,month,listWeek,listYear',
+            'left' => 'prevYear,nextYear',
+            'center' => 'prev title next',
+            'right' => 'today ,month,listWeek,listYear',
         ],
 
         'views' =>[
@@ -39,7 +39,7 @@ class Calendar
                 'buttonText' => 'List Day'
             ],
             'listWeek' => [
-                'buttonText' => 'List Week'
+                'buttonText' => 'Week'
             ],
             'month' => [
                 'buttonText' => 'Month'
@@ -48,6 +48,7 @@ class Calendar
                 'buttonText' => 'Year'
             ]
          ],
+
         'navLinks' => true,
         'eventLimit' => true,
         'defaultView' => 'month',

@@ -66,6 +66,7 @@ Route::post('/group/{id}/add-member/store', 'GroupController@storeMember');
 Route::get('/group/{id}/view-member', 'GroupController@viewMember');
 Route::post('/group/{id}/view-member/update', 'GroupController@updateMember');
 Route::get('/group/{id}/leave-group', 'GroupController@leaveGroup');
+Route::get('/group/event/{id}', 'GroupEventController@show');
 Route::resource('group', 'GroupController');
 
 
@@ -74,6 +75,5 @@ Route::get('/home', 'CalendarController@home');
 Route::get('/logout', 'HomeController@logout');
 Route::get('/change-password', 'HomeController@changePass');
 Route::post('/postUpdatePassword', 'HomeController@postUpdatePassword');
-
 
 

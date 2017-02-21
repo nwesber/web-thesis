@@ -16,10 +16,13 @@ class CalendarController extends Controller
 {
 	public function home(){
 		$eventCollection = [];
+    $repeatEventCollection = [];
+    $userEventCollection = [];
 	  $userid = \Auth::user()->id;
 	  $events = Events::getEvents($userid)->get();
 	  $holidays = DB::table('holidays')->get();
 	  $repeatEvent = RepeatEvent::getEvents($userid)->get();
+
 	  foreach ($repeatEvent as $repeat) {
 			$eventCollection[] = Calendar::event(
 		    $repeat->event_title,
@@ -61,9 +64,14 @@ class CalendarController extends Controller
 		$calendar = Calendar::addEvents($eventCollection)
 			->setOptions([
 					'header' => [
+            'right' => 'listMonth prev,next',
         	],
         	'views' =>[
+            'listMonth' => [
+              'buttonText' => 'Today'
+            ]
          ],
+         'height' => 300,
          'defaultView' => 'listMonth'
 				]);
 		return view('home', compact('calendar'));

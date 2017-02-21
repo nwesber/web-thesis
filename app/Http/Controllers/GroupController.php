@@ -34,7 +34,8 @@ class GroupController extends Controller
     }
 
     public function groupCalendar($id){
-      $group = Group::findOrFail($id);
+      $groupId = Crypt::decrypt($id);
+      $group = Group::findOrFail($groupId);
         // create event array
       $eventCollection = [];
 
@@ -42,28 +43,22 @@ class GroupController extends Controller
       $userid = \Auth::user()->id;
 
       //fetch user events
-      $events = DB::table('shared_events')->where('group_id', '=', $id)->where('user_id', '=', $userid)->where('is_shared', '=', '1')->get();
+      $events = DB::table('events')
+        ->where('user_id', '=', $userid)
+        ->where('is_shared', '=', '1')
+        ->get();
+
       //iterate all events where user id = logged in user then add them to the array
       foreach ($events as $event) {
             $eventCollection[] = Calendar::event(
             $event->event_title, //event title
-            false, //full day event?
-            $event->time_start, //start time (you can also use Carbon instead of DateTime)
-            $event->time_end, //end time (you can also use Carbon instead of DateTime)
-            $event->id, //optionally, you can specify an event ID
-
+            false,
+            $event->time_start,
+            $event->time_end,
+            $event->id,
             [
-                /*========================/
-                    make event clickable
-                    pass id
-                    route = event/{id}
-                    encrypt id for security
-                ==========================*/
-
-                // comment for now will create a seperate page for this
-            /*'url' => 'event/'. Crypt::encrypt($event->id) ,*/
-            'color' => $event->color,
-            //any other full-calendar supported parameters
+                'url' => 'event/'. Crypt::encrypt($event->id) ,
+                'color' => $event->color,
             ]
             );
         }
@@ -110,8 +105,11 @@ class GroupController extends Controller
 
 
     public function addMember($id, Request $request){
-        $userid = \Auth::user()->id;
-        $users = User::where('id', '!=',  $userid)->get();
+        $member = $this->viewMember($id);
+        $exist = $member->users;
+        $users = User::where('id', '!=', \Auth::user()->id)
+        ->where('id', '!=', $exist->pluck('user_id'))
+        ->get();
         $group = Group::findOrFail($id);
         return view('group.add-member', compact('users', 'group'));
     }
@@ -152,12 +150,11 @@ class GroupController extends Controller
         $group = Group::findOrFail($id);
 
         $users = DB::table('group_members')
-        ->join('users', 'group_members.user_id', '=', 'users.id')
-        ->join('group', function ($join) {
-            $join->on('group_members.group_id', '=', 'group.id')
-                 ->where('group_members.is_removed', '=', 0);
-        })
-        ->get();
+                ->join('users', 'group_members.user_id', 'users.id')
+                ->select('users.*', 'group_members.*')
+                ->where('group_id', '=', $id)
+                ->where('is_removed', '=', 0)
+                ->get();
         return view('group.view-members', compact('users', 'group'));
     }
 

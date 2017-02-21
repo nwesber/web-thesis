@@ -14,6 +14,9 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong>List of Users</strong>
       <div class="pull-right">
+          <button class="btn btn-default btn-xs" type="button" onclick="goBack()">
+            Back
+          </button>
          <input type="submit" class = "btn btn-primary btn-xs" value="Add Member">
       </div>
       </div>
@@ -27,7 +30,7 @@
                 <a>
                   <input type="checkbox" name="addMember[]" value="{{ $user->id }}" title="Add Member" style="margin-right: 20px;">
                   {{ $user->name }}
-                  <small class="pull-right"><i>Added</i></small>
+                  <!-- <small class="pull-right"><i>Added</i></small> -->
                 </a>
               </li>
             @endforeach
@@ -61,6 +64,12 @@
             li[i].style.display = "none";
         }
     }
+  }
+</script>
+
+<script>
+  function goBack() {
+      window.history.back();
   }
 </script>
 @endsection
