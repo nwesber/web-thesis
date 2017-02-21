@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/task.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/event.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/searchMember.css') }}">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
 

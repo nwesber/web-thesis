@@ -2,8 +2,6 @@
 @section('group', 'class="active"')
 @section('content')
 
-
-
 <h1>Add Group</h1>
 
 <div class="row">

@@ -33,7 +33,7 @@
 		<div class="col-sm-12">
 		<hr width="55%">
 			<div class="col-sm-6">
-				<li>{{ $user->user_id}}</li>
+				<li>{{ $user->name }}</li>
 			</div>
 			<div class ="col-sm-6">
 				<input type="checkbox" name="removeMember[]" value="{{ $user->user_id }}" title="Remove Member">

@@ -20,9 +20,10 @@ use App\SharedEvent;
 class GroupController extends Controller
 {
     public function index(){
+        $userid = \Auth::user()->id;
         $group = DB::table('group')
         ->join('group_members', 'group.id', '=', 'group_members.group_id')
-        ->where('group_members.user_id', '=', \Auth::user()->name)
+        ->where('group_members.user_id', '=',  $userid)
 
         ->select('group_members.*', 'group.*')
         ->where('is_removed', '=', 0)
@@ -77,16 +78,16 @@ class GroupController extends Controller
     }
 
     public function storeGroup(Request $request){
-
+        $userid = \Auth::user()->id;
     	$group = new Group();
     	$group->group_name = $request->groupName;
-        $group->user_id = \Auth::user()->id;
+        $group->user_id = $userid;
         $group->has_member = 1;
         $group->leave_group = 0;
 		$group->save();
         $member = new GroupMember();
         $member->group_id = $group->id;
-        $member->user_id = \Auth::user()->name;
+        $member->user_id = $userid;
         $member->is_removed = 0;
         $member->save();
 
@@ -109,10 +110,9 @@ class GroupController extends Controller
 
 
     public function addMember($id, Request $request){
-        $users = User::where('id', '!=', \Auth::user()->id)->get();
+        $userid = \Auth::user()->id;
+        $users = User::where('id', '!=',  $userid)->get();
         $group = Group::findOrFail($id);
-
-
         return view('group.add-member', compact('users', 'group'));
     }
 
@@ -150,8 +150,14 @@ class GroupController extends Controller
 
     public function viewMember($id){
         $group = Group::findOrFail($id);
-        $users = GroupMember::where('group_id', '=', $id)->where('is_removed', '=', 0)->get();
 
+        $users = DB::table('group_members')
+        ->join('users', 'group_members.user_id', '=', 'users.id')
+        ->join('group', function ($join) {
+            $join->on('group_members.group_id', '=', 'group.id')
+                 ->where('group_members.is_removed', '=', 0);
+        })
+        ->get();
         return view('group.view-members', compact('users', 'group'));
     }
 
