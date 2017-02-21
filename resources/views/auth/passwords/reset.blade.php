@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.reset-layout')
 
 @section('content')
 <div class="container">

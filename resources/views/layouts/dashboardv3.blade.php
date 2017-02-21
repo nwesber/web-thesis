@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'web-project') }}</title>
+    <title>{{ config('app.name', 'iSCHED') }}</title>
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}">
@@ -85,7 +85,7 @@
             <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li class="dropdown-header">SETTINGS</li>
-              <li class=""><a href="#">Other Link</a></li>
+              <li class=""><a href="{{ url('/change-password') }}">Change Password</a></li>
               <li class=""><a href="#">Other Link</a></li>
               <li class=""><a href="#">Other Link</a></li>
               <li class="divider"></li>
