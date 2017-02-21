@@ -68,6 +68,12 @@ Route::post('/group/{id}/view-member/update', 'GroupController@updateMember');
 Route::get('/group/{id}/leave-group', 'GroupController@leaveGroup');
 Route::resource('group', 'GroupController');
 
+
 //Home
 Route::get('/home', 'CalendarController@home');
 Route::get('/logout', 'HomeController@logout');
+Route::get('/change-password', 'HomeController@changePass');
+Route::post('/postUpdatePassword', 'HomeController@postUpdatePassword');
+
+
+
