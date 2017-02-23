@@ -2,10 +2,10 @@
 @section('group', 'class="active"')
 @section('content')
 
-{!! Form::open(array('action' => array('GroupController@updateMember', $group->id), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
+{!! Form::open(array('action' => array('GroupController@updateMember', Crypt::encrypt($group->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
 <div class="col-lg-12">
   @if( Session::has('message') )
-    <div class="alert alert-success fade in" role="alert" align="center">
+    <div class="alert alert-danger fade in" role="alert" align="center">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>{{ Session::get('message') }}</strong>
     </div>
@@ -72,7 +72,7 @@
 
 <script>
   function goBack() {
-      window.history.back();
+      window.history.go(-2);
   }
 </script>
 

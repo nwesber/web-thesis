@@ -1,6 +1,7 @@
-@extends('layouts.dashboardv2')
-
+@extends('layouts.dashboardv3')
+@section('class', 'class="active"')
 @section('content')
+
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header"></h1>
@@ -21,7 +22,7 @@
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-       		{!! Form::open(array('action' => array('RoutineController@updateRoutine', $routine->id), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
+       		{!! Form::open(array('action' => array('RoutineController@updateRoutine', Crypt::encrypt($routine->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
           <div class="col-md-12">
             <p id="oldRoutine" name="oldRoutine"><strong>Old Routine Name: </strong>{{ $routine->routine_name }}</p>
           </div>
@@ -36,8 +37,8 @@
           </div>
 
           <div class="col-md-12">
-          	<a href="{{ url('/routine') }}">
-              <button class="btn btn-default">Back</button>
+          	<a href="{{ url('/routine/' . Crypt::encrypt($routine->id) . '/task') }}">
+              <button type="button" class="btn btn-default">Back</button>
             </a>
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>

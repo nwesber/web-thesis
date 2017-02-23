@@ -18,7 +18,7 @@
         </div>
       </div>
       <!-- /.panel-heading -->
-      {!! Form::open(array('action' => array('TaskController@storeTask', $routine->id), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
+      {!! Form::open(array('action' => array('TaskController@storeTask', Crypt::encrypt($routine->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
       <div class="panel-body">
 
       	<div class="form-group">

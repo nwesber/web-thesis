@@ -74,7 +74,38 @@ class CalendarController extends Controller
          'height' => 300,
          'defaultView' => 'listMonth'
 				]);
-		return view('home', compact('calendar'));
+
+
+		//random array function you can use or write your own
+		function randomArrayVar($array)
+		{
+		if (!is_array($array)){
+		return $array;
+		}
+		return $array[array_rand($array)];
+		}
+		 
+		//list of grettings as arary
+		 
+		$greeting= array(
+		             "aloha"=>"Aloha",
+		             "ahoy"=>"Ahoy",
+		             "bonjour"=>"Bonjour",
+		             "gday"=>"G'day",
+		             "hello"=>"Hello",
+		             "hey"=>"Hey",
+		             "hi"=>"Hi",
+		             "hola"=>"Hola",
+		             "howdy"=>"Howdy",
+		             "sup"=>"Sup",
+		             "whatsup"=>"What's up",
+		             "yo"=>"Yo");
+		 
+		//echo greeting
+		// return (randomArrayVar($greeting));
+		$greet = randomArrayVar($greeting);
+
+		return view('home', compact('calendar', 'greet'));
 	}
 	public function index(){
 	  $eventCollection = [];

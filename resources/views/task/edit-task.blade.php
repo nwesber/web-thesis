@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="col-md-12">
-    {!! Form::model($task, ['method' => 'POST', 'action' => array('TaskController@updateTask', $routine->id, $task->id), 'id' => 'form1', 'class' => 'form-vertical'])   !!}
+    {!! Form::model($task, ['method' => 'POST', 'action' => array('TaskController@updateTask', Crypt::encrypt($routine->id), Crypt::encrypt($task->id)), 'id' => 'form1', 'class' => 'form-vertical'])   !!}
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Edit Task</strong>
         <div class="pull-right">

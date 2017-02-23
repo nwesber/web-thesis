@@ -19,11 +19,11 @@
             <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
           </button>
           <ul class="dropdown-menu ">
-            <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/edit') }}">Edit Task</a></li>
-            <li><a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id. '/delete') }}" onclick="myFunction(event)">Delete Task</a>
+            <li><a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task/task-details/'. Crypt::encrypt($task->id) . '/edit') }}">Edit Task</a></li>
+            <li><a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task/task-details/'. Crypt::encrypt($task->id) . '/delete') }}" onclick="myFunction(event)">Delete Task</a>
             </li>
             <li role="separator" class="divider"></li>
-            <li><a href="{{ url('routine/'.$routine->id.'/task') }}">Return to {{ $routine->routine_name}}</a></li>
+            <li><a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task') }}">Return to {{ $routine->routine_name}}</a></li>
           </ul>
         </div>
       </div>

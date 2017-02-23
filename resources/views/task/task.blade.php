@@ -20,11 +20,11 @@
           <ul class="dropdown-menu ">
 
             <li class="dropdown-header">Task</li>
-            <li><a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">Create Task</a></li>
+            <li><a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task/add-task/') }}">Create Task</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Routine Settings</li>
-            <li><a href="{{ url('/routine/'.$routine->id. '/edit') }}">Edit Routine</a></li>
-            <li><a href="{{ url('/routine/'.$routine->id. '/delete') }}" onclick="myFunction(event)">Delete Routine</a></li>
+            <li><a href="{{ url('/routine/'. Crypt::encrypt($routine->id) . '/edit') }}">Edit Routine</a></li>
+            <li><a href="{{ url('/routine/'. Crypt::encrypt($routine->id) . '/delete') }}" onclick="myFunction(event)">Delete Routine</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ url('/routine') }}">Return to All Routines</a></li>
           </ul>
@@ -53,23 +53,37 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
 
                     <table class="table">
                       <tbody>
                        @forelse($taskDay1 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>
@@ -93,23 +107,37 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
 
                     <table class="table">
                       <tbody>
                        @forelse($taskDay2 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>
@@ -131,22 +159,36 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
                   <table class="table">
                       <tbody>
                        @forelse($taskDay3 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id) .'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>
@@ -169,22 +211,36 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
                   <table class="table">
                       <tbody>
                        @forelse($taskDay4 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>
@@ -207,22 +263,36 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
                   <table class="table">
                       <tbody>
                        @forelse($taskDay5 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>
@@ -245,22 +315,36 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
                     <table class="table">
                       <tbody>
                        @forelse($taskDay6 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>
@@ -283,22 +367,36 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <strong>My Tasks:</strong>
+                      <p style="text-align:left;"><strong>My Tasks:</strong>
+                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
                     </div>
                     <table class="table">
                       <tbody>
                        @forelse($taskDay7 as $task)
                        <tr>
-                          <td><i class="fa fa-soccer-ball-o fa-fw"></i>
-                            <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
+                          <td>
+                            @if($task->priority == 'High')
+                            <font color="red"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
                              {{$task->task_title}}
                             </a>
+                            @elseif($task->priority == 'Medium')
+                            <font color="green"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                             {{$task->task_title}}
+                            </a>
+                            @elseif($task->priority == 'Low')
+                            <font color="black"><i class="fa fa-soccer-ball-o fa-fw"></i></font>
+                              <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/task-details/'. Crypt::encrypt($task->id)) }}">
+                                {{$task->task_title}}
+                              </a>
+                            @endif
                           </td>
                        </tr>
                        @empty
                         <div class="list-group">
                           <li class="list-group-item text-center">Oops! It seems that you don't have any task/s yet.<br>
-                            <a href="{{ url('routine/'.$routine->id.'/task/add-task/') }}">
+                            <a href="{{ url('routine/'. Crypt::encrypt($routine->id).'/task/add-task/') }}">
                               <button class="btn btn-primary btn-md">
                                 <i class="fa fa-plus fa-fw"></i>
                                 <strong>Add Task</strong>

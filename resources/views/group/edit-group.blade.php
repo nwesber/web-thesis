@@ -14,35 +14,39 @@
     @endif
   </div>
 
-  <div class="clearTop"></div>
-    <a href="{{ url('group/' . $group->id) }}"
-       class="btn btn-default"
-       role="button"
-       data-toggle="tooltip"
-       data-placement="bottom"
-       title="Back">
-       <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </a>
-    <br>
-
-<h1>Rename Group</h1>
-  <div class = "container">
-    <div class = "row">
-      <div class = "form-group">
-        {!! Form::open(array('action' => array('GroupController@updateGroup', $group->id), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
-          <ul>
-            <li>
-              <h4>
-              <input type ="text" class="form-control" name="groupName" value="{{ $group->group_name }}">
-              <input type="submit" value="Save Group Name" class = "btn btn-info pull-right form-control">
-              <a href="{{ url('/group/' . $group->id) }}"><input type="button"  class="btn btn-primary pull-right form-control" value="Cancel"></a>
-              </h4>
-            </li>
-          </ul>
-        {{ Form::close() }}
+ <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      <strong>Rename Group</strong>
       </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        {!! Form::open(array('action' => array('GroupController@updateGroup', Crypt::encrypt($group->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
+          <div class="col-md-12">
+            <p id="oldGroup" name="oldGroup"><strong>Old Group Name: </strong>{{ $group->group_name }}</p>
+          </div>
+          <div class="col-md-12 form-group{{ $errors->has('groupName') ? ' has-error' : '' }}">
+            <label for="groupName">New Group Name <span>*</span></label>
+            <input type="text" id="groupName" class="form-control" name="groupName" value="{{ $group->group_name }}" required>
+              @if($errors->has('groupName'))
+                <span class="help-block">
+                  <strong class="danger">{{ $errors->first('groupName') }}</strong>
+                </span>
+              @endif
+          </div>
+
+          <div class="col-md-12">
+            <a href="{{ URL::to('group/' . Crypt::encrypt($group->id)) }}">
+              <button type="button" class="btn btn-default">Back</button>
+            </a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+
+          {!! Form::close() !!}
+
+      </div>
+      <!-- /.panel-body -->
     </div>
   </div>
-</div>
 
 @endsection

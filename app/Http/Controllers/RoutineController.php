@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\Encryption\DecryptException;
 use App\Http\Requests;
 use App\Routine;
 use App\User;
 use Validator;
 use Input;
+use Crypt;
 
 class RoutineController extends Controller
 {
@@ -38,39 +39,55 @@ class RoutineController extends Controller
     }
 
     public function editRoutine($id){
-        $routine = Routine::findOrFail($id);
-        return view('routine.edit-routine', compact('routine'));
+        try{
+        $decryptTask = Crypt::decrypt($id);
+        $routine = Routine::findOrFail($decryptTask);
+            return view('routine.edit-routine', compact('routine'));
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 
     public function updateRoutine(Request $request, $id){
-        $routine = Routine::findOrFail($id);
+        try{
+            $decryptTask = Crypt::decrypt($id);
+            $routine = Routine::findOrFail($decryptTask);
 
          $validator = Validator::make($request->all(), [
             'routineName' => 'required',
         ]);
 
          if ($validator->fails()) {
-             return redirect('/routine/'. $id.'/edit')
+             return redirect('/routine/'. $decryptTask.'/edit')
             ->withInput()
             ->withErrors($validator)
             ->with('message', 'Error');
         } 
 
-        $updateRoutine = Routine::updateRoutine($id, $request->routineName);
+        $updateRoutine = Routine::updateRoutine($decryptTask, $request->routineName);
+        
+        $check = $request->routineName;
 
-        if($request->routine_name == 'routineName'){
-            return redirect('/')->with(compact('routine'))->with('message', 'No changes has been made.');
+        if($routine->routine_name == $check){
+            return redirect('/routine/' . $id . '/task')->with(compact('routine'))->with('message', 'No changes has been made.');
         }else{
-            return redirect('/')->with(compact('routine'))->with('message', 'Your changes has been saved!');       
+            return redirect('/routine/' . $id . '/task')->with(compact('routine'))->with('message', 'Your changes has been saved!');       
         }
-       
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
+        
     }
 
     public function deleteRoutine($id){
-        $routine = Routine::findOrFail($id);
-        $deleteRoutine = Routine::deleteRoutine($id);
-
-        return redirect('/routine')->with(compact('routine'))->with('message', 'Routine ' . $routine->routine_name .  ' has been successfully deleted!');
+        try{
+            $decryptTask = Crypt::decrypt($id);
+            $routine = Routine::findOrFail($decryptTask);
+            $deleteRoutine = Routine::deleteRoutine($decryptTask);
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
+        return redirect('/routine')->with(compact('routine'))->with('message', 'Routine "' . $routine->routine_name .  '" has been successfully deleted!');
     }
 }
 

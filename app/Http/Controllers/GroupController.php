@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\Encryption\DecryptException;
 use App\Http\Requests;
 use App\Group;
 use Input;
@@ -78,7 +78,6 @@ class GroupController extends Controller
     	$group->group_name = $request->groupName;
         $group->user_id = $userid;
         $group->has_member = 1;
-        $group->leave_group = 0;
 		$group->save();
         $member = new GroupMember();
         $member->group_id = $group->id;
@@ -91,37 +90,61 @@ class GroupController extends Controller
     }
 
     public function editGroup($id){
-    	$group = Group::findOrFail($id);
-    	return view('group.edit-group', compact('group'));
+        try{
+            $decryptGroup = Crypt::decrypt($id);
+             $group = Group::findOrFail( $decryptGroup );
+            return view('group.edit-group', compact('group'));
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
+        
     }
-
     public function updateGroup(Request $request, $id){
-    	$group = Group::findOrFail($id);
+       try{
+            $decryptGroup = Crypt::decrypt($id);
+            $group = Group::findOrFail( $decryptGroup );
+            $updateGroup = Group::updateGroup($decryptGroup, $request->groupName);
+             
+        $check  = $request->groupName;
+        if($group->group_name == $check){
+            return redirect('/group/'. $id)->with(compact('group'))->with('message', 'No changes has been made.');
+        }else{
+            return redirect('/group/'. $id)->with(compact('group'))->with('message', 'Your changes has been saved!');      
+        }
 
-    	$updateGroup = Group::updateGroup($id, $request->groupName);
-
-    	return redirect('/group/' . $group->id)->with(compact('group'));
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
-
 
     public function addMember($id, Request $request){
-        $member = $this->viewMember($id);
-        $exist = $member->users;
-        $users = User::where('id', '!=', \Auth::user()->id)
-        ->where('id', '!=', $exist->pluck('user_id'))
-        ->get();
-        $group = Group::findOrFail($id);
-        return view('group.add-member', compact('users', 'group'));
+        try{
+            $decryptGroup = Crypt::decrypt($id);
+            $member = $this->viewMember($id);
+            $exist = $member->users;
+            $users = User::where('id', '!=', \Auth::user()->id)
+            ->where('id', '!=', $exist->pluck('user_id'))
+            ->get();
+            $group = Group::findOrFail($decryptGroup);
+            return view('group.add-member', compact('users', 'group'));
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 
     public function storeMember($id){
-        $group = Group::findOrFail($id);
-        $now = \Carbon\Carbon::now();
-        $userId = Input::get('addMember');
+        try{
+            $decryptGroup = Crypt::decrypt($id);
+            $group = Group::findOrFail($decryptGroup);
+            $now = \Carbon\Carbon::now();
+            $userId = Input::get('addMember');
+            if(empty($userId)){
+                return redirect()->back()->with('message', 'Please select atleast 1 from the list!');
+            }
 
-        foreach($userId as $key => $n ) {
+        /*foreach($userId as $key => $n ) {
             $groupMem = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $userId[$key])->where('is_removed', '=', 1)->update(array('is_removed' => 0));
-        }
+        }*/
 
         foreach($userId as $key => $n ) {
             $arrData[] = array(
@@ -133,29 +156,50 @@ class GroupController extends Controller
             );
         }
         $member = DB::table('group_members')->insert($arrData);
-        return redirect('/group')->with(compact('group'))->with('message', 'Successfully Added Member(s)');
+        return redirect('/group/' . $id)->with(compact('group'))->with('message', 'Successfully Added Member(s)');
 
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 
     public function updateMember($id, Request $request){
-        $group = Group::findOrFail($id);
-        $getMember = Input::get('removeMember');
-        foreach($getMember as $key => $n ) {
-            $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->update(array('is_removed' => 1));
+         try{
+            $decryptGroup = Crypt::decrypt($id);
+            $group = Group::findOrFail($decryptGroup);
+
+            $getMember = Input::get('removeMember');
+            if(empty($getMember)){
+                return redirect()->back()->with('message', 'Please select atleast 1 from the list!');
+            }
+
+            foreach($getMember as $key => $n ) {
+                // $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->update(array('is_removed' => 1));
+                $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->delete();
+            }
+            return redirect('/group/' . $id)->with(compact('group', 'users'))->with('message', 'Successfully Removed Member(s)');
+
+        }catch(DecryptException $e){
+            return view('errors.404');
         }
-        return redirect('/group')->with(compact('group', 'users'))->with('message', 'Successfully Removed Member(s)');
+        
     }
 
     public function viewMember($id){
-        $group = Group::findOrFail($id);
+        try{
+            $decryptGroup = Crypt::decrypt($id);
+            $group = Group::findOrFail($decryptGroup);
 
-        $users = DB::table('group_members')
+            $users = DB::table('group_members')
                 ->join('users', 'group_members.user_id', 'users.id')
                 ->select('users.*', 'group_members.*')
-                ->where('group_id', '=', $id)
+                ->where('group_id', '=', $decryptGroup)
                 ->where('is_removed', '=', 0)
                 ->get();
-        return view('group.view-members', compact('users', 'group'));
+            return view('group.view-members', compact('users', 'group'));
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 
     public function groupShareEvent($id, Request $request){
@@ -210,13 +254,15 @@ class GroupController extends Controller
     }
 
     public function leaveGroup($id){
-        $group = Group::findOrFail($id);
-   /*     $group->leave_group = 1;
-        $group->save();*/
+        try{
+            $decryptGroup = Crypt::decrypt($id);
+            $group = Group::findOrFail($decryptGroup);
+            // $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->update(array('is_removed' => 1));
+            $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->delete();
+            return redirect('/group')->with(compact('group'))->with('message', 'You have left your group: '.$group->group_name);
 
-
-        $groupMem = GroupMember::where('user_id', '=', \Auth::user()->name)->update(array('is_removed' => 1));
-
-        return redirect('/group')->with(compact('group'))->with('message', 'You have left '.$group->group_name.' group');
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 }

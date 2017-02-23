@@ -3,7 +3,12 @@
 @section('class', 'class="active"')
 
 @section('content')
-
+@if( Session::has('message') )
+  <div class="alert alert-success fade in" role="alert" align="center">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{ Session::get('message') }}</strong>
+  </div>
+@endif
 <div class="row">
 	<div class="col-md-12">
 
@@ -23,7 +28,7 @@
           @if($routine->count() > 0)
             @foreach($routine as $rout)
             <li>
-              <a href="{{ url('/routine/'.$rout->id.'/task') }}">
+              <a href="{{ url('/routine/'.Crypt::encrypt($rout->id).'/task') }}">
                 <i class="fa fa-soccer-ball-o fa-fw"></i> {{ $rout->routine_name }}
                 <!-- <small class="pull-right"><i>Added</i></small> -->
               </a>
