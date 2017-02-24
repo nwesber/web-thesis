@@ -26,7 +26,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#"></i>New Event</a>
+              <a href="{{ url('/group/' . Crypt::encrypt($group->id) . '/create-event') }}"></i>New Event</a>
             </li>
             <li class="divider"></li>
             <li>
