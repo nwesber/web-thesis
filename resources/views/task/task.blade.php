@@ -53,8 +53,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
 
                     <table class="table">
@@ -94,7 +98,6 @@
                        @endforelse
                       </tbody>
                     </table>
-
                   </div>
                 </div>
 
@@ -107,8 +110,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
 
                     <table class="table">
@@ -159,8 +166,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
                   <table class="table">
                       <tbody>
@@ -211,8 +222,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
                   <table class="table">
                       <tbody>
@@ -263,8 +278,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
                   <table class="table">
                       <tbody>
@@ -315,8 +334,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
                     <table class="table">
                       <tbody>
@@ -367,8 +390,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <p style="text-align:left;"><strong>My Tasks:</strong>
-                      <span style="float:right;">Legend: <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium  <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low</span></p>
+                      <strong>My Tasks:</strong><br>
+                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                        <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
+                        <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
+                        <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low
+                      </span>
                     </div>
                     <table class="table">
                       <tbody>

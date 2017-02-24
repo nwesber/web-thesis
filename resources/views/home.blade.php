@@ -7,9 +7,10 @@
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
+      <div class="panel-heading text-center" style="border: none;"><strong><i class="fa fa-sun-o" aria-hidden="true"></i> {{ $greet }} {{ Auth::user()->name }}!</strong></div>
+    </div>
 
-   	<div class="panel-heading text-center"><strong>{{ $greet }} {{ Auth::user()->name }}!</strong></div>
-
+    <div class="panel panel-default">
       <div class="panel-heading"><strong>Upcoming Events</strong>
       </div>
       <div class="panel-body">

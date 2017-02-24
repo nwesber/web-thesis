@@ -5,18 +5,16 @@
 @section('content')
 
 <div class="row">
-        <div class="col-lg-12">
-    @if( Session::has('message') )
-        <div class="alert alert-success fade in" role="alert" align="center">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>{{ Session::get('message') }}</strong>
-        </div>
-    @endif
-</div>
-
-<div class="row">
 
   <div class="col-md-12">
+    <div class="col-lg-12">
+      @if( Session::has('message') )
+        <div class="alert alert-success fade in" role="alert" align="center">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>{{ Session::get('message') }}</strong>
+        </div>
+      @endif
+    </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <i class="fa fa-users fa-fw"></i> <strong>Group</strong>

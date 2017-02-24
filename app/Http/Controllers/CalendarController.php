@@ -14,6 +14,7 @@ use Crypt;
 use Validator;
 class CalendarController extends Controller
 {
+
 	public function home(){
 		$eventCollection = [];
     $repeatEventCollection = [];
@@ -36,6 +37,7 @@ class CalendarController extends Controller
     		]
 			);
 		}
+
 	  foreach ($events as $event) {
 			$eventCollection[] = Calendar::event(
 		    $event->event_title,
@@ -49,6 +51,7 @@ class CalendarController extends Controller
     		]
 			);
 		}
+
 	  foreach ($holidays as $holiday) {
 			$eventCollection[] = Calendar::event(
 		    $holiday->event_title,
@@ -61,58 +64,50 @@ class CalendarController extends Controller
     		]
 			);
 		}
+
 		$calendar = Calendar::addEvents($eventCollection)
 			->setOptions([
-					'header' => [
-            'right' => 'listMonth prev,next',
-        	],
-        	'views' =>[
-            'listMonth' => [
-              'buttonText' => 'Today'
-            ]
-         ],
-         'height' => 300,
-         'defaultView' => 'listMonth'
-				]);
+				'header' => [
+          'right' => 'listMonth prev,next',
+      	],
+      	'views' =>[
+          'listMonth' => [
+            'buttonText' => 'Today'
+          ]
+       ],
+      'height' => 300,
+      'defaultView' => 'listMonth'
+		]);
 
-
-		//random array function you can use or write your own
-		function randomArrayVar($array)
-		{
-		if (!is_array($array)){
-		return $array;
-		}
-		return $array[array_rand($array)];
-		}
-		 
-		//list of grettings as arary
-		 
 		$greeting= array(
-		             "aloha"=>"Aloha",
-		             "ahoy"=>"Ahoy",
-		             "bonjour"=>"Bonjour",
-		             "gday"=>"G'day",
-		             "hello"=>"Hello",
-		             "hey"=>"Hey",
-		             "hi"=>"Hi",
-		             "hola"=>"Hola",
-		             "howdy"=>"Howdy",
-		             "sup"=>"Sup",
-		             "whatsup"=>"What's up",
-		             "yo"=>"Yo");
-		 
+     "aloha"=>"Aloha",
+     "ahoy"=>"Ahoy",
+     "bonjour"=>"Bonjour",
+     "gday"=>"G'day",
+     "hello"=>"Hello",
+     "hey"=>"Hey",
+     "hi"=>"Hi",
+     "hola"=>"Hola",
+     "howdy"=>"Howdy",
+     "sup"=>"Sup",
+     "whatsup"=>"What's up",
+     "yo"=>"Yo"
+    );
+
 		//echo greeting
 		// return (randomArrayVar($greeting));
-		$greet = randomArrayVar($greeting);
+		$greet = $this->randomArrayVar($greeting);
 
 		return view('home', compact('calendar', 'greet'));
 	}
+
 	public function index(){
 	  $eventCollection = [];
 	  $userid = \Auth::user()->id;
 	  $events = Events::getEvents($userid)->get();
 	  $holidays = DB::table('holidays')->get();
 	  $repeatEvent = RepeatEvent::getEvents($userid)->get();
+
 	  foreach ($repeatEvent as $repeat) {
 			$eventCollection[] = Calendar::event(
 		    $repeat->event_title,
@@ -126,6 +121,7 @@ class CalendarController extends Controller
     		]
 			);
 		}
+
 	  foreach ($events as $event) {
 			$eventCollection[] = Calendar::event(
 		    $event->event_title,
@@ -139,6 +135,7 @@ class CalendarController extends Controller
     		]
 			);
 		}
+
 	  foreach ($holidays as $holiday) {
 			$eventCollection[] = Calendar::event(
 		    $holiday->event_title,
@@ -154,9 +151,11 @@ class CalendarController extends Controller
 		$calendar = Calendar::addEvents($eventCollection);
 		return view('events.event', compact('calendar'));
 	}
+
 	public function create(){
 		return view('events.create');
 	}
+
 	public function show($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -166,6 +165,7 @@ class CalendarController extends Controller
 		}
 		return view('events.show', compact('event'));
 	}
+
 	public function showRepeatEvent($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -175,6 +175,7 @@ class CalendarController extends Controller
 		}
 		return view('events.showRepeat', compact('event'));
 	}
+
 	public function editRepeatEvent($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -184,6 +185,7 @@ class CalendarController extends Controller
 		}
 		return view('events.editRepeat', compact('event'));
 	}
+
 	public function store(Request $request){
 		$userId = \Auth::user()->id;
 		$events = new Events();
@@ -199,11 +201,13 @@ class CalendarController extends Controller
       'eventTimeStart' => 'required',
       'eventTimeEnd' => 'required'
     ]);
+
     if ($validator->fails()) {
       return redirect('/event/create')
       ->withErrors($validator)
       ->withInput();
     }
+
 		if($request->chkRepeat == 'repeatEvent'){
 			switch($request->repeat){
 				case 'year':
@@ -222,6 +226,7 @@ class CalendarController extends Controller
 		}
 		return redirect('/event');
 	}
+
   public function edit($id){
    try{
       $cryptEvent = Crypt::decrypt( $id );
@@ -231,6 +236,7 @@ class CalendarController extends Controller
       return view('errors.404');
     }
   }
+
   public function updateRepeatEvent(Request $request, $id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -243,6 +249,7 @@ class CalendarController extends Controller
 		$updateEvent = RepeatEvent::updateRepeat($request, $repeatId, $userId);
 		return redirect('/event');
 	}
+
 	public function update(Request $request, $id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -255,6 +262,7 @@ class CalendarController extends Controller
     $updateEvent = Events::updateEvent($request, $userId, $eventId);
     return redirect('/event');
 	}
+
 	public function destroy($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -265,6 +273,7 @@ class CalendarController extends Controller
 		$deleteEvent = Events::deleteEvent($cryptEvent);
 		return redirect('/event');
 	}
+
 	public function destroyRepeat($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -277,4 +286,13 @@ class CalendarController extends Controller
     $deleteEvent = RepeatEvent::destroyEvent($repeatId, $userId);
     return redirect('/event');
 	}
+
+  public function randomArrayVar($array){
+    if (!is_array($array)){
+      return $array;
+    }
+
+    return $array[array_rand($array)];
+  }
+
 }

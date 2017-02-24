@@ -180,7 +180,7 @@ class taskController extends Controller
       $routine = Routine::findOrFail($id);
       $task = Task::findOrFail($id2);
 
-      
+
 
        $validator = Validator::make($request->all(), [
             'taskTitle' => 'required',
