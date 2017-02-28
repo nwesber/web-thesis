@@ -23,7 +23,7 @@ class GroupEvents extends Model
     return $events;
   }
 
-    public static function saveGroupEvent($request, $id, $id2){
+  public static function saveGroupEvent($request, $id, $id2){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
     $timeStart = date("Hi", strtotime($request->eventTimeStart));

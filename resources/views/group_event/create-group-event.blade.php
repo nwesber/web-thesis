@@ -58,11 +58,11 @@
         </div>
 
         <div class="form-group row">
-          <div class="col-md-1">
+          <!-- <div class="col-md-1">
             <div class="checkbox">
               <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
-          </div>
+          </div> -->
            <div class="col-sm-2">
             <div class="checkbox">
               <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
