@@ -15,7 +15,8 @@ use DateTime;
 use Calendar;
 use Crypt;
 use App\SharedEvent;
-
+use App\RepeatEvent;
+use App\GroupEvents;
 
 class GroupController extends Controller
 {
@@ -47,7 +48,9 @@ class GroupController extends Controller
         ->where('user_id', '=', $userid)
         ->where('is_shared', '=', '1')
         ->get();
-
+      $holidays = DB::table('holidays')->get();
+      $repeatEvent = RepeatEvent::getEvents($userid)->get();
+      $group_events = GroupEvents::getGroupEvents($groupId)->get();
       //iterate all events where user id = logged in user then add them to the array
       foreach ($events as $event) {
             $eventCollection[] = Calendar::event(
@@ -62,8 +65,44 @@ class GroupController extends Controller
             ]
             );
         }
-
-        //add an array with addEvents
+        foreach ($repeatEvent as $repeat) {
+          $eventCollection[] = Calendar::event(
+            $repeat->event_title,
+            false,
+            $repeat->time_start,
+            $repeat->time_end,
+            $repeat->id,
+            [
+              'url' => 'repeatEvent/'. Crypt::encrypt($repeat->id) ,
+              'color' => $repeat->color,
+            ]
+          );
+        }
+        foreach ($holidays as $holiday) {
+          $eventCollection[] = Calendar::event(
+            $holiday->event_title,
+            true,
+            $holiday->time_start,
+            $holiday->time_end,
+            $holiday->id,
+            [
+              'color' => $holiday->color,
+            ]
+          );
+        }
+         foreach ($group_events as $grpEvent) {
+          $eventCollection[] = Calendar::event(
+            $grpEvent->event_title,
+            false,
+            $grpEvent->time_start,
+            $grpEvent->time_end,
+            $grpEvent->id,
+            [
+              'url' => 'groupEvent/'. Crypt::encrypt($grpEvent->id) ,
+              'color' => $grpEvent->color,
+            ]
+          );
+        }
         $calendar = Calendar::addEvents($eventCollection);
         return view('group.group-calendar', compact('calendar', 'group'));
     }

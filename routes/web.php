@@ -77,3 +77,10 @@ Route::get('/change-password', 'HomeController@changePass');
 Route::post('/postUpdatePassword', 'HomeController@postUpdatePassword');
 
 
+//Group_Event
+Route::get('/group/{id}/create-event', 'GroupEventController@create');
+Route::post('/group/{id}/createGroupEvent', 'GroupEventController@store');
+Route::get('/group/groupEvent/{id}', 'GroupEventController@showGroupEvent');
+Route::get('/group/editGroupEvent/{id}', 'GroupEventController@edit');
+Route::patch('/group/updateGroupEvent/{id}', 'GroupEventController@updateGroupEvent');
+Route::get('/group/deleteGroupEvent/{id}', 'GroupEventController@deleteGroupEvent');

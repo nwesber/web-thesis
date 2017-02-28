@@ -8,23 +8,22 @@ use Illuminate\Http\Request;
 use DB;
 use DateTime;
 
-
-
-class Events extends Model
+class GroupEvents extends Model
 {
-  use SoftDeletes;
-  protected $dates = ['deleted_at'];
-  public $table = "events";
+	use SoftDeletes;
+  	protected $dates = ['deleted_at'];
+    public $table = "group_events";
 
 
-  public static function getEvents($id){
-    $events = DB::table('events')
-    ->where('user_id', '=', $id)
+    public static function getGroupEvents($id){
+    $events = DB::table('group_events')
+    ->where('user_id', '=', \Auth::user()->id)
+    ->where('group_id', '=', $id)
     ->whereNull('deleted_at');
     return $events;
   }
 
-  public static function saveEvent($request, $id){
+  public static function saveGroupEvent($request, $id, $id2){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
     $timeStart = date("Hi", strtotime($request->eventTimeStart));
@@ -39,21 +38,21 @@ class Events extends Model
       $allDay = false;
     }
 
-    $event = new Events;
-    $event->event_title =  $request->eventTitle;
-    $event->event_description =  $request->eventDesc;
-    $event->user_id = $id;
-    $event->location = $request->eventLocation;
-    $event->full_day = $allDay;
-    $event->time_start = $time_start;
-    $event->time_end = $time_end;
-    $event->color = $request->eventColor;
-    $event->is_shared = $request->shared;
-    $event->save();
-    return $event;
+    $group_event = new GroupEvents;
+    $group_event->event_title =  $request->eventTitle;
+    $group_event->event_description =  $request->eventDesc;
+    $group_event->user_id = $id;
+    $group_event->group_id = $id2;
+    $group_event->location = $request->eventLocation;
+    $group_event->full_day = $allDay;
+    $group_event->time_start = $time_start;
+    $group_event->time_end = $time_end;
+    $group_event->color = $request->eventColor;
+    $group_event->save();
+    return $group_event;
   }
 
-  public static function updateEvent($request, $id, $event){
+  public static function updateGroupEvent($request, $id, $event){
     $allDay = false;
     $start = "";
     $end = "";
@@ -76,7 +75,7 @@ class Events extends Model
 
     $time_start = new DateTime($start);
     $time_end = new DateTime($end);
-    $query = Events::where('user_id', $id)
+    $query = GroupEvents::where('user_id', $id)
       ->where('id', $event)
       ->update([
         'event_title' => $request->eventTitle,
@@ -86,14 +85,11 @@ class Events extends Model
         'time_end' => $time_end,
         'color' => $request->eventColor,
         'location' => $request->eventLocation,
-        'is_shared' => $request->shared,
-
       ]);
   }
 
-  public static function deleteEvent($id){
-    $query = Events::where('id', $id)->delete();
+  public static function deleteGroupEvent($id){
+    $query = GroupEvents::where('id', $id)->delete();
     return $query;
   }
-
 }
