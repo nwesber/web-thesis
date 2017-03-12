@@ -80,19 +80,19 @@ class CalendarController extends Controller
 		]);
 
 		$greeting= array(
-     "aloha"=>"Aloha",
-     "ahoy"=>"Ahoy",
-     "bonjour"=>"Bonjour",
-     "gday"=>"G'day",
-     "hello"=>"Hello",
-     "hey"=>"Hey",
-     "hi"=>"Hi",
-     "hola"=>"Hola",
-     "howdy"=>"Howdy",
-     "sup"=>"Sup",
-     "whatsup"=>"What's up",
-     "yo"=>"Yo"
-    );
+	     "aloha"=>"Aloha",
+	     "ahoy"=>"Ahoy",
+	     "bonjour"=>"Bonjour",
+	     "gday"=>"G'day",
+	     "hello"=>"Hello",
+	     "hey"=>"Hey",
+	     "hi"=>"Hi",
+	     "hola"=>"Hola",
+	     "howdy"=>"Howdy",
+	     "sup"=>"Sup",
+	     "whatsup"=>"What's up",
+	     "yo"=>"Yo"
+	    );
 
 		//echo greeting
 		// return (randomArrayVar($greeting));
@@ -198,8 +198,6 @@ class CalendarController extends Controller
       'eventTitle' => 'required',
       'eventStartDate' => 'required',
       'eventEndDate' => 'required',
-      'eventTimeStart' => 'required',
-      'eventTimeEnd' => 'required'
     ]);
 
     if ($validator->fails()) {

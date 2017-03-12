@@ -87,10 +87,15 @@ class Task extends Model
   }
 
 	public static function updateTask($id, $taskTitle, $taskDesc, $taskDue, $taskPrio, $taskDay, $timeStart){
-    $taskDay = implode(',', Input::get('taskDay'));
+      if(Input::get('taskDay') == null){
+        $taskDay = Input::get('oldTaskDay');
+      }else{
+        $taskDay = implode(',', Input::get('taskDay'));
+      }
       if($taskDay == 'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'){
           $taskDay = 'All Day';
       }
+
      $query = Task::where('id', $id)
         ->update([
           'task_title' => $taskTitle,
@@ -100,7 +105,6 @@ class Task extends Model
           'priority' => $taskPrio,
           'time_start' => $timeStart,
         ]);
-
     return $query;
   }
 

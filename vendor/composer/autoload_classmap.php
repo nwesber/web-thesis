@@ -9,7 +9,7 @@ return array(
     'AddEventColumnsToEventsTable' => $baseDir . '/database/migrations/2017_01_16_091746_add_event_columns_to_events_table.php',
     'CreateGroupEventsTable' => $baseDir . '/database/migrations/2017_02_24_080537_create_group_events_table.php',
     'CreateGroupMembersTable' => $baseDir . '/database/migrations/2016_11_29_025624_create_group_members_table.php',
-    'CreateGroupTable' => $baseDir . '/database/migrations/2017_01_17_094540_create_group_table.php',
+    'CreateGroupTable' => $baseDir . '/database/migrations/2017_03_12_090749_create_group_table.php',
     'CreateHolidaysTable' => $baseDir . '/database/migrations/2017_01_17_131609_create_holidays_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateRepeatEventsTable' => $baseDir . '/database/migrations/2017_02_16_104253_create-repeat-events-table.php',

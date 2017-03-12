@@ -12,7 +12,7 @@
       <div class="panel-heading">
         <strong>New Task</strong>
         <div class="pull-right">
-          <a href="{{ url('/routine/'.$routine->id.'/task') }}">
+          <a href="{{ url('/routine/'.Crypt::encrypt($routine->id).'/task') }}">
             <button class="btn btn-default btn-xs"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
           </a>
         </div>
@@ -21,11 +21,13 @@
       {!! Form::open(array('action' => array('TaskController@storeTask', Crypt::encrypt($routine->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
       <div class="panel-body">
 
-      	<div class="form-group">
+      		  <div class="form-group">
 			    <label for="taskTitle">Task Name:</label>
 			    <input type="text" name="taskTitle" class="form-control" required="true" placeholder="Unititled Task">
 			  </div>
+
 			  <div class="form-group">
+			  	<label for="taskDay">Task Day/s:</label><br>
 			  	<input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"> All Day
 			  </div>
 

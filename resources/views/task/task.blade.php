@@ -54,7 +54,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <strong>My Tasks:</strong><br>
-                      <span class="small" style="font-size:11px"><strong>Legend:</strong>
+                      <span class="small" style="font-size:11px"><strong>Priority Legend:</strong>
                         <font color='red'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - High
                         <font color='green'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Medium
                         <font color='black'><i class="fa fa-square fa-1" aria-hidden="true"></i></font> - Low

@@ -8,7 +8,7 @@
   <div class="col-md-12">
     @include('errors.errors')
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>Create Event</strong>
+      <div class="panel-heading"><strong>Create Group Event</strong>
         <div class="pull-right">
           <a href="{{ url('/group/' . Crypt::encrypt($group->id)) }}">
             <button class="btn btn-default btn-xs" type="button"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>

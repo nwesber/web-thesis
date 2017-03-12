@@ -171,39 +171,54 @@ class taskController extends Controller
     }
 
     public function taskEdit($id, $id2){
-      $routine = Routine::findOrFail($id);
-      $task = Task::findOrFail($id2);
+      try{
+        $decryptTask = Crypt::decrypt($id);
+        $decryptTask2 = Crypt::decrypt($id2);
+        $routine = Routine::findOrFail($decryptTask);
+        $task = Task::findOrFail($decryptTask2);
       return view('task.edit-task', compact('task', 'routine'));
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 
     public function updateTask(Request $request, $id, $id2){
-      $routine = Routine::findOrFail($id);
-      $task = Task::findOrFail($id2);
+       try{
+        $decryptTask = Crypt::decrypt($id);
+        $decryptTask2 = Crypt::decrypt($id2);
+        $routine = Routine::findOrFail($decryptTask);
+        $task = Task::findOrFail($decryptTask2);
 
-
-
-       $validator = Validator::make($request->all(), [
-            'taskTitle' => 'required',
+        $validator = Validator::make($request->all(), [
+            'taskTitle' => 'required|max:255',
             'taskDesc' => 'required|max:255',
-            'taskDue' => 'required|max:255',
-            'taskPrio' => 'required|max:255',
-            'taskDay' => 'required|max:255',
-            'timeStart' => 'required|max:255',
+            'taskDue' => 'required',
+            'taskPrio' => 'required',
+            'timeStart' => 'required',
         ]);
-
+          if(Input::get('taskDay') == null){
+            $request->taskDay = Input::get('oldTaskDay');
+          }
+          if($request->taskDay == array('Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday')){
+              $request->taskDay = 'All Day';
+          }
          if ($validator->fails()) {
              return redirect('/routine/'. $id.'/task/task-details/'. $id2 . '/edit')
           ->withInput()
             ->withErrors($validator)
             ->with('message', 'Error');
         }else{
-      $updateTask = Task::updateTask($id2, $request->taskTitle, $request->taskDesc, $request->taskDue, $request->taskPrio, $request->taskDay, $request->timeStart);
+      $updateTask = Task::updateTask($decryptTask2, $request->taskTitle, $request->taskDesc, $request->taskDue, $request->taskPrio, $request->taskDay, $request->timeStart);
       }
-      if($request->taskTitle == 'taskTitle' && $request->taskDesc == 'taskDesc' && $request->taskDue == 'taskDue' && $request->taskDay == 'taskDay' && $request->taskPrio == 'taskPrio' && $request->timeStart == 'timeStart'){
+      if($request->taskTitle == $task->task_title && $request->taskDesc == $task->task_description && $request->taskDue == $task->due_date && $request->taskDay == $task->task_day && 
+        $request->taskPrio == $task->priority && $request->timeStart == $task->time_start){
         return redirect('/routine/'. $id.'/task/task-details/'. $id2)->with(compact('task', 'routine'))->with('message', 'No changes has been made.');
       }else{
        return redirect('/routine/'. $id.'/task/task-details/'. $id2)->with(compact('task', 'routine'))->with('message', 'Your changes has been saved!');
       }
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
     }
 
     public function taskDelete($id, $id2){

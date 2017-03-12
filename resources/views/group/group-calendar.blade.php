@@ -30,7 +30,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="{{ url('/group/'. Crypt::encrypt($group->id). '/leave-group') }}"> Leave Group</a>
+              <a href="{{ url('/group/'. Crypt::encrypt($group->id). '/leave-group') }}" onclick="myFunction(event)"> Leave Group</a>
             </li>
           </ul>
         </div>
@@ -45,4 +45,13 @@
 
 {!! $calendar->script() !!}
 
+
+<script type="text/javascript">
+  function myFunction(e) {
+    if (confirm('Are you sure you want to leave this group?')) {
+    } else {
+      e.preventDefault();
+    }
+  }
+</script>
 @endsection

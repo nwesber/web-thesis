@@ -8,7 +8,7 @@
   <div class="col-lg-12">
     <div class="col-lg-12">
     @if( Session::has('message') )
-        <div class="alert alert-success fade in" role="alert" align="center">
+        <div class="alert alert-danger fade in" role="alert" align="center">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>{{ Session::get('message') }}</strong>
         </div>
@@ -20,8 +20,8 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Edit Task</strong>
         <div class="pull-right">
-          <a href="{{ url('routine/'.$routine->id.'/task/task-details/'.$task->id) }}">
-            <button class="btn btn-default btn-xs"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+          <a href="{{ url('routine/'.Crypt::encrypt($routine->id).'/task/task-details/'.Crypt::encrypt($task->id)) }}">
+            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
           </a>
         </div>
       </div>
@@ -39,12 +39,46 @@
            <input type="date" value="{{$task->due_date}}" name="taskDue" class = "form-control" required="true">
         </div>
         <div class="form-group">
-          <label for="taskPrio">Priority:</label>
-           <input type="text" value="{{$task->priority}}" name="taskPrio" class = "form-control" required="true">
+          <label for="taskPrio">Priority:</label><br>
+          <div class="form-group">
+            <select class="form-control" id="taskPrio" name="taskPrio">
+              <option value="{{$task->priority}}" name="taskPrio" selected="" hidden="">{{$task->priority}}</option>
+              <option value="Low" name="taskPrio">Low</option>
+              <option value="Medium" name="taskPrio">Medium</option>
+              <option value="High" name="taskPrio">High</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
           <label for="Task Day">Task Day/s:</label>
-            <input type="text" value="{{$task->task_day}}" name="taskDay" class = "form-control" required="true">
+            @if($task->task_day == 'All Day')
+              <div class="form-group">
+                <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" checked> All Day
+              </div>
+            @elseif($task->task_day != 'All Day')
+              <div class="form-group">
+                <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" unchecked> All Day
+              </div>
+            @endif
+            <div id="showIt" class="form-group">
+              <strong>Currently Selected Day/s:</strong> <input type="text" name="oldTaskDay" value="{{ $task->task_day }}" hidden="">({{ $task->task_day }})
+            </div>
+            <div id="showIt2" class="form-group">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><strong> Select Day/s:</strong></div>
+                  <div class="panel-body">
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Sunday"> Sunday <br>
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Monday"> Monday <br>
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Tuesday"> Tuesday <br>
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Wednesday"> Wednesday <br>
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Thursday"> Thursday <br>
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Friday"> Friday <br>
+                    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Saturday"> Saturday <br>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
         <div class="form-group">
           <label for="timeStart">Time Start:</label>
@@ -58,20 +92,24 @@
   </div>
 
 </div>
-@endsection
+
 
 <script>
   $(document).ready(function(){
       if(document.getElementById('allDay').checked) {
           $("#showIt").hide();
+          $("#showIt2").hide();
       } else {
           $("#showIt").show();
+          $("#showIt2").show();
       }
        $('#allDay').on('click', function(){
       if(document.getElementById('allDay').checked) {
           $("#showIt").hide();
+          $("#showIt2").hide();
       } else {
           $("#showIt").show();
+          $("#showIt2").show();
           $('.task').prop('checked',false);
       }
     });
@@ -79,4 +117,3 @@
 </script>
 
 @endsection
->>>>>>> groupcrud

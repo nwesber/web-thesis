@@ -18,7 +18,6 @@ class CreateGroupTable extends Migration
             $table->integer('user_id');
             $table->string('group_name');
             $table->boolean('has_member');
-            $table->boolean('leave_group');
             $table->timestamps();
         });
     }
