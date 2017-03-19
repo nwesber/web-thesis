@@ -73,7 +73,7 @@ class GroupController extends Controller
             $repeat->time_end,
             $repeat->id,
             [
-              'url' => 'repeatEvent/'. Crypt::encrypt($repeat->id) ,
+              'url' => 'groupRepeatEvent/'. Crypt::encrypt($repeat->id) ,
               'color' => $repeat->color,
             ]
           );
@@ -136,19 +136,19 @@ class GroupController extends Controller
         }catch(DecryptException $e){
             return view('errors.404');
         }
-        
+
     }
     public function updateGroup(Request $request, $id){
        try{
             $decryptGroup = Crypt::decrypt($id);
             $group = Group::findOrFail( $decryptGroup );
             $updateGroup = Group::updateGroup($decryptGroup, $request->groupName);
-             
+
         $check  = $request->groupName;
         if($group->group_name == $check){
             return redirect('/group/'. $id)->with(compact('group'))->with('message', 'No changes has been made.');
         }else{
-            return redirect('/group/'. $id)->with(compact('group'))->with('message', 'Your changes has been saved!');      
+            return redirect('/group/'. $id)->with(compact('group'))->with('message', 'Your changes has been saved!');
         }
 
         }catch(DecryptException $e){
@@ -221,7 +221,7 @@ class GroupController extends Controller
         }catch(DecryptException $e){
             return view('errors.404');
         }
-        
+
     }
 
     public function viewMember($id){
@@ -299,6 +299,17 @@ class GroupController extends Controller
             // $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->update(array('is_removed' => 1));
             $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->delete();
             return redirect('/group')->with(compact('group'))->with('message', 'You have left your group: '.$group->group_name);
+
+        }catch(DecryptException $e){
+            return view('errors.404');
+        }
+    }
+
+    public function viewRepeatEvent($id){
+        try{
+            $repeatEvent = Crypt::decrypt($id);
+            $event = RepeatEvent::findOrFail($repeatEvent);
+            return view('group_event.group_repeat_event', compact('event'));
 
         }catch(DecryptException $e){
             return view('errors.404');
