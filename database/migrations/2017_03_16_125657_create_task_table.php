@@ -24,7 +24,6 @@ class CreateTaskTable extends Migration
             $table->text('priority');
             $table->text('task_day');
             $table->time('time_start');
-            $table->boolean('is_completed');
             $table->timestamps();
             $table->softDeletes();
         });

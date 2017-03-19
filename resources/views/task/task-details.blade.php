@@ -46,14 +46,6 @@
             <td>Time Start:</td>
             <td><strong>{{ \Carbon\Carbon::parse($task->time_start)->format('g:i A') }}</strong></td>
           </tr>
-          <tr>
-            <td>Progess:</td>
-            @if($task->is_completed == 1)
-              <td><strong>Completed</strong></td>
-            @else
-              <td><strong>In Progress</strong></td>
-            @endif
-          </tr>
         </table>
       </div>
     </div>

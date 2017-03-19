@@ -161,7 +161,6 @@ class taskController extends Controller
       $task->priority = $request->taskPrio;
       $task->task_day = $taskDay;
       $task->time_start = $request->timeStart;
-      $task->is_completed = 0;
       $task->save();
 
       return redirect('/routine/'. $id. '/task');
