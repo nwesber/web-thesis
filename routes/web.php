@@ -84,3 +84,4 @@ Route::get('/group/groupEvent/{id}', 'GroupEventController@showGroupEvent');
 Route::get('/group/editGroupEvent/{id}', 'GroupEventController@edit');
 Route::patch('/group/updateGroupEvent/{id}', 'GroupEventController@updateGroupEvent');
 Route::get('/group/deleteGroupEvent/{id}', 'GroupEventController@deleteGroupEvent');
+Route::get('/group/groupRepeatEvent/{id}', 'GroupController@viewRepeatEvent');

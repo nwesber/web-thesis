@@ -7,7 +7,7 @@
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Group Event Details:</strong>
-      <div class="pull-right dropdown">
+        <div class="pull-right dropdown">
           <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
             <i class="fa fa-gear fa-fw"></i>Options <span class="caret"></span>
           </button>
