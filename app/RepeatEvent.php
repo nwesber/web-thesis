@@ -141,7 +141,7 @@ class RepeatEvent extends Model
 
       if($repeatOption == 'endsOn'){
         $endOn = $request->modalEnd;
-        $result = RepeatEvent::yearlyRepeatOn($dateStart, $dateEnd, $endOn, $monthlyInterval);
+        $result = RepeatEvent::repeatOn($dateStart, $dateEnd, $endOn, $monthlyInterval);
         $newarray = array_chunk($result, 2);
         $repeatId = random_int(0,1000);
 
@@ -167,7 +167,7 @@ class RepeatEvent extends Model
 
       }
       else{
-        $result = RepeatEvent::yearlyRepeatNever($dateStart, $dateEnd, $monthlyInterval);
+        $result = RepeatEvent::repeatNever($dateStart, $dateEnd, $monthlyInterval);
         $newarray = array_chunk($result, 2);
         $repeatId = random_int(0,1000);
 
