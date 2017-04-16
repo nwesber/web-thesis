@@ -49,7 +49,7 @@
         </div>
          <div class="form-group">
           <label for="chooseColor">Choose Color:</label>
-          <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" required="true" value="{{ $event->color }}">
+          <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" value="{{ $event->color }}">
         </div>
         <h5 class="clearTop">
           <strong>Visibility</strong>
