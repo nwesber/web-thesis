@@ -66,7 +66,13 @@ class Events extends Model
     }
 
 
-    if($request->eventStartDate == null && $request->eventEndDate == null){
+    if($request->eventStartDate == null && !$request->eventEndDate == null){
+      $start = $request->oldStart;
+      $end = $request->eventEndDate;
+    }else if(!$request->eventStartDate == null && $request->eventEndDate == null){
+      $start = $request->eventStartDate;
+      $end = $request->oldEnd;
+    }else if($request->eventStartDate == null && $request->eventEndDate == null){
       $start = $request->oldStart;
       $end = $request->oldEnd;
     }else{

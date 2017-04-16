@@ -206,7 +206,6 @@ class GroupController extends Controller
          try{
             $decryptGroup = Crypt::decrypt($id);
             $group = Group::findOrFail($decryptGroup);
-
             $getMember = Input::get('removeMember');
             if(empty($getMember)){
                 return redirect()->back()->with('message', 'Please select atleast 1 from the list!');
@@ -215,8 +214,14 @@ class GroupController extends Controller
             foreach($getMember as $key => $n ) {
                 // $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->update(array('is_removed' => 1));
                 $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->delete();
+                $hasMember = count(GroupMember::where('group_id', '=', $group->id)->get());
+                if($hasMember == 0){
+                    $deleteGroup = Group::where('id', '=', $group->id)->delete();
+                    return redirect('/group')->with('message', 'Successfully Removed Member(s)');
+                }else{
+                    return redirect('/group/' . $id)->with(compact('group', 'users'))->with('message', 'Successfully Removed Member(s)');
+                }
             }
-            return redirect('/group/' . $id)->with(compact('group', 'users'))->with('message', 'Successfully Removed Member(s)');
 
         }catch(DecryptException $e){
             return view('errors.404');
