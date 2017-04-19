@@ -16,6 +16,10 @@ use Carbon;
 
 class taskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function task($id){
       try{
         $decryptTask = Crypt::decrypt($id);
