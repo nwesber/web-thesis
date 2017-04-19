@@ -20,6 +20,10 @@ use App\GroupEvents;
 
 class GroupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $userid = \Auth::user()->id;
         $group = DB::table('group')

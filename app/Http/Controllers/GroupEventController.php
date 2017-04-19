@@ -22,6 +22,10 @@ use Validator;
 
 class GroupEventController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
   public function create($id){
     try{
         $decrypt = Crypt::decrypt($id);
