@@ -73,7 +73,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ url('/routine') }}">
+      <a class="navbar-brand" href="{{ url('/') }}">
         <strong>iSCHED</strong>
       </a>
     </div>
