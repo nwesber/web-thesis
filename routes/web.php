@@ -13,7 +13,7 @@
 Route::auth();
 
 //Routine
-Route::get('/', 'CalendarController@home');
+Route::get('/', 'RoutineController@index');
 Route::get('/routine/add-routine/', 'RoutineController@addRoutine');
 Route::get('/routine/add-routine/', 'RoutineController@addRoutine');
 Route::post('/routine/store-routine/', 'RoutineController@storeRoutine');
