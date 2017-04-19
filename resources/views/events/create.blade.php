@@ -27,7 +27,7 @@
         </h5>
 
         <div class="form-group row">
-          <div class="col-md-6">
+          <div class="col-md-6" >
             <label for="eventStartDate">Date Start:</label>
             <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()">
           </div>
@@ -37,16 +37,20 @@
           </div>
         </div>
 
+
+
         <div class="form-group row">
-          <div class="col-md-6">
+          <div class="col-md-6 bootstrap-timepicker timepicker">
             <label for="eventTimeStart">Time Start:</label>
-            <input type="time" name="eventTimeStart" class="form-control" id="eventTimeStart">
+            <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart">
           </div>
-           <div class="col-md-6">
+           <div class="col-md-6 bootstrap-timepicker timepicker">
             <label for="eventTimeEnd">Time End:</label>
-            <input type="time" name="eventTimeEnd" class="form-control" id="eventTimeEnd">
+            <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd">
           </div>
         </div>
+
+
 
         <div class="form-group">
           <label for="eventDesc">Event Description:</label>

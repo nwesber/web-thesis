@@ -40,11 +40,11 @@
         <div class="form-group row">
           <div class="col-md-6">
             <label for="eventTimeStart">Time Start:</label>
-            <input type="time" name="eventTimeStart" class="form-control" id="eventTimeStart" required>
+            <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart" required>
           </div>
            <div class="col-md-6">
             <label for="eventTimeEnd">Time End:</label>
-            <input type="time" name="eventTimeEnd" class="form-control" id="eventTimeEnd" required>
+            <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd" required>
           </div>
         </div>
 
@@ -58,11 +58,11 @@
         </div>
 
         <div class="form-group row">
-          <!-- <div class="col-md-1">
+          <div class="col-md-1">
             <div class="checkbox">
               <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
-          </div> -->
+          </div>
            <div class="col-sm-2">
             <div class="checkbox">
               <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>

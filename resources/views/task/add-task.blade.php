@@ -42,10 +42,11 @@
 						  <label for="taskDue">Due Date:</label>
 						  <input type="date" name="taskDue" class="form-control" required="true">
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-4 bootstrap-timepicker timepicker">
 						  <label for="timeStart">Time Start:</label>
-						  <input type="time" name="timeStart" class="form-control" required="true">
+						  <input type="time" name="timeStart" id="timeStart" class="form-control" required="true">
 						</div>
+
 						<div class="form-group col-md-4">
 						  <label for="taskPrio">Priority:</label><br>
 						  <div class="form-group">

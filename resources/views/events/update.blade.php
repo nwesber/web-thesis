@@ -27,12 +27,12 @@
           <div class="col-md-6">
             <label for="eventStartDate">Date Start:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventStartDate" class="form-control" id="eventStartDate">
+            <input type="datetime-local" name="eventStartDate" class="form-control" id="datetimepicker">
           </div>
            <div class="col-md-6">
             <label for="eventEndDate">Date End:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventEndDate" class="form-control" value="{{ $event->time_end }}">
+            <input type="datetime-local" name="eventEndDate" class="form-control" id="datetimepicker2">
           </div>
         </div>
 

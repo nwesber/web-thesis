@@ -43,9 +43,9 @@
               <tr>
                 <td>Visibility:</td>
                 @if($event->is_shared == 0)
-                <td><strong>Public</strong></td>
-                @else
                 <td><strong>Private</strong></td>
+                @else
+                <td><strong>Public</strong></td>
                 @endif
               </tr>
             </tbody>

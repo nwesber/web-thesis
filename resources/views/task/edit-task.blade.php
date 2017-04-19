@@ -80,7 +80,7 @@
               </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group bootstrap-timepicker timepicker">
           <label for="timeStart">Time Start:</label>
             <input type="time" name="timeStart" value="{{ $task->time_start }}" class="form-control" required="true">
         </div>

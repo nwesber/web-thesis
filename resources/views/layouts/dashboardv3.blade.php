@@ -11,9 +11,11 @@
     <title>{{ config('app.name', 'iSCHED') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/css/bootstrap-colorpicker.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}">
@@ -39,13 +41,14 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script> -->
+    <script type="text/javascript" src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/tether.min.js') }}"></script>
-    <!-- <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('js/dashboard/dashboardv2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dashboard/menu.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/spectrum.js') }}"></script>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/js/bootstrap-colorpicker.min.js"></script>
@@ -56,7 +59,7 @@
         ]); ?>
     </script>
 </head>
-<body>
+<body style="background-color: #e9ebee;">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -104,7 +107,7 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container-fluid main-container">
+  <div class="container-fluid main-container" style="background-color: #e9ebee;">
     <div class="col-md-2 sidebar">
       <div class="row">
         <div class="absolute-wrapper"> </div>
@@ -135,5 +138,16 @@
       </p>
     </footer>
   </div>
+
+  <script type="text/javascript">
+    $('#eventTimeStart').timepicker();
+  </script>
+  <script type="text/javascript">
+    $('#eventTimeEnd').timepicker();
+  </script>
+  <script type="text/javascript">
+    $('#timeStart').timepicker();
+  </script>
+
 </html>
 
