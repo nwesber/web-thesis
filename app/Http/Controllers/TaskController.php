@@ -12,6 +12,7 @@ use Validator;
 use App\Routine;
 use Input;
 use Crypt;
+use Carbon;
 
 class taskController extends Controller
 {
@@ -151,7 +152,7 @@ class taskController extends Controller
       if($taskDay == 'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'){
           $taskDay = 'All Day';
       }
-
+      $time_in_24_hour_format  = date("H:i", strtotime( $request->timeStart ));
       $task = new Task();
       $task->user_id = \Auth::user()->id;
       $task->routine_id = $routine->id;
@@ -160,7 +161,7 @@ class taskController extends Controller
       $task->due_date = $request->taskDue;
       $task->priority = $request->taskPrio;
       $task->task_day = $taskDay;
-      $task->time_start = $request->timeStart;
+      $task->time_start = $time_in_24_hour_format;
       $task->save();
 
       return redirect('/routine/'. $id. '/task');
