@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Http\Requests;
 use App\Events;
+use App\Holiday;
 use App\RepeatEvent;
 use DateTime;
 use Calendar;
@@ -190,6 +191,7 @@ class CalendarController extends Controller
 		$userId = \Auth::user()->id;
 		$events = new Events();
 		$repeatEvent = new RepeatEvent();
+    $holiday = new Holiday();
 		$timestampStart = strtotime( $request->eventStartDate );
 		$timestampEnd = strtotime( $request->eventEndDate );
 		$userWeekStart = $dw = date( "w", $timestampStart );
@@ -209,7 +211,7 @@ class CalendarController extends Controller
 		if($request->chkRepeat == 'repeatEvent'){
 			switch($request->repeat){
 				case 'year':
-					$repeatEvent->repeatYear( $request, $userId );
+					$holiday->repeatYear( $request, $userId );
 				break;
 				case 'month':
 					$repeatEvent->repeatMonth( $request, $userId );
