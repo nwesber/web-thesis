@@ -28,14 +28,14 @@
             @foreach($users as $user)
               <li>
                 <a>
-                  <input type="checkbox" name="addMember[]" value="{{ $user->id }}" title="Add Member" style="margin-right: 20px;">
+                  <input type="checkbox" name="addMember[]" value="{{ $user->id }}" class="here" title="Add Member" style="margin-right: 20px;">
                   {{ $user->name }}
                   <!-- <small class="pull-right"><i>Added</i></small> -->
                 </a>
               </li>
             @endforeach
           @else
-            <h5>-- No Members Found --</h5>
+            <h5>-- No Users Found --</h5>
             <input type="submit" class = "btn btn-primary" value="Add Member" disabled="true">
           @endif
         </ul>

@@ -165,9 +165,8 @@ class GroupController extends Controller
             $decryptGroup = Crypt::decrypt($id);
             $member = $this->viewMember($id);
             $exist = $member->users;
-            $users = User::where('id', '!=', \Auth::user()->id)
-            ->where('id', '!=', $exist->pluck('user_id'))
-            ->get();
+            $users = User::whereNotIn('id', $exist->pluck('user_id'))->get();
+            
             $group = Group::findOrFail($decryptGroup);
             return view('group.add-member', compact('users', 'group'));
         }catch(DecryptException $e){
@@ -217,15 +216,10 @@ class GroupController extends Controller
 
             foreach($getMember as $key => $n ) {
                 // $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->update(array('is_removed' => 1));
-                $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->delete();
-                $hasMember = count(GroupMember::where('group_id', '=', $group->id)->get());
-                if($hasMember == 0){
-                    $deleteGroup = Group::where('id', '=', $group->id)->delete();
-                    return redirect('/group')->with('message', 'Successfully Removed Member(s)');
-                }else{
-                    return redirect('/group/' . $id)->with(compact('group', 'users'))->with('message', 'Successfully Removed Member(s)');
-                }
+                $users = GroupMember::where('group_id', '=', $group->id)->whereIn('user_id', $getMember)->delete();
+
             }
+
 
         }catch(DecryptException $e){
             return view('errors.404');
@@ -305,8 +299,15 @@ class GroupController extends Controller
         try{
             $decryptGroup = Crypt::decrypt($id);
             $group = Group::findOrFail($decryptGroup);
-            // $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->update(array('is_removed' => 1));
             $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->delete();
+            $hasMember = count(GroupMember::where('group_id', '=', $group->id)->get());
+            
+           if($hasMember == 0){
+                    $deleteGroup = Group::where('id', '=', $group->id)->delete();
+                }
+            // $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->update(array('is_removed' => 1));
+            
+
             return redirect('/group')->with(compact('group'))->with('message', 'You have left your group: '.$group->group_name);
 
         }catch(DecryptException $e){

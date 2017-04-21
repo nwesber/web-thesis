@@ -28,19 +28,22 @@
 			</div>
 			<div class="panel-body">
 				 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
         <ul id="myUL">
           @if($users->count() > 0)
 						@foreach($users as $user)
               <li>
                 <a>
+                @if($user->name == \Auth::user()->name)
+                  <input type="checkbox" name="removeMember[]" value="{{ $user->user_id }}" title="Remove Member" disabled="" style="margin-right: 20px;">
+                @else
                   <input type="checkbox" name="removeMember[]" value="{{ $user->user_id }}" title="Remove Member" style="margin-right: 20px;">
+                @endif
                   {{ $user->name }}
                 </a>
               </li>
             @endforeach
           @else
-            <h5>-- No Members Found --</h5>
+            <h5>-- No Other Members Found --</h5>
             <input type="submit" class = "btn btn-primary" value="Add Member" disabled="true">
           @endif
         </ul>
