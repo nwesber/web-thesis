@@ -96,7 +96,7 @@ class RepeatEvent extends Model
     }
   }
 
-  public static function updateRepeat($request, $repeatId, $id, $start, $end){
+  public static function updateRepeat($request, $repeatId, $id){
     $allDay = false;
     if($request->has('allDay')){
       $allDay = true;
@@ -104,8 +104,6 @@ class RepeatEvent extends Model
       $allDay = false;
     }
 
-    $time_start = new DateTime($start);
-    $time_end = new DateTime($end);
     $query = RepeatEvent::where('user_id', $id)
       ->where('repeat_id', $repeatId)
       ->update([
