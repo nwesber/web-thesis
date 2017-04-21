@@ -162,7 +162,7 @@
 
 <script type="text/javascript">
 $("#showPaletteOnly").spectrum({
-    color: "CornflowerBlue ",
+    color: "MediumBlue ",
     showPaletteOnly: true,
     change: function(color) {
         printColor(color);
@@ -189,7 +189,6 @@ $("#showPaletteOnly").spectrum({
         'Khaki',
         'GreenYellow ',
         'LightSkyBlue',
-        'CornflowerBlue  ',
         'Plum  '
       ]
     ]
