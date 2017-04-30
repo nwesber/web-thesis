@@ -18,7 +18,7 @@
         <div class = "form-group">
           {!! Form::open(array('action' => array('GroupController@storeGroup'), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
             <div class="col-md-12 form-group{{ $errors->has('groupName') ? ' has-error' : '' }}">
-            <label for="groupName">Group Name</label>
+            <label for="groupName">Group Name *</label>
             <input type="text" id="groupName" class="form-control" name="groupName" required placeholder="Legion of Doom">
               @if($errors->has('groupName'))
                   <span class="help-block">

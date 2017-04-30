@@ -13,7 +13,7 @@
           </button>
           <ul class="dropdown-menu ">
             <li><a href="{{ URL::to('/group/editGroupEvent/' . Crypt::encrypt($groupEvent->id)) }}">Edit Event</a></li>
-            <li><a href="{{ URL::to('/group/deleteGroupEvent/' . Crypt::encrypt($groupEvent->id)) }} }}" onclick="myFunction(event)">Delete Event</a></li>
+            <li><a href="{{ URL::to('/group/deleteGroupEvent/' . Crypt::encrypt($groupEvent->id)) }}" onclick="myFunction(event)">Delete Event</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ url('/group/' . Crypt::encrypt($group->id)) }}">Return to My Group Events</a></li>
           </ul>

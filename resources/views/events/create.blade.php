@@ -17,7 +17,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label for="eventTitle">Event Title:</label>
+          <label for="eventTitle">*Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" >
         </div>
 
@@ -28,12 +28,12 @@
 
         <div class="form-group row">
           <div class="col-md-6" >
-            <label for="eventStartDate">Date Start:</label>
+            <label for="eventStartDate">*Date Start:</label>
             <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()">
           </div>
            <div class="col-md-6">
-            <label for="eventEndDate">Date End:</label>
-            <input type="date" name="eventEndDate" class="form-control">
+            <label for="eventEndDate">*Date End:</label>
+            <input type="date" name="eventEndDate" id="eventEndDate" class="form-control">
           </div>
         </div>
 
@@ -67,11 +67,11 @@
               <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
           </div>
-           <div class="col-sm-2">
+           <!-- <div class="col-sm-2">
             <div class="checkbox">
               <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
             </div>
-          </div>
+          </div> -->
         </div>
         <p id="summary"></p>
         <div class="form-group">
@@ -133,7 +133,7 @@
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="endsOn" id="on" value="endsOn" onchange="dynamicModal()">On <input type="date" name="modalEnd" id="modalEnd" disabled="true" />
+              <input type="radio" name="endsOn" id="on" value="endsOn" onchange="dynamicModal()">On <input type="date" name="modalEnd" id="modalEnd" disabled="true"  onchange = "dynamicModal()"/>
             </label>
           </div>
         </div>
@@ -185,7 +185,6 @@ $("#showPaletteOnly").spectrum({
         'LightGrey',
         'brown',
         'pink',
-        'orange',
         'Khaki',
         'GreenYellow ',
         'LightSkyBlue',
@@ -193,6 +192,16 @@ $("#showPaletteOnly").spectrum({
       ]
     ]
 });
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#chkRepeat').on('click', function(){
+      if(document.getElementById('chkRepeat').checked == false) {
+          document.getElementById('eventEndDate').readOnly = false;
+      }
+    });
+  });
 </script>
 
 <script type="text/javascript">

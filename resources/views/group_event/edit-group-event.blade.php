@@ -18,7 +18,7 @@
         {{ Form::hidden('oldStart', $groupEvent->time_start , array('id' => 'oldStart')) }}
         {{ Form::hidden('oldEnd', $groupEvent->time_end, array('id' => 'oldEnd')) }}
         <div class="form-group">
-          <label for="eventTitle">Group Event Title:</label>
+          <label for="eventTitle">*Group Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" required="true" value="{{ $groupEvent->event_title }}">
         </div>
 

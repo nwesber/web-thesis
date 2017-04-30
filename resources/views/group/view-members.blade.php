@@ -3,38 +3,52 @@
 @section('content')
 
 {!! Form::open(array('action' => array('GroupController@updateMember', Crypt::encrypt($group->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
-<div class="col-lg-12">
-  @if( Session::has('message') )
+  @if(  Session::get('message')  == 'Successfully Removed Member(s)!' )
+    <div class="alert alert-success fade in" role="alert" align="center">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{ Session::get('message') }}</strong>
+    </div>
+  @elseif( Session::get('message')  == 'Please select atleast 1 from the list!' )
     <div class="alert alert-danger fade in" role="alert" align="center">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>{{ Session::get('message') }}</strong>
     </div>
   @endif
-</div>
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading"><strong>List of Members</strong>
 				<div class="pull-right">
-          <button class="btn btn-default btn-xs" type="button" onclick="goBack()">
+        <a href="{{ url('/group/' . Crypt::encrypt($group->id)) }}">
+          <button class="btn btn-default btn-xs" type="button">
             Back
           </button>
-	        @if($users->count() > 0)
-						<input type="submit" class = "btn btn-primary btn-xs" value="Remove Member">
+        </a>
+	        @if($users->count() == 1)
+            <input type="submit" class = "btn btn-primary btn-xs" value="Remove Member" disabled="true">
 					@else
-						<input type="submit" class = "btn btn-primary btn-xs" value="Remove Member" disabled="true">
+            <input type="submit" class = "btn btn-primary btn-xs" value="Remove Member">
 					@endif
       	</div>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" id="checkAll">
 				 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+          @if($users->count() == 1)
+            <button type="button" class="btn btn-primary pull-right" id="selectAll" disabled="" hidden="" /> Select / Deselect All Members<br/></button>
+            <div style="padding-top: 3%;" hidden="">
+          </div>
+          @else
+            <button type="button" class="btn btn-primary pull-right"  id="selectAll" /> Select / Deselect All Members<br/></button>
+            <div style="padding-top: 3%;">
+          </div>
+          @endif
+          
         <ul id="myUL">
-          @if($users->count() > 0)
 						@foreach($users as $user)
               <li>
                 <a>
                 @if($user->name == \Auth::user()->name)
-                  <input type="checkbox" name="removeMember[]" value="{{ $user->user_id }}" title="Remove Member" disabled="" style="margin-right: 20px;">
+                  <input type="checkbox" value="{{ $user->user_id }}" title="Remove Member" disabled="" style="margin-right: 20px;">
                 @else
                   <input type="checkbox" name="removeMember[]" value="{{ $user->user_id }}" title="Remove Member" style="margin-right: 20px;">
                 @endif
@@ -42,10 +56,6 @@
                 </a>
               </li>
             @endforeach
-          @else
-            <h5>-- No Other Members Found --</h5>
-            <input type="submit" class = "btn btn-primary" value="Add Member" disabled="true">
-          @endif
         </ul>
       </div>
 		</div>
@@ -74,9 +84,16 @@
 </script>
 
 <script>
-  function goBack() {
-      window.history.go(-1);
-  }
+$(document).ready(function () {
+  $('#checkAll').on('click', '#selectAll', function () {
+    if ($(this).hasClass('allChecked')) {
+        $('input[type="checkbox"]:not(:disabled)', '#checkAll').prop('checked', false);
+    } else {
+        $('input[type="checkbox"]:not(:disabled)', '#checkAll').prop('checked', true);
+    }
+    $(this).toggleClass('allChecked');  
+  })
+});
 </script>
 
 @endsection

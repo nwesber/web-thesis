@@ -132,12 +132,18 @@ class GroupEventController extends Controller
   public function deleteGroupEvent($id){
     try{
       $cryptEvent = Crypt::decrypt($id);
+      $groupEvent = GroupEvents::findOrFail($cryptEvent);
+      
+      $deleteEvent = GroupEvents::deleteGroupEvent($cryptEvent);
+      
+      $group = Group::findOrFail($groupEvent->group_id);
+      $crypter = Crypt::encrypt($group->id);
+       return redirect('/group/' . $crypter)->with('message', 'Group Event Successfully Deleted!');
+    
     }catch(DecryptException $e){
       return view('errors.404');
     }
-    $groupEvent = GroupEvents::findOrFail($cryptEvent);
-    $deleteEvent = GroupEvents::deleteGroupEvent($cryptEvent);
-    return redirect('/group/' . $id);
+    
   }
 
 }

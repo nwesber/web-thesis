@@ -4,7 +4,12 @@
 
 @section('content')
 
-
+@if( Session::has('message') )
+    <div class="alert alert-danger fade in" role="alert" align="center">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{ Session::get('message') }}</strong>
+    </div>
+@endif
 
 <div class="row">
 	<div class="col-md-12">
@@ -22,13 +27,13 @@
       <div class="panel-body">
 
       		  <div class="form-group">
-			    <label for="taskTitle">Task Name:</label>
+			    <label for="taskTitle">*Task Name:</label>
 			    <input type="text" name="taskTitle" class="form-control" required="true" placeholder="Unititled Task">
 			  </div>
 
 			  <div class="form-group">
-			  	<label for="taskDay">Task Day/s:</label><br>
-			  	<input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"> All Day
+			  	<label for="taskDay">*Task Day/s:</label><br>
+			  	<input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"> All Week
 			  </div>
 
 			  <div class="panel panel-default">
@@ -39,7 +44,7 @@
 						  <textarea class="form-control" rows="4" id="taskDesc" name="taskDesc"></textarea>
 						</div>
 						<div class="form-group col-md-4">
-						  <label for="taskDue">Due Date:</label>
+						  <label for="taskDue">*Due Date:</label>
 						  <input type="date" name="taskDue" class="form-control" required="true">
 						</div>
 						<div class="form-group col-md-4 bootstrap-timepicker timepicker">
@@ -62,7 +67,7 @@
 								<div class="panel panel-default">
 									<div class="panel-heading"><strong> Select Day/s:</strong></div>
 									<div class="panel-body">
-										<input type ="checkbox" name="taskDay[]" id="taskDay" value="Sunday"> Sunday <br>
+									<input type ="checkbox" name="taskDay[]" id="taskDay" value="Sunday"> Sunday <br>
 								    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Monday"> Monday <br>
 								    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Tuesday"> Tuesday <br>
 								    <input type ="checkbox" name="taskDay[]" id="taskDay" value="Wednesday"> Wednesday <br>

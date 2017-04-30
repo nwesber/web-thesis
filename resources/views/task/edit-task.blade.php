@@ -27,7 +27,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label for="taskTitle">Task Name:</label>
+          <label for="taskTitle">*Task Name:</label>
            <input type="text" value="{{$task->task_title}}" name="taskTitle" class = "form-control" required="true">
         </div>
         <div class="form-group">
@@ -49,21 +49,27 @@
             </select>
           </div>
         </div>
+        <div class="form-group bootstrap-timepicker timepicker">
+          <label for="timeStart">Time Start:</label>
+            <input type="time" name="timeStart" value="{{ $task->time_start }}" class="form-control" required="true">
+        </div>
         <div class="form-group">
           <label for="Task Day">Task Day/s:</label>
             @if($task->task_day == 'All Day')
               <div class="form-group">
-                <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" checked> All Day
+                <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" checked> All Week
               </div>
             @elseif($task->task_day != 'All Day')
               <div class="form-group">
-                <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" unchecked> All Day
+                <input type ="checkbox" name="taskDay[]" id="allDay" value="Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday" unchecked> All Week
               </div>
             @endif
             <div id="showIt" class="form-group">
               <strong>Currently Selected Day/s:</strong> <input type="text" name="oldTaskDay" value="{{ $task->task_day }}" hidden="">({{ $task->task_day }})
             </div>
-            <div id="showIt2" class="form-group">
+            
+        </div>
+        <div id="showIt2" class="form-group">
               <div class="col-md-12">
                 <div class="panel panel-default">
                   <div class="panel-heading"><strong> Select Day/s:</strong></div>
@@ -79,11 +85,6 @@
                 </div>
               </div>
             </div>
-        </div>
-        <div class="form-group bootstrap-timepicker timepicker">
-          <label for="timeStart">Time Start:</label>
-            <input type="time" name="timeStart" value="{{ $task->time_start }}" class="form-control" required="true">
-        </div>
         <input type="submit" value="Save" class = "btn btn-primary pull-right">
       </div>
     </div>

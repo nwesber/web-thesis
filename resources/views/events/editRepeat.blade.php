@@ -18,18 +18,18 @@
         {{ Form::hidden('oldStart', $event->time_start , array('id' => 'oldStart')) }}
         {{ Form::hidden('oldEnd', $event->time_end, array('id' => 'oldEnd')) }}
         <div class="form-group">
-          <label for="eventTitle">Event Title:</label>
+          <label for="eventTitle">*Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" required="true" value="{{ $event->event_title }}">
         </div>
 
 
         <div class="form-group row">
           <div class="col-md-6">
-            <label for="eventStartDate">Date Start:</label>
+            <label for="eventStartDate">*Date Start:</label>
             <p class="small"><strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
           </div>
            <div class="col-md-6">
-            <label for="eventEndDate">Date End:</label>
+            <label for="eventEndDate">*Date End:</label>
             <p class="small"><strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
           </div>
         </div>
@@ -46,13 +46,13 @@
           <label for="eventLocation">Location:</label>
           <input type="text" name="eventLocation" id="eventLocation" class="form-control" required="true" value="{{ $event->location }}">
         </div>
-        <div class="form-group row">
+      <!--   <div class="form-group row">
          <div class="col-sm-2">
           <div class="checkbox">
             <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
           </div>
          </div>
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="eventColor">Choose Color:</label>
           <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" value="{{ $event->color }}">

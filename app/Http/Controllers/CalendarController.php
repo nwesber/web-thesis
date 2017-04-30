@@ -12,6 +12,8 @@ use DateInterval;
 use DatePeriod;
 use Crypt;
 use Validator;
+use Input;
+
 class CalendarController extends Controller
 {	
 	public function __construct()
@@ -76,31 +78,23 @@ class CalendarController extends Controller
       	],
       	'views' =>[
           'listMonth' => [
-            'buttonText' => 'Today'
+            'buttonText' => 'This Month'
           ]
        ],
       'height' => 300,
       'defaultView' => 'listMonth'
 		]);
-
-		$greeting= array(
-	     "aloha"=>"Aloha",
-	     "ahoy"=>"Ahoy",
-	     "bonjour"=>"Bonjour",
-	     "gday"=>"G'day",
-	     "hello"=>"Hello",
-	     "hey"=>"Hey",
-	     "hi"=>"Hi",
-	     "hola"=>"Hola",
-	     "howdy"=>"Howdy",
-	     "sup"=>"Sup",
-	     "whatsup"=>"What's up",
-	     "yo"=>"Yo"
-	    );
-
-		//echo greeting
-		// return (randomArrayVar($greeting));
-		$greet = $this->randomArrayVar($greeting);
+		$greet = "Welcome";
+		$now = \Carbon\Carbon::now('Asia/Manila');
+		if ($now->hour >= 20) {
+		    $greet = "Good Night";
+		} elseif ($now->hour > 17) {
+		   $greet = "Good Evening";
+		} elseif ($now->hour > 11) {
+		    $greet = "Good Afternoon";
+		} elseif ($now->hour < 12) {
+		   $greet = "Good Morning";
+		}
 
 		return view('home', compact('calendar', 'greet'));
 	}
@@ -198,18 +192,19 @@ class CalendarController extends Controller
 		$timestampEnd = strtotime( $request->eventEndDate );
 		$userWeekStart = $dw = date( "w", $timestampStart );
 		$userWeekEnd = $dw = date( "w", $timestampEnd );
-    $validator = Validator::make($request->all(), [
-      'eventTitle' => 'required',
-      'eventStartDate' => 'required',
-      'eventEndDate' => 'required',
-    ]);
 
-    if ($validator->fails()) {
-      return redirect('/event/create')
-      ->withErrors($validator)
-      ->withInput();
-    }
+	    $validator = Validator::make($request->all(), [
+	      'eventTitle' => 'required',
+	      'eventStartDate' => 'required',
+	      'eventEndDate' => 'required'
+	    ]);
 
+	    if ($validator->fails()) {
+	      return redirect('/event/create')
+	      ->withErrors($validator)
+	      ->withInput();
+	    }
+	
 		if($request->chkRepeat == 'repeatEvent'){
 			switch($request->repeat){
 				case 'year':

@@ -17,7 +17,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label for="eventTitle">Event Title:</label>
+          <label for="eventTitle">*Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" required>
         </div>
 
@@ -28,22 +28,22 @@
 
         <div class="form-group row">
           <div class="col-md-6">
-            <label for="eventStartDate">Date Start:</label>
+            <label for="eventStartDate">*Date Start:</label>
             <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()" required>
           </div>
            <div class="col-md-6">
-            <label for="eventEndDate">Date End:</label>
+            <label for="eventEndDate">*Date End:</label>
             <input type="date" name="eventEndDate" class="form-control" required>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-md-6">
-            <label for="eventTimeStart">Time Start:</label>
+            <label for="eventTimeStart">*Time Start:</label>
             <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart" required>
           </div>
            <div class="col-md-6">
-            <label for="eventTimeEnd">Time End:</label>
+            <label for="eventTimeEnd">*Time End:</label>
             <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd" required>
           </div>
         </div>
@@ -63,11 +63,11 @@
               <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
           </div>
-           <div class="col-sm-2">
+           <!-- <div class="col-sm-2">
             <div class="checkbox">
               <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
             </div>
-          </div>
+          </div> -->
         </div>
         <p id="summary"></p>
         <div class="form-group">
@@ -172,7 +172,6 @@ $("#showPaletteOnly").spectrum({
         'LightGrey',
         'brown',
         'pink',
-        'orange',
         'Khaki',
         'GreenYellow ',
         'LightSkyBlue',

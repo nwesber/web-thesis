@@ -198,7 +198,7 @@ class GroupController extends Controller
             );
         }
         $member = DB::table('group_members')->insert($arrData);
-        return redirect('/group/' . $id)->with(compact('group'))->with('message', 'Successfully Added Member(s)');
+        return redirect('/group/' . $id . '/add-member')->with(compact('group'))->with('message', 'Successfully Added User(s)!');
 
         }catch(DecryptException $e){
             return view('errors.404');
@@ -218,6 +218,7 @@ class GroupController extends Controller
                 // $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->update(array('is_removed' => 1));
                 $users = GroupMember::where('group_id', '=', $group->id)->whereIn('user_id', $getMember)->delete();
 
+                return redirect('/group/' . $id . '/view-member')->with('message', 'Successfully Removed Member(s)!');
             }
 
 

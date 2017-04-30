@@ -18,19 +18,19 @@
         {{ Form::hidden('oldStart', $event->time_start , array('id' => 'oldStart')) }}
         {{ Form::hidden('oldEnd', $event->time_end, array('id' => 'oldEnd')) }}
         <div class="form-group">
-          <label for="eventTitle">Event Title:</label>
+          <label for="eventTitle">*Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" required="true" value="{{ $event->event_title }}">
         </div>
 
 
         <div class="form-group row">
           <div class="col-md-6">
-            <label for="eventStartDate">Date Start:</label>
+            <label for="eventStartDate">*Date Start:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
             <input type="datetime-local" name="eventStartDate" class="form-control" id="datetimepicker">
           </div>
            <div class="col-md-6">
-            <label for="eventEndDate">Date End:</label>
+            <label for="eventEndDate">*Date End:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
             <input type="datetime-local" name="eventEndDate" class="form-control" id="datetimepicker2">
           </div>

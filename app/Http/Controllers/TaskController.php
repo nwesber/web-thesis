@@ -150,9 +150,10 @@ class taskController extends Controller
       try{
         $decryptTask = Crypt::decrypt($id);
         $routine = Routine::findOrFail($decryptTask);
-
+        if(empty(Input::get('taskDay'))){
+          return redirect()->back()->with('message', 'Please select day(s)!');
+        }
         $taskDay = implode(',', Input::get('taskDay'));
-
       if($taskDay == 'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'){
           $taskDay = 'All Day';
       }

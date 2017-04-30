@@ -3,26 +3,48 @@
 @section('content')
 {!! Form::open(array('action' => array('GroupController@storeMember', Crypt::encrypt($group->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
 
-@if( Session::has('message') )
+
+@if(  Session::get('message')  == 'Successfully Added User(s)!' )
+  <div class="alert alert-success fade in" role="alert" align="center">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{ Session::get('message') }}</strong>
+  </div>
+@elseif( Session::get('message')  == 'Please select atleast 1 from the list!' )
   <div class="alert alert-danger fade in" role="alert" align="center">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>{{ Session::get('message') }}</strong>
   </div>
 @endif
+
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><strong>List of Users</strong>
       <div class="pull-right">
-          <button class="btn btn-default btn-xs" type="button" onclick="goBack()">
+        <a href="{{ url('/group/' . Crypt::encrypt($group->id)) }}">
+          <button class="btn btn-default btn-xs" type="button">
             Back
           </button>
+        </a>
+        @if($users->count() > 0)
          <input type="submit" class = "btn btn-primary btn-xs" value="Add Member">
+        @else
+         <input type="submit" class = "btn btn-primary btn-xs" disabled="true" value="Add Member">
+        @endif
       </div>
       </div>
-      <div class="panel panel-body">
+      <div class="panel panel-body" id="checkAll">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
+          @if($users->count() > 0)
+             <button type="button" class="btn btn-primary pull-right"  id="selectAll" /> Select / Deselect All Members<br/></button>
+             <div style="padding-top: 3%;">
+          </div>
+          @else
+            <button type="button" class="btn btn-primary pull-right" id="selectAll" disabled="" hidden="" /> Select / Deselect All Members<br/></button>
+            <div style="padding-top: 3%;" hidden="">
+            </div>
+          @endif
+          
         <ul id="myUL">
           @if($users->count() > 0)
             @foreach($users as $user)
@@ -68,8 +90,16 @@
 </script>
 
 <script>
-  function goBack() {
-      window.history.go(-1);
-  }
+$(document).ready(function () {
+  $('#checkAll').on('click', '#selectAll', function () {
+    if ($(this).hasClass('allChecked')) {
+        $('input[type="checkbox"]', '#checkAll').prop('checked', false);
+    } else {
+        $('input[type="checkbox"]', '#checkAll').prop('checked', true);
+    }
+    $(this).toggleClass('allChecked');  
+  })
+});
 </script>
+
 @endsection

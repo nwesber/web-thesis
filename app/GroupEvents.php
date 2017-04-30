@@ -17,7 +17,6 @@ class GroupEvents extends Model
 
     public static function getGroupEvents($id){
     $events = DB::table('group_events')
-    ->where('user_id', '=', \Auth::user()->id)
     ->where('group_id', '=', $id)
     ->whereNull('deleted_at');
     return $events;
@@ -65,13 +64,21 @@ class GroupEvents extends Model
     }
 
 
-    if($request->eventStartDate == null && $request->eventEndDate == null){
+    if($request->eventStartDate == null && !$request->eventEndDate == null){
+      $start = $request->oldStart;
+      $end = $request->eventEndDate;
+    }else if(!$request->eventStartDate == null && $request->eventEndDate == null){
+      $start = $request->eventStartDate;
+      $end = $request->oldEnd;
+    }else if($request->eventStartDate == null && $request->eventEndDate == null){
       $start = $request->oldStart;
       $end = $request->oldEnd;
     }else{
       $start = $request->eventStartDate;
       $end = $request->eventEndDate;
     }
+
+
 
     $time_start = new DateTime($start);
     $time_end = new DateTime($end);
