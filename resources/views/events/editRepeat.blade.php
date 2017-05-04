@@ -25,12 +25,33 @@
 
         <div class="form-group row">
           <div class="col-md-6">
-            <label for="eventStartDate">*Date Start:</label>
+            <label for="eventStartDate">Current Date Start:</label>
             <p class="small"><strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
           </div>
            <div class="col-md-6">
-            <label for="eventEndDate">*Date End:</label>
+            <label for="eventEndDate">Current Date End:</label>
             <p class="small"><strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6" >
+              <label for="eventStartDate">*Date Start:</label>
+              <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()">
+            </div>
+             <div class="col-md-6">
+              <label for="eventEndDate">*Date End:</label>
+              <input type="date" name="eventEndDate" id="eventEndDate" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-6 bootstrap-timepicker timepicker">
+              <label for="eventTimeStart">Time Start:</label>
+              <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart">
+            </div>
+             <div class="col-md-6 bootstrap-timepicker timepicker">
+              <label for="eventTimeEnd">Time End:</label>
+              <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd">
+            </div>
           </div>
         </div>
 
@@ -46,13 +67,6 @@
           <label for="eventLocation">Location:</label>
           <input type="text" name="eventLocation" id="eventLocation" class="form-control" required="true" value="{{ $event->location }}">
         </div>
-      <!--   <div class="form-group row">
-         <div class="col-sm-2">
-          <div class="checkbox">
-            <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
-          </div>
-         </div>
-        </div> -->
         <div class="form-group">
           <label for="eventColor">Choose Color:</label>
           <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" value="{{ $event->color }}">

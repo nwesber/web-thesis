@@ -15,10 +15,10 @@ use Validator;
 use Input;
 
 class CalendarController extends Controller
-{	
+{
 	public function __construct()
     {
-        $this->middleware('auth');
+      $this->middleware('auth');
     }
 
 	public function home(){
@@ -204,7 +204,7 @@ class CalendarController extends Controller
 	      ->withErrors($validator)
 	      ->withInput();
 	    }
-	
+
 		if($request->chkRepeat == 'repeatEvent'){
 			switch($request->repeat){
 				case 'year':
@@ -243,6 +243,7 @@ class CalendarController extends Controller
    	$event = RepeatEvent::findOrFail($cryptEvent);
 		$userId = \Auth::user()->id;
 		$repeatId = $event->repeat_id;
+    $count = RepeatEvent::where('repeat_id', $repeatId)->count();
 		$updateEvent = RepeatEvent::updateRepeat($request, $repeatId, $userId);
 		return redirect('/event');
 	}

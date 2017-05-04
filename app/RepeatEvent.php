@@ -54,6 +54,8 @@ class RepeatEvent extends Model
             $event->event_title =  $request->eventTitle;
             $event->event_description =  $request->eventDesc;
             $event->repeat_id = $repeatId;
+            $event->repeat_type = 'year';
+            $event->ends_on = $endOn;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
             $event->full_day = $allDay;
@@ -81,6 +83,8 @@ class RepeatEvent extends Model
             $event->event_title =  $request->eventTitle;
             $event->event_description =  $request->eventDesc;
             $event->repeat_id = $repeatId;
+            $event->repeat_type = 'year';
+            $event->ends_on = '2051-01-01';
             $event->user_id = $id;
             $event->location = $request->eventLocation;
             $event->full_day = $allDay;
@@ -97,6 +101,45 @@ class RepeatEvent extends Model
   }
 
   public static function updateRepeat($request, $repeatId, $id){
+
+    $repeat = RepeatEvent::where([
+      ['user_id' , '=', $id],
+      ['repeat_id' , '=', $repeatId]
+    ])->take(1)->get();
+
+    foreach ($repeat as $rep) {
+      switch($rep->repeat_type){
+        case 'month':
+          $monthlyInterval = 'P1M';
+          $type = 'month';
+          RepeatEvent::updateRepeatEvent($monthlyInterval, $request, $id, $type, $rep);
+          RepeatEvent::destroyEvent($repeatId, $id);
+        break;
+        case 'year':
+          $yearlyInterval = 'P1Y';
+          $type = 'year';
+          RepeatEvent::updateRepeatEvent($yearlyInterval, $request, $id, $type, $rep);
+          RepeatEvent::destroyEvent($repeatId, $id);
+        break;
+        case 'week':
+        break;
+      }
+    }
+  }
+
+  public static function updateRepeatEvent($interval, $request, $id, $type, $rep){
+    $dateStart = $request->eventStartDate;
+    $dateEnd = $request->eventEndDate;
+    $timeStart = date("Hi", strtotime($request->eventTimeStart));
+    $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+    $endOn = $rep->ends_on;
+    if($endOn = '2051-01-01'){
+      $result = RepeatEvent::repeatNever($dateStart, $dateEnd, $interval);
+    }else{
+      $result = RepeatEvent::repeatOn($dateStart, $dateEnd, $endOn, $interval);
+    }
+    $newarray = array_chunk($result, 2);
+    $repid = random_int(0,1000);
     $allDay = false;
     if($request->has('allDay')){
       $allDay = true;
@@ -104,19 +147,27 @@ class RepeatEvent extends Model
       $allDay = false;
     }
 
-    $query = RepeatEvent::where('user_id', $id)
-      ->where('repeat_id', $repeatId)
-      ->update([
-        'event_title' => $request->eventTitle,
-        'event_description' => $request->eventDesc,
-        'full_day' =>  $allDay,
-        'color' => $request->eventColor,
-        'location' => $request->eventLocation,
-        'is_shared' => $request->shared,
-
-      ]);
-
-    return $query;
+    foreach($newarray as $arr){
+      foreach($arr as $a){
+        $time_start = new DateTime(reset($arr) . 'T' . $timeStart);
+        $time_end = new DateTime(end($arr) . 'T' . $timeEnd);
+        $event = new RepeatEvent;
+        $event->event_title =  $request->eventTitle;
+        $event->event_description =  $request->eventDesc;
+        $event->repeat_id = $repid;
+        $event->repeat_type = $type;
+        $event->ends_on = $endOn;
+        $event->user_id = $id;
+        $event->location = $request->eventLocation;
+        $event->full_day = $allDay;
+        $event->time_start = $time_start;
+        $event->time_end = $time_end;
+        $event->color = $request->eventColor;
+        $event->is_shared = $request->shared;
+        $event->save();
+        break;
+      }
+    }
   }
 
 
@@ -126,6 +177,7 @@ class RepeatEvent extends Model
     $dateEnd = $request->eventEndDate;
     $timeStart = date("Hi", strtotime($request->eventTimeStart));
     $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+
     $allDay = false;
 
     if($request->has('allDay')){
@@ -151,6 +203,8 @@ class RepeatEvent extends Model
             $event->event_title =  $request->eventTitle;
             $event->event_description =  $request->eventDesc;
             $event->repeat_id = $repeatId;
+            $event->repeat_type = 'month';
+            $event->ends_on = $endOn;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
             $event->full_day = $allDay;
@@ -178,6 +232,8 @@ class RepeatEvent extends Model
             $event->event_title =  $request->eventTitle;
             $event->event_description =  $request->eventDesc;
             $event->repeat_id = $repeatId;
+            $event->repeat_type = 'month';
+            $$event->ends_on = '2051-01-01';
             $event->user_id = $id;
             $event->location = $request->eventLocation;
             $event->full_day = $allDay;
@@ -191,8 +247,6 @@ class RepeatEvent extends Model
         }
       }
     }
-
-
   }
 
   public static function repeatWeek($request, $id, $userWeekStart, $userWeekEnd){
@@ -226,6 +280,8 @@ class RepeatEvent extends Model
             $event->event_title =  $request->eventTitle;
             $event->event_description =  $request->eventDesc;
             $event->repeat_id = $repeatId;
+            $event->repeat_type = 'week';
+            $event->ends_on = $endOn;
             $event->user_id = $id;
             $event->location = $request->eventLocation;
             $event->full_day = $allDay;
@@ -254,6 +310,8 @@ class RepeatEvent extends Model
             $event->event_title =  $request->eventTitle;
             $event->event_description =  $request->eventDesc;
             $event->repeat_id = $repeatId;
+            $event->repeat_type = 'week';
+            $$event->ends_on = '2051-01-01';
             $event->user_id = $id;
             $event->location = $request->eventLocation;
             $event->full_day = $allDay;
