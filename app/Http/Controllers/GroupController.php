@@ -53,7 +53,11 @@ class GroupController extends Controller
         ->where('is_shared', '=', '1')
         ->get();
       $holidays = DB::table('holidays')->get();
-      $repeatEvent = RepeatEvent::getEvents($userid)->get();
+
+      $repeatEvent = DB::table('repeat_event')
+        ->where('user_id', '=', $userid)
+        ->where('is_shared', '=', '1')
+        ->get();
       $group_events = GroupEvents::getGroupEvents($groupId)->get();
       //iterate all events where user id = logged in user then add them to the array
       foreach ($events as $event) {
@@ -166,7 +170,7 @@ class GroupController extends Controller
             $member = $this->viewMember($id);
             $exist = $member->users;
             $users = User::whereNotIn('id', $exist->pluck('user_id'))->get();
-            
+
             $group = Group::findOrFail($decryptGroup);
             return view('group.add-member', compact('users', 'group'));
         }catch(DecryptException $e){
@@ -302,12 +306,12 @@ class GroupController extends Controller
             $group = Group::findOrFail($decryptGroup);
             $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->delete();
             $hasMember = count(GroupMember::where('group_id', '=', $group->id)->get());
-            
+
            if($hasMember == 0){
                     $deleteGroup = Group::where('id', '=', $group->id)->delete();
                 }
             // $groupMem = GroupMember::where('group_id', '=', $decryptGroup)->where('user_id', '=', \Auth::user()->id)->update(array('is_removed' => 1));
-            
+
 
             return redirect('/group')->with(compact('group'))->with('message', 'You have left your group: '.$group->group_name);
 

@@ -35,11 +35,11 @@
           <div class="form-group">
             <div class="col-md-6" >
               <label for="eventStartDate">*Date Start:</label>
-              <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()">
+              <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()" required="required">
             </div>
              <div class="col-md-6">
               <label for="eventEndDate">*Date End:</label>
-              <input type="date" name="eventEndDate" id="eventEndDate" class="form-control">
+              <input type="date" name="eventEndDate" id="eventEndDate" class="form-control" required="required">
             </div>
           </div>
 
