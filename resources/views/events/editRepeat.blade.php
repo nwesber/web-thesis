@@ -120,7 +120,6 @@ $("#showPaletteOnly").spectrum({
         'LightGrey',
         'brown',
         'pink',
-        'orange',
         'Khaki',
         'GreenYellow ',
         'LightSkyBlue',

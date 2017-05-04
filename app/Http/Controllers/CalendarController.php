@@ -190,8 +190,8 @@ class CalendarController extends Controller
 		$repeatEvent = new RepeatEvent();
 		$timestampStart = strtotime( $request->eventStartDate );
 		$timestampEnd = strtotime( $request->eventEndDate );
-		$userWeekStart = $dw = date( "w", $timestampStart );
-		$userWeekEnd = $dw = date( "w", $timestampEnd );
+		$userWeekStart = date( "w", $timestampStart );
+		$userWeekEnd = date( "w", $timestampEnd );
 
 	    $validator = Validator::make($request->all(), [
 	      'eventTitle' => 'required',

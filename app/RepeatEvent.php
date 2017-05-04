@@ -122,9 +122,57 @@ class RepeatEvent extends Model
           RepeatEvent::destroyEvent($repeatId, $id);
         break;
         case 'week':
+          $type = 'year';
+          RepeatEvent::updateWeeklyRepeatEvent($request, $id, $rep, $type);
+          RepeatEvent::destroyEvent($repeatId, $id);
         break;
       }
     }
+  }
+
+  public static function updateWeeklyRepeatEvent($request, $id, $rep, $type){
+    $endOn = $rep->ends_on;
+    $timestampStart = strtotime( $request->eventStartDate );
+    $timestampEnd = strtotime( $request->eventEndDate );
+    $userWeekStart = $dw = date( "w", $timestampStart );
+    $userWeekEnd = $dw = date( "w", $timestampEnd );
+    $dateStart = $request->eventStartDate;
+    $dateEnd = $request->eventEndDate;
+    $timeStart = date("Hi", strtotime($request->eventTimeStart));
+    $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+    $allDay = false;
+
+    if($request->has('allDay')){
+      $allDay = true;
+    }else{
+      $allDay = false;
+    }
+
+    $result = RepeatEvent::weeklyRepeat($dateStart, $dateEnd, $endOn, $userWeekStart, $userWeekEnd);
+    $newarray = array_chunk($result, 2);
+    $repeatId = random_int(0,1000);
+    foreach($newarray as $arr){
+      foreach($arr as $a){
+        $time_start = new DateTime(reset($arr) . 'T' . $timeStart);
+        $time_end = new DateTime(end($arr) . 'T' . $timeEnd);
+        $event = new RepeatEvent;
+        $event->event_title =  $request->eventTitle;
+        $event->event_description =  $request->eventDesc;
+        $event->repeat_id = $repeatId;
+        $event->repeat_type = 'week';
+        $event->ends_on = $endOn;
+        $event->user_id = $id;
+        $event->location = $request->eventLocation;
+        $event->full_day = $allDay;
+        $event->time_start = $time_start;
+        $event->time_end = $time_end;
+        $event->color = $request->eventColor;
+        $event->is_shared = $request->shared;
+        $event->save();
+        break;
+      }
+    }
+
   }
 
   public static function updateRepeatEvent($interval, $request, $id, $type, $rep){
@@ -256,6 +304,8 @@ class RepeatEvent extends Model
     $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
     $allDay = false;
 
+
+
     if($request->has('allDay')){
       $allDay = true;
     }else{
@@ -268,6 +318,7 @@ class RepeatEvent extends Model
         $endOn = $request->modalEnd;
         $week = $request->weeklyRepeat;
         $result = RepeatEvent::weeklyRepeat($dateStart, $dateEnd, $endOn, $userWeekStart, $userWeekEnd);
+
         $newarray = array_chunk($result, 2);
         $repeatId = random_int(0,1000);
 
@@ -431,7 +482,6 @@ class RepeatEvent extends Model
     $maxDate = new DateTime($repeatOn);
     $startDateRange = new DatePeriod($startDate, $interval, $maxDate);
     $endDateRange = new DatePeriod($endDate, $interval, $maxDate);
-
 
     foreach ($startDateRange as $start) {
       if($start->format('N') == $userWeekStart){
