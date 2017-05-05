@@ -278,7 +278,32 @@ class CalendarController extends Controller
     $event = Events::findOrFail($cryptEvent);
    	$eventId = $event->id;
     $userId = \Auth::user()->id;
-    $updateEvent = Events::updateEvent($request, $userId, $eventId);
+
+
+    if($request->chkRepeat == 'repeatEvent'){
+      $repeatEvent = new RepeatEvent();
+      $timestampStart = strtotime( $request->eventStartDate );
+      $timestampEnd = strtotime( $request->eventEndDate );
+      $userWeekStart = date( "w", $timestampStart );
+      $userWeekEnd = date( "w", $timestampEnd );
+      switch($request->repeat){
+        case 'year':
+          $repeatEvent->repeatYear( $request, $userId );
+          $deleteEvent = Events::deleteEvent($cryptEvent);
+        break;
+        case 'month':
+          $repeatEvent->repeatMonth( $request, $userId );
+          $deleteEvent = Events::deleteEvent($cryptEvent);
+        break;
+        case 'week':
+          $repeatEvent->repeatWeek( $request, $userId, $userWeekStart, $userWeekEnd );
+          $deleteEvent = Events::deleteEvent($cryptEvent);
+        break;
+      }
+    }else{
+      $updateEvent = Events::updateEvent($request, $userId, $eventId);
+    }
+
     return redirect('/event');
 	}
 
