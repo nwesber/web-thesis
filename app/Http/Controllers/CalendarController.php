@@ -240,11 +240,32 @@ class CalendarController extends Controller
     }catch(DecryptException $e){
       return view('errors.404');
     }
-   	$event = RepeatEvent::findOrFail($cryptEvent);
-		$userId = \Auth::user()->id;
-		$repeatId = $event->repeat_id;
-    $count = RepeatEvent::where('repeat_id', $repeatId)->count();
-		$updateEvent = RepeatEvent::updateRepeat($request, $repeatId, $userId);
+
+    $event = RepeatEvent::findOrFail($cryptEvent);
+    $userId = \Auth::user()->id;
+    $repeatId = $event->repeat_id;
+    $repeatEvent = new RepeatEvent();
+
+    if($request->chkRepeat == 'repeatEvent'){
+      switch($request->repeat){
+        case 'year':
+          $repeatEvent->repeatYear( $request, $userId );
+          $deleteEvent = RepeatEvent::destroyEvent($repeatId, $userId);
+        break;
+        case 'month':
+          $repeatEvent->repeatMonth( $request, $userId );
+          $deleteEvent = RepeatEvent::destroyEvent($repeatId, $userId);
+        break;
+        case 'week':
+          $repeatEvent->repeatWeek( $request, $userId, $userWeekStart, $userWeekEnd );
+          $deleteEvent = RepeatEvent::destroyEvent($repeatId, $userId);
+        break;
+      }
+    }else{
+      $count = RepeatEvent::where('repeat_id', $repeatId)->count();
+      $updateEvent = RepeatEvent::updateRepeat($request, $repeatId, $userId);
+    }
+
 		return redirect('/event');
 	}
 

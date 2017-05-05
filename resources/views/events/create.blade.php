@@ -68,7 +68,7 @@
         <div>
           <p><strong><small><i id="repeatText"></i></small></strong></p>
         </div>
-        <p id="summary"></p>
+
         <div class="form-group">
           <label for="eventColor">Choose Color:</label>
           <input type="text" name="eventColor" id="showPaletteOnly" class="form-control">
