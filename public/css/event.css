@@ -1,3 +1,7 @@
 .hideDate{
   display:none;
 }
+
+.font-warning{
+  color: red !important;
+}

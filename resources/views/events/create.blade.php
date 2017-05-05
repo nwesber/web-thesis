@@ -16,7 +16,8 @@
         </div>
       </div>
       <div class="panel-body">
-        <div class="form-group">
+        <strong style="color: red;"><i><small>* required fields</small></i></strong>
+        <div class="form-group clearTop">
           <label for="eventTitle">*Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" >
         </div>
@@ -36,9 +37,6 @@
             <input type="date" name="eventEndDate" id="eventEndDate" class="form-control">
           </div>
         </div>
-
-
-
         <div class="form-group row">
           <div class="col-md-6 bootstrap-timepicker timepicker">
             <label for="eventTimeStart">Time Start:</label>
@@ -50,8 +48,6 @@
           </div>
         </div>
 
-
-
         <div class="form-group">
           <label for="eventDesc">Event Description:</label>
           <textarea class="form-control" rows="4" id="eventDesc" name="eventDesc"></textarea>
@@ -61,17 +57,16 @@
           <input type="text" name="eventLocation" id="eventLocation" class="form-control">
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" style="margin-bottom: 0px;">
           <div class="col-md-1">
             <div class="checkbox">
               <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
           </div>
-           <!-- <div class="col-sm-2">
-            <div class="checkbox">
-              <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
-            </div>
-          </div> -->
+        </div>
+
+        <div>
+          <p><strong><small><i id="repeatText"></i></small></strong></p>
         </div>
         <p id="summary"></p>
         <div class="form-group">
@@ -126,9 +121,9 @@
 
         <div class="clearTop">
           <label for="modalStart">Ends On:</label>
-          <div class="radio">
+          <div class="radio" id="radioNever">
             <label>
-              <input type="radio" name="endsOn" id="never" value="never" checked='checked' onchange="dynamicModal()"/>Never
+              <input type="radio" name="endsOn" id="never" value="never" onchange="dynamicModal()"/>Never
             </label>
           </div>
           <div class="radio">
@@ -213,11 +208,21 @@ $(document).ready(function(){
     var startDate = document.getElementById("eventStartDate").value;
     var occurrences = "";
     var modalStart = document.getElementById("modalStart");
+    var modalEnd = document.getElementById("modalEnd").value;
     modalStart.value = startDate;
+
+    if(option == 'week'){
+      $("#radioNever").hide();
+    }else{
+      $("#radioNever").show();
+    }
+
     if(document.getElementById('on').checked) {
       document.getElementById("modalEnd").disabled = false;
+      document.getElementById("repeatText").textContent = "Repeat every " +  option + " until " + modalEnd;
     }else if(document.getElementById('never').checked){
       document.getElementById("modalEnd").disabled = true;
+      document.getElementById("repeatText").textContent = "Repeat every " +  option;
     }
   }
 </script>
