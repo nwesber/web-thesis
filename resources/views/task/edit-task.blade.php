@@ -26,6 +26,9 @@
         </div>
       </div>
       <div class="panel-body">
+      <strong style="color: red;"><i><small>* required fields</small></i></strong>
+        <div class="clearTop">
+        </div>
         <div class="form-group">
           <label for="taskTitle">*Task Name:</label>
            <input type="text" value="{{$task->task_title}}" name="taskTitle" class = "form-control" required="true">

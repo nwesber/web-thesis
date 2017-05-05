@@ -25,7 +25,9 @@
       <!-- /.panel-heading -->
       {!! Form::open(array('action' => array('TaskController@storeTask', Crypt::encrypt($routine->id)), 'method' => 'POST', 'id' => 'form1', 'class' => 'form-vertical')) !!}
       <div class="panel-body">
-
+      	<strong style="color: red;"><i><small>* required fields</small></i></strong>
+      	<div class="clearTop">
+      	</div>
       		  <div class="form-group">
 			    <label for="taskTitle">*Task Name:</label>
 			    <input type="text" name="taskTitle" class="form-control" required="true" placeholder="Unititled Task">
