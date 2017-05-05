@@ -60,18 +60,14 @@
           <input type="text" name="eventLocation" id="eventLocation" class="form-control">
         </div>
 
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <div class="col-md-1">
             <div class="checkbox">
               <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
             </div>
           </div>
-           <!-- <div class="col-sm-2">
-            <div class="checkbox">
-              <label><input type="checkbox" id="allDay" name="allDay" ><strong>All Day</strong></label>
-            </div>
-          </div> -->
-        </div>
+          <input type="radio" name="shared" value="0" checked='checked' style="display:none">
+        </div> -->
         <p id="summary"></p>
         <div class="form-group">
           <label for="eventColor">Choose Color:</label>

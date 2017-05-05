@@ -50,13 +50,13 @@ class GroupController extends Controller
       //fetch user events
       $events = DB::table('events')
         ->where('user_id', '=', $userid)
-        ->where('is_shared', '=', '1')
+        ->where('is_shared', '=', 1)
         ->get();
       $holidays = DB::table('holidays')->get();
 
       $repeatEvent = DB::table('repeat_event')
         ->where('user_id', '=', $userid)
-        ->where('is_shared', '=', '1')
+        ->where('is_shared', '=', 1)
         ->get();
       $group_events = GroupEvents::getGroupEvents($groupId)->get();
       //iterate all events where user id = logged in user then add them to the array

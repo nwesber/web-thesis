@@ -71,7 +71,7 @@ class CalendarController extends Controller
 			);
 		}
 
-		$calendar = Calendar::addEvents($eventCollection)->whereMonth('listMonth' != null)
+		$calendar = Calendar::addEvents($eventCollection)
 			->setOptions([
 				'header' => [
           'right' => 'listMonth prev,next',
@@ -246,6 +246,10 @@ class CalendarController extends Controller
     $userId = \Auth::user()->id;
     $repeatId = $event->repeat_id;
     $repeatEvent = new RepeatEvent();
+    $timestampStart = strtotime( $request->eventStartDate );
+    $timestampEnd = strtotime( $request->eventEndDate );
+    $userWeekStart = date( "w", $timestampStart );
+    $userWeekEnd = date( "w", $timestampEnd );
 
     if($request->chkRepeat == 'repeatEvent'){
       switch($request->repeat){
@@ -263,7 +267,6 @@ class CalendarController extends Controller
         break;
       }
     }else{
-      $count = RepeatEvent::where('repeat_id', $repeatId)->count();
       $updateEvent = RepeatEvent::updateRepeat($request, $repeatId, $userId);
     }
 
