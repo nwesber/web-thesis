@@ -15,9 +15,9 @@
         </div>
       </div>
       <div class="panel-body">
+
       <strong style="color: red;"><i><small>* required fields</small></i></strong>
-        <div class="clearTop">
-        </div>
+
         {{ Form::hidden('oldStart', $event->time_start , array('id' => 'oldStart')) }}
         {{ Form::hidden('oldEnd', $event->time_end, array('id' => 'oldEnd')) }}
         <div class="form-group">
@@ -30,12 +30,31 @@
           <div class="col-md-6">
             <label for="eventStartDate">*Date Start:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventStartDate" class="form-control" id="datetimepicker">
+
           </div>
            <div class="col-md-6">
             <label for="eventEndDate">*Date End:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($event->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventEndDate" class="form-control" id="datetimepicker2">
+
+          </div>
+          <div class="form-group">
+            <div class="col-md-6" >
+              <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()" required="required">
+            </div>
+             <div class="col-md-6">
+              <input type="date" name="eventEndDate" id="eventEndDate" class="form-control" required="required">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-6 bootstrap-timepicker timepicker">
+              <label for="eventTimeStart">Time Start:</label>
+              <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart">
+            </div>
+             <div class="col-md-6 bootstrap-timepicker timepicker">
+              <label for="eventTimeEnd">Time End:</label>
+              <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd">
+            </div>
           </div>
         </div>
 
@@ -50,6 +69,19 @@
           <label for="eventLocation">Location:</label>
           <input type="text" name="eventLocation" id="eventLocation" class="form-control" required="true" value="{{ $event->location }}">
         </div>
+
+        <div class="form-group row" style="margin-bottom: 0px;">
+          <div class="col-md-1">
+            <div class="checkbox">
+              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p><strong><small><i id="repeatText"></i></small></strong></p>
+        </div>
+
          <div class="form-group">
           <label for="chooseColor">Choose Color:</label>
           <input type="text" name="eventColor" id="showPaletteOnly" class="form-control" value="{{ $event->color }}">
@@ -74,7 +106,66 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Repeating Event Details</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="sel1">Repeats:</label>
+          <select class="form-control" id="repeat" onchange = "dynamicModal()" name="repeat">
+            <option value="year">Yearly</option>
+            <option value="month">Monthly</option>
+            <option value="week">Weekly</option>
+          </select>
+        </div>
+        <div>
+          <label for="modalStart">Starts On:</label>
+          <input type="date" name="modalStart" id="modalStart" class="form-control" disabled="true">
+        </div>
+
+        <div class="clearTop">
+          <label for="modalStart">Ends On:</label>
+          <div class="radio" id="radioNever">
+            <label>
+              <input type="radio" name="endsOn" id="never" value="never" onchange="dynamicModal()"/>Never
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="endsOn" id="on" value="endsOn" onchange="dynamicModal()">On <input type="date" name="modalEnd" id="modalEnd" disabled="true"  onchange = "dynamicModal()"/>
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="exitRepeat()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 {!! Form::close() !!}
+
+<script type="text/javascript">
+  $('input[name="chkRepeat"]').on('change', function(e){
+   if(e.target.checked){
+     $('#myModal').modal();
+   }
+});
+</script>
 
 <script type="text/javascript">
 
@@ -90,7 +181,6 @@ $("#showPaletteOnly").spectrum({
         'Grey ',
         'DarkRed ',
         'red',
-        'orange',
         'yellow',
         'green',
         'blue',
@@ -113,5 +203,42 @@ $("#showPaletteOnly").spectrum({
     ]
 });
 
+</script>
+<script>
+$(document).ready(function(){
+    $('#chkRepeat').on('click', function(){
+      if(document.getElementById('chkRepeat').checked == false) {
+          document.getElementById('eventEndDate').readOnly = false;
+      }
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  function exitRepeat(){
+    document.getElementById("chkRepeat").checked = false;
+  }
+  function dynamicModal(){
+    var option = document.getElementById("repeat").value;
+    var startDate = document.getElementById("eventStartDate").value;
+    var occurrences = "";
+    var modalStart = document.getElementById("modalStart");
+    var modalEnd = document.getElementById("modalEnd").value;
+    modalStart.value = startDate;
+
+    if(option == 'week'){
+      $("#radioNever").hide();
+    }else{
+      $("#radioNever").show();
+    }
+
+    if(document.getElementById('on').checked) {
+      document.getElementById("modalEnd").disabled = false;
+      document.getElementById("repeatText").textContent = "Repeat every " +  option + " until " + modalEnd;
+    }else if(document.getElementById('never').checked){
+      document.getElementById("modalEnd").disabled = true;
+      document.getElementById("repeatText").textContent = "Repeat every " +  option;
+    }
+  }
 </script>
 @endsection

@@ -58,6 +58,13 @@ class Events extends Model
     $start = "";
     $end = "";
 
+    $dateStart = $request->eventStartDate;
+    $dateEnd = $request->eventEndDate;
+    $timeStart = date("Hi", strtotime($request->eventTimeStart));
+    $timeEnd = date("Hi", strtotime($request->eventTimeEnd));
+
+    $time_start = new DateTime($dateStart . 'T' . $timeStart);
+    $time_end = new DateTime($dateEnd . 'T' . $timeEnd);
 
     if($request->has('allDay')){
       $allDay = true;
@@ -66,7 +73,7 @@ class Events extends Model
     }
 
 
-    if($request->eventStartDate == null && !$request->eventEndDate == null){
+/*    if($request->eventStartDate == null && !$request->eventEndDate == null){
       $start = $request->oldStart;
       $end = $request->eventEndDate;
     }else if(!$request->eventStartDate == null && $request->eventEndDate == null){
@@ -81,7 +88,7 @@ class Events extends Model
     }
 
     $time_start = new DateTime($start);
-    $time_end = new DateTime($end);
+    $time_end = new DateTime($end);*/
     $query = Events::where('user_id', $id)
       ->where('id', $event)
       ->update([
