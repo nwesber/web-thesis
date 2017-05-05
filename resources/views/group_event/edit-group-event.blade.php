@@ -15,6 +15,9 @@
         </div>
       </div>
       <div class="panel-body">
+      <strong style="color: red;"><i><small>* required fields</small></i></strong>
+        <div class="clearTop">
+        </div>
         {{ Form::hidden('oldStart', $groupEvent->time_start , array('id' => 'oldStart')) }}
         {{ Form::hidden('oldEnd', $groupEvent->time_end, array('id' => 'oldEnd')) }}
         <div class="form-group">

@@ -71,7 +71,7 @@ class CalendarController extends Controller
 			);
 		}
 
-		$calendar = Calendar::addEvents($eventCollection)
+		$calendar = Calendar::addEvents($eventCollection)->whereMonth('listMonth' != null)
 			->setOptions([
 				'header' => [
           'right' => 'listMonth prev,next',
@@ -84,6 +84,7 @@ class CalendarController extends Controller
       'height' => 300,
       'defaultView' => 'listMonth'
 		]);
+
 		$greet = "Welcome";
 		$now = \Carbon\Carbon::now('Asia/Manila');
 		if ($now->hour >= 20) {

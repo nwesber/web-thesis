@@ -16,6 +16,9 @@
         </div>
       </div>
       <div class="panel-body">
+      <strong style="color: red;"><i><small>* required fields</small></i></strong>
+        <div class="clearTop">
+        </div>
         <div class="form-group">
           <label for="eventTitle">*Event Title:</label>
           <input type="text" name="eventTitle" class="form-control" placeholder="Unititled Event" required>
