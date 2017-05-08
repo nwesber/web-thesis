@@ -71,7 +71,7 @@
         <div class="form-group row" style="margin-bottom: 0px;">
           <div class="col-md-1">
             <div class="checkbox">
-              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
+              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent" onchange="removeText()"><strong>Repeat</strong></label>
             </div>
           </div>
         </div>
@@ -162,6 +162,8 @@
 });
 </script>
 
+
+
 <script type="text/javascript">
 
 $("#showPaletteOnly").spectrum({
@@ -200,11 +202,20 @@ $("#showPaletteOnly").spectrum({
 
 </script>
 
+<script type="text/javascript">
+function removeText(){
+  if(document.getElementById('chkRepeat').checked == false){
+    document.getElementById("repeatText").textContent = "";
+    document.getElementById("never").checked = false;
+    document.getElementById("on").checked = false;
+  }
+}
+</script>
 <script>
 $(document).ready(function(){
     $('#chkRepeat').on('click', function(){
       if(document.getElementById('chkRepeat').checked == false) {
-          document.getElementById('eventEndDate').readOnly = false;
+        document.getElementById('eventEndDate').readOnly = false;
       }
     });
   });

@@ -60,7 +60,7 @@
         <div class="form-group row" style="margin-bottom: 0px;">
           <div class="col-md-1">
             <div class="checkbox">
-              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent"><strong>Repeat</strong></label>
+              <label><input type="checkbox" id="chkRepeat" name="chkRepeat" value="repeatEvent" onclick="removeText()"><strong>Repeat</strong></label>
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="exitRepeat()">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="exitRepeat()">Cancel</button>
       </div>
     </div>
 
@@ -189,6 +189,16 @@ $("#showPaletteOnly").spectrum({
 });
 </script>
 
+<script type="text/javascript">
+function removeText(){
+  if(document.getElementById('chkRepeat').checked == false){
+    document.getElementById("repeatText").textContent = "";
+    document.getElementById("never").checked = false;
+    document.getElementById("on").checked = false;
+  }
+}
+</script>
+
 <script>
 $(document).ready(function(){
     $('#chkRepeat').on('click', function(){
@@ -202,7 +212,12 @@ $(document).ready(function(){
 <script type="text/javascript">
   function exitRepeat(){
     document.getElementById("chkRepeat").checked = false;
+    document.getElementById("repeatText").textContent = "";
+    document.getElementById("never").checked = false;
+    document.getElementById("on").checked = false;
   }
+
+
   function dynamicModal(){
     var option = document.getElementById("repeat").value;
     var startDate = document.getElementById("eventStartDate").value;
