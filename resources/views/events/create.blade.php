@@ -195,6 +195,8 @@ function removeText(){
     document.getElementById("repeatText").textContent = "";
     document.getElementById("never").checked = false;
     document.getElementById("on").checked = false;
+    document.getElementById("modalEnd").value = "";
+    document.getElementById("modalEnd").disabled = true;
   }
 }
 </script>
@@ -215,6 +217,8 @@ $(document).ready(function(){
     document.getElementById("repeatText").textContent = "";
     document.getElementById("never").checked = false;
     document.getElementById("on").checked = false;
+    document.getElementById("modalEnd").value = "";
+    document.getElementById("modalEnd").disabled = true;
   }
 
 
