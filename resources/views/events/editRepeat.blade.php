@@ -36,22 +36,22 @@
           <div class="form-group">
             <div class="col-md-6" >
               <label for="eventStartDate">*Date Start:</label>
-              <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()" required="required">
+              <input type="date" name="eventStartDate" class="form-control" id="eventStartDate" onchange = "dynamicModal()" required="required" value="{{ Carbon\Carbon::parse($event->time_start)->format('Y-m-d') }}">
             </div>
              <div class="col-md-6">
               <label for="eventEndDate">*Date End:</label>
-              <input type="date" name="eventEndDate" id="eventEndDate" class="form-control" required="required">
+              <input type="date" name="eventEndDate" id="eventEndDate" class="form-control" required="required"  value="{{ Carbon\Carbon::parse($event->time_end)->format('Y-m-d') }}">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-md-6 bootstrap-timepicker timepicker">
               <label for="eventTimeStart">Time Start:</label>
-              <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart">
+              <input type="text" name="eventTimeStart" class="form-control" id="eventTimeStart"  value="{{ Carbon\Carbon::parse($event->time_start)->format('h:i A') }}">
             </div>
              <div class="col-md-6 bootstrap-timepicker timepicker">
               <label for="eventTimeEnd">Time End:</label>
-              <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd">
+              <input type="text" name="eventTimeEnd" class="form-control" id="eventTimeEnd" value="{{ Carbon\Carbon::parse($event->time_end)->format('h:i A') }}">
             </div>
           </div>
         </div>
@@ -208,6 +208,8 @@ function removeText(){
     document.getElementById("repeatText").textContent = "";
     document.getElementById("never").checked = false;
     document.getElementById("on").checked = false;
+    document.getElementById("modalEnd").value = "";
+    document.getElementById("modalEnd").disabled = true;
   }
 }
 </script>
@@ -224,6 +226,11 @@ $(document).ready(function(){
 <script type="text/javascript">
   function exitRepeat(){
     document.getElementById("chkRepeat").checked = false;
+    document.getElementById("repeatText").textContent = "";
+    document.getElementById("never").checked = false;
+    document.getElementById("on").checked = false;
+    document.getElementById("modalEnd").value = "";
+    document.getElementById("modalEnd").disabled = true;
   }
   function dynamicModal(){
     var option = document.getElementById("repeat").value;
