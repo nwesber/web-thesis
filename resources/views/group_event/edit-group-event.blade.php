@@ -30,11 +30,12 @@
             <label for="eventStartDate">Date Start:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($groupEvent->time_start)->format('D, M-d-Y h:i A') }} </strong></p>
             <input type="datetime-local" name="eventStartDate" class="form-control" id="eventStartDate" value="{{ Carbon\Carbon::parse($groupEvent->time_start)->format('Y-m-d\TH:i:s') }}" >
+
           </div>
            <div class="col-md-6">
             <label for="eventEndDate">Date End:</label>
             <p class="small">Previous:  <strong>{{ Carbon\Carbon::parse($groupEvent->time_end)->format('D, M-d-Y h:i A') }} </strong></p>
-            <input type="datetime-local" name="eventEndDate" class="form-control" value="{{ $groupEvent->time_end }}">
+            <input type="datetime-local" name="eventEndDate" class="form-control" value="{{ Carbon\Carbon::parse($groupEvent->time_end)->format('Y-m-d\TH:i:s') }}">
           </div>
         </div>
 

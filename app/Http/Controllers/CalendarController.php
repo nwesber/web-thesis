@@ -78,7 +78,7 @@ class CalendarController extends Controller
       	],
       	'views' =>[
           'listMonth' => [
-            'buttonText' => 'This Month'
+            'buttonText' => 'Month View'
           ]
        ],
       'height' => 300,
