@@ -9,7 +9,9 @@ use DB;
 class Routine extends Model
 {
   use SoftDeletes;
+  /* recognize the deleted_at column from the table for softdelete  */
   protected $dates = ['deleted_at'];
+  /* returns the table name where to save the data */
   public $table = "routine";
 
   	var $data = array();
@@ -17,25 +19,14 @@ class Routine extends Model
     protected $fillable = [
          'user_id',
     ];
-/*
-    public function getUserRoutine($id){
-    $this->data = DB::table('users')
-                 ->join('routine', 'users.id', '=', 'routine.user_id')
-                 ->select('users.id as u_id' ,'routine.id as routine_id','users.*','routine.*')
-                 ->where('user_id', '=', \Auth::user()->id)
-                 ->select('routine.*')
-                 ->get();
-    return $this->data;
-    }*/
 
-
-
-
+    /* function to delete routine */
     public static function deleteRoutine($id){
     $query = Routine::where('id', $id)->delete();
     return $query;
   }
 
+  /* function to update routine */
   public static function updateRoutine($id, $routineName){
      $query = Routine::where('id', $id)
         ->update([

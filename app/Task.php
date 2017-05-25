@@ -11,11 +11,14 @@ use Input;
 class Task extends Model
 {
   use SoftDeletes;
+  /* recognize the deleted_at column from the table for softdelete */
   protected $dates = ['deleted_at'];
+  /* returns the table name where to save the data */
   public $table = "task";
 
   var $data = array();
 
+  /* returns task for Sunday */
   public function getSundayTask($id){
     $this->data = DB::table('task')->where('task_day', 'LIKE', '%Sunday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -26,6 +29,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* returns task for Monday */
   public function getMondayTask($id){
     $this->data = DB::table('task')->where('task_day', 'LIKE', '%Monday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -36,6 +40,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* returns task for Tuesday */
   public function getTuesdayTask($id){
     $this->data= DB::table('task')->where('task_day', 'LIKE', '%Tuesday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -46,6 +51,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* returns task for Wednesday */
   public function getWednesdayTask($id){
     $this->data = DB::table('task')->where('task_day', 'LIKE', '%Wednesday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -56,6 +62,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* returns task for Thursday */
   public function getThursdayTask($id){
     $this->data = DB::table('task')->where('task_day', 'LIKE', '%Thursday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -66,6 +73,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* returns task for Friday */
   public function getFridayTask($id){
     $this->data = DB::table('task')->where('task_day', 'LIKE', '%Friday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -76,6 +84,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* returns task for Saturday */
   public function getSaturdayTask($id){
     $this->data = DB::table('task')->where('task_day', 'LIKE', '%Saturday%')
                 ->orWhere('task_day', '=', 'All Day')
@@ -86,6 +95,7 @@ class Task extends Model
     return $this->data;
   }
 
+  /* function to update task */
 	public static function updateTask($id, $taskTitle, $taskDesc, $taskDue, $taskPrio, $taskDay, $timeStart){
       if(Input::get('taskDay') == null){
         $taskDay = Input::get('oldTaskDay');
@@ -108,6 +118,7 @@ class Task extends Model
     return $query;
   }
 
+  /* function to delete task */
    public static function deleteTask($id){
     $query = Task::where('id', $id)->delete();
     return $query;

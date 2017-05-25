@@ -24,6 +24,8 @@ class GroupController extends Controller
     {
         $this->middleware('auth');
     }
+
+    /* returns list of group */
     public function index(){
         $userid = \Auth::user()->id;
         $group = DB::table('group')
@@ -38,6 +40,7 @@ class GroupController extends Controller
     	return view('group.group', compact('group'));
     }
 
+    /* returns to the group page with calendar */
     public function groupCalendar($id){
       $groupId = Crypt::decrypt($id);
       $group = Group::findOrFail($groupId);
@@ -115,6 +118,7 @@ class GroupController extends Controller
         return view('group.group-calendar', compact('calendar', 'group'));
     }
 
+    /* returns to group creation */
     public function addGroup(){
     	return view('group.add-group');
     }
@@ -136,6 +140,7 @@ class GroupController extends Controller
     	return redirect('/group');
     }
 
+    /* returns editing of group */
     public function editGroup($id){
         try{
             $decryptGroup = Crypt::decrypt($id);
@@ -146,6 +151,8 @@ class GroupController extends Controller
         }
 
     }
+
+    /* function to update group */
     public function updateGroup(Request $request, $id){
        try{
             $decryptGroup = Crypt::decrypt($id);
@@ -164,6 +171,7 @@ class GroupController extends Controller
         }
     }
 
+    /* returns list of users to add to the group */
     public function addMember($id, Request $request){
         try{
             $decryptGroup = Crypt::decrypt($id);
@@ -178,6 +186,7 @@ class GroupController extends Controller
         }
     }
 
+    /* function to add a member to the group */
     public function storeMember($id){
         try{
             $decryptGroup = Crypt::decrypt($id);
@@ -187,10 +196,6 @@ class GroupController extends Controller
             if(empty($userId)){
                 return redirect()->back()->with('message', 'Please select atleast 1 from the list!');
             }
-
-        /*foreach($userId as $key => $n ) {
-            $groupMem = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $userId[$key])->where('is_removed', '=', 1)->update(array('is_removed' => 0));
-        }*/
 
         foreach($userId as $key => $n ) {
             $arrData[] = array(
@@ -209,6 +214,8 @@ class GroupController extends Controller
         }
     }
 
+
+    /* function to remove member from the group */
     public function updateMember($id, Request $request){
          try{
             $decryptGroup = Crypt::decrypt($id);
@@ -219,7 +226,6 @@ class GroupController extends Controller
             }
 
             foreach($getMember as $key => $n ) {
-                // $users = GroupMember::where('group_id', '=', $group->id)->where('user_id', '=', $getMember[$key])->where('is_removed', '=', 0)->update(array('is_removed' => 1));
                 $users = GroupMember::where('group_id', '=', $group->id)->whereIn('user_id', $getMember)->delete();
 
                 return redirect('/group/' . $id . '/view-member')->with('message', 'Successfully Removed Member(s)!');
@@ -232,6 +238,7 @@ class GroupController extends Controller
 
     }
 
+    /* returns list of members to remove from the group */
     public function viewMember($id){
         try{
             $decryptGroup = Crypt::decrypt($id);
@@ -249,6 +256,7 @@ class GroupController extends Controller
         }
     }
 
+    /* returns list of events that can be shared */
     public function groupShareEvent($id, Request $request){
         $group = Group::findOrFail($id);
 
@@ -259,6 +267,7 @@ class GroupController extends Controller
         return view('group.group-event-share', compact('events', 'group'));
     }
 
+    /* function to share event */
     public function performShare($id, Request $request){
         $group = Group::findOrFail($id);
 
@@ -300,6 +309,7 @@ class GroupController extends Controller
 
     }
 
+    /* function to leave a group */
     public function leaveGroup($id){
         try{
             $decryptGroup = Crypt::decrypt($id);
@@ -320,6 +330,7 @@ class GroupController extends Controller
         }
     }
 
+    /* function to view a repeating event */
     public function viewRepeatEvent($id){
         try{
             $repeatEvent = Crypt::decrypt($id);
