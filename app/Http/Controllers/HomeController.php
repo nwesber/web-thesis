@@ -14,16 +14,18 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-
+    /* function to logout an account */
     public function logout(){
         auth()->logout();
         return view('auth.login');
     }
 
+    /* returns view to change password */
     public function changePass(){
     	return view('auth.passwords.change-pass');
     }
 
+    /* function to update password */
     public function postUpdatePassword(Request $request) {
 
         $user = Auth::user();

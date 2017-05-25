@@ -26,6 +26,7 @@ class GroupEventController extends Controller
     {
         $this->middleware('auth');
     }
+  /* returns view for creating a group event */
   public function create($id){
     try{
         $decrypt = Crypt::decrypt($id);
@@ -36,6 +37,7 @@ class GroupEventController extends Controller
         }
   }
 
+  /* returns view of an event */
   public function show($id){
     try{
       $cryptEvent = Crypt::decrypt($id);
@@ -48,6 +50,7 @@ class GroupEventController extends Controller
     }
   }
 
+  /* returns view of a group event */
   public function showGroupEvent($id){
     try{
       $cryptEvent = Crypt::decrypt($id);
@@ -61,6 +64,7 @@ class GroupEventController extends Controller
     }
   }
 
+  /* function to store a group event */
   public function store(Request $request, $id){
     try{
         $decrypt = Crypt::decrypt($id);
@@ -106,6 +110,7 @@ class GroupEventController extends Controller
           }
     }
 
+  /* returns view of edit event */
   public function edit($id){
    try{
       $cryptEvent = Crypt::decrypt( $id );
@@ -116,6 +121,7 @@ class GroupEventController extends Controller
     }
   }
 
+  /* function to update an event */
   public function updateGroupEvent(Request $request, $id){
     try{
       $cryptEvent = Crypt::decrypt($id);
@@ -129,6 +135,7 @@ class GroupEventController extends Controller
     return redirect('/group/groupEvent/' . $id);
   }
 
+  /* function to delete a group event */
   public function deleteGroupEvent($id){
     try{
       $cryptEvent = Crypt::decrypt($id);

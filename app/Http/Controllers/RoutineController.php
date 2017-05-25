@@ -17,15 +17,19 @@ class RoutineController extends Controller
     {
         $this->middleware('auth');
     }
+
+    /* returns list of routine */
     public function index(){
     	$routine = Routine::where('user_id', '=', \Auth::user()->id)->get();
     	return view('routine.routine', compact('routine'));
     }
 
+    /* returns view for creating a routine */
     public function addRoutine(){
     	return view('routine.add-routine');
     }
 
+    /* function to store a routine */
     public function storeRoutine(Request $request){
     	$routine = new Routine();
       	$routine->user_id = \Auth::user()->id;
@@ -38,6 +42,7 @@ class RoutineController extends Controller
     	return redirect('/routine');
     }
 
+    /* returns view for editing routine */
     public function editRoutine($id){
         try{
         $decryptTask = Crypt::decrypt($id);
@@ -48,6 +53,7 @@ class RoutineController extends Controller
         }
     }
 
+    /* function to update a routine */
     public function updateRoutine(Request $request, $id){
         try{
             $decryptTask = Crypt::decrypt($id);
@@ -79,6 +85,7 @@ class RoutineController extends Controller
         
     }
 
+    /* function to delete a routine */
     public function deleteRoutine($id){
         try{
             $decryptTask = Crypt::decrypt($id);

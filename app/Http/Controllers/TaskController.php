@@ -20,6 +20,8 @@ class taskController extends Controller
     {
         $this->middleware('auth');
     }
+
+    /* returns task for each day in a week */
     public function task($id){
       try{
         $decryptTask = Crypt::decrypt($id);
@@ -123,7 +125,7 @@ class taskController extends Controller
       }
     }
 
-
+    /* returns view for creating a task */
     public function addTask($id){
       try{
         $decryptTask = Crypt::decrypt($id);
@@ -134,6 +136,7 @@ class taskController extends Controller
       }
     }
 
+    /* returns view for task details */
     public function taskDetails($id, $id2){
       try{
         $decryptTask = Crypt::decrypt($id);
@@ -146,6 +149,7 @@ class taskController extends Controller
       }
     }
 
+    /* function to store a task */
     public function storeTask(Request $request, $id){
       try{
         $decryptTask = Crypt::decrypt($id);
@@ -175,6 +179,7 @@ class taskController extends Controller
         }
     }
 
+    /* returns view for editing a task */
     public function taskEdit($id, $id2){
       try{
         $decryptTask = Crypt::decrypt($id);
@@ -187,6 +192,7 @@ class taskController extends Controller
         }
     }
 
+    /* function for editing a task */
     public function updateTask(Request $request, $id, $id2){
        try{
         $decryptTask = Crypt::decrypt($id);
@@ -226,6 +232,7 @@ class taskController extends Controller
         }
     }
 
+    /* function to delete a task */
     public function taskDelete($id, $id2){
       try{
            $decryptTask = Crypt::decrypt($id);
