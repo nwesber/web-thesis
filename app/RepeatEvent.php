@@ -14,6 +14,7 @@ class RepeatEvent extends Model
   protected $dates = ['deleted_at'];
   public $table = "repeat_event";
 
+  /* Get ALl Event  */
   public static function getEvents($id){
     $events = DB::table('repeat_event')
     ->where('user_id', '=', $id)
@@ -21,6 +22,7 @@ class RepeatEvent extends Model
     return $events;
   }
 
+  /*  Repeat An Event Yearly */
   public static function repeatYear($request, $id){
     $yearlyInterval = 'P1Y';
     $dateStart = $request->eventStartDate;
@@ -100,6 +102,7 @@ class RepeatEvent extends Model
     }
   }
 
+  /*  Update Repeat Event */
   public static function updateRepeat($request, $repeatId, $id){
 
     $repeat = RepeatEvent::where([
@@ -129,6 +132,8 @@ class RepeatEvent extends Model
       }
     }
   }
+
+  /*  Update Weekly Event */
 
   public static function updateWeeklyRepeatEvent($request, $id, $rep, $type){
     $endOn = $rep->ends_on;
@@ -175,6 +180,7 @@ class RepeatEvent extends Model
 
   }
 
+  /*  Update Event */
   public static function updateRepeatEvent($interval, $request, $id, $type, $rep){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
@@ -219,6 +225,7 @@ class RepeatEvent extends Model
   }
 
 
+  /*  Create Monthly Event */
   public static function repeatMonth($request, $id){
     $monthlyInterval = 'P1M';
     $dateStart = $request->eventStartDate;
@@ -297,6 +304,8 @@ class RepeatEvent extends Model
     }
   }
 
+
+  /*  Create Weekly Event */
   public static function repeatWeek($request, $id, $userWeekStart, $userWeekEnd){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
@@ -379,6 +388,7 @@ class RepeatEvent extends Model
     }
   }
 
+  /*  Repeat Never Ends on 2051 */
   public static function repeatNever($dateStart, $dateEnd, $dateInterval){
     $rangeStart = [];
     $rangeEnd = [];
@@ -406,6 +416,7 @@ class RepeatEvent extends Model
     return $range;
   }
 
+  /*  Repeat On Function  */
   public static function repeatOn($dateStart, $dateEnd, $repeatOn, $dateInterval){
     $rangeStart = [];
     $rangeEnd = [];
@@ -435,6 +446,7 @@ class RepeatEvent extends Model
     return $range;
   }
 
+  /* Weekly Repeat Never Ends on 2051 */
   public static function weeklyRepeatNever($dateStart, $dateEnd, $userWeekStart, $userWeekEnd){
     $rangeStart = [];
     $rangeEnd = [];
@@ -469,6 +481,7 @@ class RepeatEvent extends Model
 
   }
 
+  /* Weekly Repeat Never Ends on 2051 */
   public static function weeklyRepeat($dateStart, $dateEnd, $repeatOn, $userWeekStart, $userWeekEnd){
     $rangeStart = [];
     $rangeEnd = [];
@@ -501,6 +514,7 @@ class RepeatEvent extends Model
     return $range;
   }
 
+  /* Destroy Weekly Event */
   public static function destroyEvent($repeatId, $userId){
     $query = RepeatEvent::where('user_id', $userId)->where('repeat_id', $repeatId)->delete();
     return $query;

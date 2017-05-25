@@ -21,6 +21,7 @@ class CalendarController extends Controller
       $this->middleware('auth');
     }
 
+  /* Home page Calendar */
 	public function home(){
 		$eventCollection = [];
     $repeatEventCollection = [];
@@ -100,6 +101,7 @@ class CalendarController extends Controller
 		return view('home', compact('calendar', 'greet'));
 	}
 
+   /* Event Index */
 	public function index(){
 	  $eventCollection = [];
 	  $userid = \Auth::user()->id;
@@ -151,6 +153,7 @@ class CalendarController extends Controller
 		return view('events.event', compact('calendar'));
 	}
 
+  /* Create View */
 	public function create(){
 		return view('events.create');
 	}
@@ -165,6 +168,7 @@ class CalendarController extends Controller
 		return view('events.show', compact('event'));
 	}
 
+  /* Show Repeate Event Index */
 	public function showRepeatEvent($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -175,6 +179,7 @@ class CalendarController extends Controller
 		return view('events.showRepeat', compact('event'));
 	}
 
+    /* Edit Repeate Event Index */
 	public function editRepeatEvent($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -185,6 +190,7 @@ class CalendarController extends Controller
 		return view('events.editRepeat', compact('event'));
 	}
 
+    /* Create Event Index */
 	public function store(Request $request){
 		$userId = \Auth::user()->id;
 		$events = new Events();
@@ -225,6 +231,7 @@ class CalendarController extends Controller
 		return redirect('/event');
 	}
 
+    /* Edit View */
   public function edit($id){
    try{
       $cryptEvent = Crypt::decrypt( $id );
@@ -235,6 +242,7 @@ class CalendarController extends Controller
     }
   }
 
+    /* Update Repeate Event Index */
   public function updateRepeatEvent(Request $request, $id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -273,6 +281,7 @@ class CalendarController extends Controller
 		return redirect('/event');
 	}
 
+    /* Update Event Index */
 	public function update(Request $request, $id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -311,6 +320,7 @@ class CalendarController extends Controller
     return redirect('/event');
 	}
 
+    /* Destroy Event Index */
 	public function destroy($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -322,6 +332,7 @@ class CalendarController extends Controller
 		return redirect('/event');
 	}
 
+    /*Destroy Repeat Event Index */
 	public function destroyRepeat($id){
 		try{
 			$cryptEvent = Crypt::decrypt($id);
@@ -335,6 +346,7 @@ class CalendarController extends Controller
     return redirect('/event');
 	}
 
+    /* Generates Random Array */
   public function randomArrayVar($array){
     if (!is_array($array)){
       return $array;

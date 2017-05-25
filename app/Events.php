@@ -16,7 +16,7 @@ class Events extends Model
   protected $dates = ['deleted_at'];
   public $table = "events";
 
-
+  /* return all events in the event view */
   public static function getEvents($id){
     $events = DB::table('events')
     ->where('user_id', '=', $id)
@@ -24,6 +24,7 @@ class Events extends Model
     return $events;
   }
 
+  /*  save normal event */
   public static function saveEvent($request, $id){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
@@ -53,6 +54,7 @@ class Events extends Model
     return $event;
   }
 
+  /*  Update Event base on Event ID */
   public static function updateEvent($request, $id, $event){
     $allDay = false;
     $start = "";
@@ -104,6 +106,7 @@ class Events extends Model
       ]);
   }
 
+  /* Delete Event Base on ID */
   public static function deleteEvent($id){
     $query = Events::where('id', $id)->delete();
     return $query;

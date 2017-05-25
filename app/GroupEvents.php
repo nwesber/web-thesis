@@ -15,13 +15,15 @@ class GroupEvents extends Model
     public $table = "group_events";
 
 
-    public static function getGroupEvents($id){
+  /*  Get All Group Events */
+  public static function getGroupEvents($id){
     $events = DB::table('group_events')
     ->where('group_id', '=', $id)
     ->whereNull('deleted_at');
     return $events;
   }
 
+  /*  Save Group Event */
   public static function saveGroupEvent($request, $id, $id2){
     $dateStart = $request->eventStartDate;
     $dateEnd = $request->eventEndDate;
@@ -51,6 +53,7 @@ class GroupEvents extends Model
     return $group_event;
   }
 
+  /*  Update Group Event */
   public static function updateGroupEvent($request, $id, $event){
     $allDay = false;
     $start = "";
@@ -95,6 +98,7 @@ class GroupEvents extends Model
       ]);
   }
 
+  /* Returns Delete Group Event  */
   public static function deleteGroupEvent($id){
     $query = GroupEvents::where('id', $id)->delete();
     return $query;
