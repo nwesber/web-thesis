@@ -1,27 +1,54 @@
-# Laravel PHP Framework
+# iSCHED Web Application (Completed)
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+iSCHED (Thesis Project)
+Centralized Scheduler App for students, teachers and employees of iACADEMY.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+# Motivation
+We created this application to provide the students and teachers of iACADEMY 
+an easy way in organizing their make-up classes, class events, and school events. 
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+# Installation
+Software Requirements
+1. Install [Composer](https://getcomposer.org/)
+2. Install [XAMPP](https://www.apachefriends.org/index.html)
+3. Clone this Github Repository on the HTDOCS folder of your XAMPP.
 
-## Official Documentation
+Using SSH
+```javascript
+git clone git@github.com:nwesber/web-thesis.git
+```
+Using HTTPS
+```javascript
+git clone https://github.com/nwesber/web-thesis.git
+```
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Database Migration
 
-## Contributing
+Once you successfully clone the repository
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Step 1. Open a terminal
 
-## Security Vulnerabilities
+Step 2. Update Dependecies by
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+```javascript
+composer update
+```
 
-## License
+Step 3. Create a database called "isched"
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Step 3. Database Migration by
+
+```javascript
+php artisan migrate
+```
+
+Step 4. Run The Application 
+Via XAMPP
+  1. Open XAMPP
+  2. Type localhost/web-thesis/public
+Via Laravel Framework
+  1. Open Terminal that points to the application
+  2. Type 'php artisan serve'
+  3. Open a browser and type localhost:8000
+  
+  
