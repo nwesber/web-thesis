@@ -22,7 +22,7 @@ git clone git@github.com:nwesber/web-thesis.git
 git clone https://github.com/nwesber/web-thesis.git
 ```
 
-##### Database Migration
+# Database Migration
 
 Once you successfully clone the repository
 
