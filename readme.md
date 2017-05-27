@@ -36,13 +36,13 @@ composer update
 
 Step 3. Create a database called "isched"
 
-Step 3. Database Migration by
+Step 4. Database Migration by
 
 ```javascript
 php artisan migrate
 ```
 
-Step 4. Run The Application 
+# Running the Application
 
 ###### Via XAMPP
 
