@@ -61,5 +61,7 @@ Via Laravel Framework
 php artisan serve
 ```
   3. Open a browser and type localhost:8000
-  
+```javascript
+localhost:8000
+```
   
