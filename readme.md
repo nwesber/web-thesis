@@ -8,21 +8,21 @@ We created this application to provide the students and teachers of iACADEMY
 an easy way in organizing their make-up classes, class events, and school events. 
 
 # Installation
-Software Requirements
+##### Software Requirements
 1. Install [Composer](https://getcomposer.org/)
 2. Install [XAMPP](https://www.apachefriends.org/index.html)
 3. Clone this Github Repository on the HTDOCS folder of your XAMPP.
 
-Using SSH
+###### Using SSH
 ```javascript
 git clone git@github.com:nwesber/web-thesis.git
 ```
-Using HTTPS
+###### Using HTTPS
 ```javascript
 git clone https://github.com/nwesber/web-thesis.git
 ```
 
-Database Migration
+##### Database Migration
 
 Once you successfully clone the repository
 
@@ -44,7 +44,7 @@ php artisan migrate
 
 Step 4. Run The Application 
 
-Via XAMPP
+###### Via XAMPP
 
   1. Open XAMPP
   2. Open Browser and Type
@@ -53,14 +53,14 @@ Via XAMPP
   localhost/web-thesis/public
   ```
   
-Via Laravel Framework
+###### Via Laravel Framework
 
   1. Open Terminal that points to the application
   2. Type in your terminal
 ```javascript
 php artisan serve
 ```
-  3. Open a browser and type localhost:8000
+  3. Open a browser and type 
 ```javascript
 localhost:8000
 ```
