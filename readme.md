@@ -43,12 +43,23 @@ php artisan migrate
 ```
 
 Step 4. Run The Application 
+
 Via XAMPP
+
   1. Open XAMPP
-  2. Type localhost/web-thesis/public
+  2. Open Browser and Type
+  
+  ```javascript
+  localhost/web-thesis/public
+  ```
+  
 Via Laravel Framework
+
   1. Open Terminal that points to the application
-  2. Type 'php artisan serve'
+  2. Type in your terminal
+```javascript
+php artisan serve
+```
   3. Open a browser and type localhost:8000
   
   
