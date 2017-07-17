@@ -31,7 +31,7 @@ Step 1. Open a terminal
 Step 2. Update Dependecies by
 
 ```javascript
-composer update
+composer install
 ```
 
 Step 3. Create a database called "isched"
